@@ -224,6 +224,9 @@
       .x-foot .badge { justify-self: start; }
 
       @media (prefers-reduced-motion: reduce) { .x-nft, .x-card, .x-btn { transition: none; } .x-nft:hover { transform: none; } .x-ghost img, .x-ghost::before, .x-ghost::after { transition: none; animation: none !important; } .x-nft:hover .x-ghost img { transform: none; } }
+    
+      @media (max-width: 820px){ .x-header, header{ backdrop-filter:none!important; -webkit-backdrop-filter:none!important; background:rgba(8,8,8,.96)!important } .x-nft img, .x-ghost img{ filter:none!important } }
+      .x-sec{ content-visibility:auto; contain-intrinsic-size: auto 900px; }
     </style>
   <meta name="description" content="SPOXY — 1.031 Cyber Spirits, arwah neon pixel di BNB Chain. Mint segera dibuka. Free Mint 0.0007 BNB, Publik 0.007 BNB dengan peluang 60% Legendary." />
 <link rel="canonical" href="https://spoxydev.fun/" />
@@ -273,7 +276,7 @@
 
       <main>
         <section class="x-hero" aria-label="Cyber Spirits">
-          <img class="x-hero__img" src="spoxy-hero.png" alt="A haunted black-gold digital temple with neon ghosts rising" />
+          <img class="x-hero__img" src="spoxy-hero.webp" alt="A haunted black-gold digital temple with neon ghosts rising" />
           <div class="x-wrap x-hero__copy">
             <p class="x-kicker">Cyber Spirits · BNB Chain</p>
             <h1 class="x-h1">The midnight <em>haunt.</em></h1>
@@ -290,7 +293,7 @@
           <div class="x-wrap">
             <div class="x-mint">
               <div class="x-frame">
-                <div class="x-ghost x-ghost--float" style="--glow: 168 85 247"><img src="cut-witch.png" alt="Cyber Spirit, Witch Violet" /></div>
+                <div class="x-ghost x-ghost--float" style="--glow: 168 85 247"><img loading="lazy" decoding="async" src="cut-witch.webp" alt="Cyber Spirit, Witch Violet" /></div>
               </div>
               <div class="x-panel">
                 <p class="x-kicker">Genesis mint</p>
@@ -336,7 +339,7 @@
                 <h2 class="x-h2">Let your agent <em>mint.</em></h2>
                 <p class="x-lede">Punya Binance Agent / Agentic Wallet? Salin prompt di bawah, tempel ke agent kamu, dan agent akan menyiapkan transaksi mint Cyber Spirits. Kamu tetap yang memeriksa dan menyetujui sebelum ditandatangani.</p>
               </div>
-              <div class="x-ghost x-ghost--float" aria-hidden="true"><img src="cut-agent.png" alt="" /></div>
+              <div class="x-ghost x-ghost--float" aria-hidden="true"><img loading="lazy" decoding="async" src="cut-agent.webp" alt="" /></div>
             </div>
             <div class="x-agent">
               <ol class="x-steps">
@@ -362,7 +365,7 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
 
         <section class="x-sec x-sec--alt" id="odds">
           <div class="x-wrap x-split">
-            <div class="x-ghost x-ghost--float" style="--glow: 240 185 11"><img src="cut-golden.png" alt="Legendary Spirit" /></div>
+            <div class="x-ghost x-ghost--float" style="--glow: 240 185 11"><img loading="lazy" decoding="async" src="cut-golden.webp" alt="Legendary Spirit" /></div>
             <div>
               <div class="x-sec__head" style="margin-bottom:0">
                 <p class="x-kicker">Legendary Odds</p>
@@ -410,18 +413,18 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
               <button type="button" data-filter="Common" aria-pressed="false">Common</button>
             </div>
             <div class="x-gallery" id="gallery-grid">
-              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost"><img src="cut-golden.png" alt="Legendary #01, Golden Crown" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #01 · Golden Crown</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
-              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 240 185 11"><img src="new-pharaoh.png" alt="Legendary #02, Pharaoh Spirit" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #02 · Pharaoh Spirit</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
-              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 255 156 26"><img src="new-dragon.png" alt="Legendary #03, Ember Dragon" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #03 · Ember Dragon</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
-              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 110 80 255"><img src="new-cosmic.png" alt="Legendary #04, Cosmic Void" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #04 · Cosmic Void</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 168 85 247"><img src="cut-witch.png" alt="Spirit #0001, Witch Violet" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0001 · Witch Violet</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 59 130 246"><img src="cut-thunder.png" alt="Spirit #0388, Thunder Imp" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0388 · Thunder Imp</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 239 50 50"><img src="new-samurai.png" alt="Spirit #0612, Ronin Blade" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0612 · Ronin Blade</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 110 231 249"><img src="new-ice.png" alt="Spirit #0845, Frost Wraith" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0845 · Frost Wraith</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 255 45 150"><img src="new-dj.png" alt="Spirit #0903, Bass Phantom" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0903 · Bass Phantom</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Epic"><span class="x-ghost"><img src="cut-agent.png" alt="Spirit #0777, Agent Spirit" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0777 · Agent Spirit</span><span class="x-rarity x-rarity--epic">Epic</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Uncommon"><span class="x-ghost" style="--glow: 255 106 26"><img src="cut-pumpkin.png" alt="Spirit #0217, Pumpkin Ember" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0217 · Pumpkin Ember</span><span class="x-rarity">Uncommon</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Common"><span class="x-ghost" style="--glow: 34 197 94"><img src="cut-glitch2.png" alt="Spirit #0521, Glitch Witch" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0521 · Glitch Witch</span><span class="x-rarity">Common</span></span></button>
+              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost"><img loading="lazy" decoding="async" src="cut-golden.webp" alt="Legendary #01, Golden Crown" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #01 · Golden Crown</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
+              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 240 185 11"><img loading="lazy" decoding="async" src="new-pharaoh.webp" alt="Legendary #02, Pharaoh Spirit" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #02 · Pharaoh Spirit</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
+              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 255 156 26"><img loading="lazy" decoding="async" src="new-dragon.webp" alt="Legendary #03, Ember Dragon" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #03 · Ember Dragon</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
+              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 110 80 255"><img loading="lazy" decoding="async" src="new-cosmic.webp" alt="Legendary #04, Cosmic Void" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #04 · Cosmic Void</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 168 85 247"><img loading="lazy" decoding="async" src="cut-witch.webp" alt="Spirit #0001, Witch Violet" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0001 · Witch Violet</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 59 130 246"><img loading="lazy" decoding="async" src="cut-thunder.webp" alt="Spirit #0388, Thunder Imp" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0388 · Thunder Imp</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 239 50 50"><img loading="lazy" decoding="async" src="new-samurai.webp" alt="Spirit #0612, Ronin Blade" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0612 · Ronin Blade</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 110 231 249"><img loading="lazy" decoding="async" src="new-ice.webp" alt="Spirit #0845, Frost Wraith" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0845 · Frost Wraith</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 255 45 150"><img loading="lazy" decoding="async" src="new-dj.webp" alt="Spirit #0903, Bass Phantom" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0903 · Bass Phantom</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Epic"><span class="x-ghost"><img loading="lazy" decoding="async" src="cut-agent.webp" alt="Spirit #0777, Agent Spirit" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0777 · Agent Spirit</span><span class="x-rarity x-rarity--epic">Epic</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Uncommon"><span class="x-ghost" style="--glow: 255 106 26"><img loading="lazy" decoding="async" src="cut-pumpkin.webp" alt="Spirit #0217, Pumpkin Ember" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0217 · Pumpkin Ember</span><span class="x-rarity">Uncommon</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Common"><span class="x-ghost" style="--glow: 34 197 94"><img loading="lazy" decoding="async" src="cut-glitch2.webp" alt="Spirit #0521, Glitch Witch" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0521 · Glitch Witch</span><span class="x-rarity">Common</span></span></button>
             </div>
           </div>
         </section>
@@ -594,7 +597,7 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
   <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js");}</script>
 <script src="/market-config.js?v=13"></script>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="/mint.js?v=14"></script>
+<script src="/mint.js?v=15"></script>
 <script src="/fx.js?v=14"></script>
 <script src="/i18n.js"></script>
 </body>
