@@ -1,0 +1,69 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>SPOXY · Deploy & Admin</title><link rel="icon" href="/favicon.png">
+<style>
+:root{--g:#F0B90B;--l:#f0b90b33}*{box-sizing:border-box}body{margin:0;background:#050505;color:#eee;font:15px/1.55 system-ui,sans-serif}
+.w{max-width:760px;margin:0 auto;padding:24px 18px 80px}h1{color:var(--g);letter-spacing:.2em;font-size:22px}h2{font-size:17px;margin:0 0 10px;color:#fff}
+.box{border:1px solid var(--l);padding:18px;margin:16px 0;background:#0b0b0b}label{display:grid;gap:4px;margin:10px 0;color:#aaa;font-size:13px}
+input,select,textarea{width:100%;min-height:42px;background:#111;border:1px solid #333;color:#eee;padding:8px 10px;font:inherit}textarea{min-height:110px;font-family:monospace;font-size:13px}
+button{min-height:44px;padding:0 16px;margin:6px 6px 0 0;border:1px solid var(--g);background:var(--g);color:#000;font-weight:600;cursor:pointer}button.o{background:none;color:var(--g)}button:disabled{opacity:.4}
+.mono{font-family:monospace;word-break:break-all;color:var(--g)}.mut{color:#888;font-size:13px}.warn{border-left:3px solid #e5484d;padding:10px 12px;background:#e5484d14;font-size:13px}
+#log{white-space:pre-wrap;font-family:monospace;font-size:12px;color:#9a9a9a;max-height:240px;overflow:auto}
+</style></head><body><div class="w">
+<h1>SPOXY · DEPLOY</h1>
+<p class="mut">Halaman khusus pemilik. Semua transaksi ditandatangani di wallet kamu sendiri. Jangan pernah membagikan seed phrase.</p>
+<div class="warn">Kontrak belum diaudit. Deploy ke BSC Testnet dulu, coba mint dan jual-beli, baru ke Mainnet.</div>
+
+<div class="box"><h2>0 · Wallet & jaringan</h2>
+<label>Jaringan<select id="net"><option value="97">BSC Testnet (chainId 97) — coba dulu</option><option value="56">BNB Smart Chain Mainnet (chainId 56)</option></select></label>
+<button id="connect">Connect Wallet</button><p class="mut" id="acct">Belum terhubung</p></div>
+
+<div class="box"><h2>1 · Deploy kontrak NFT (SpoxySpirits)</h2>
+<label>Unrevealed metadata URI<input id="hidden" value="https://spoxydev.fun/meta/hidden.json"></label>
+<label>Penerima royalti 5% (kosong = wallet kamu)<input id="royr" placeholder="0x..."></label>
+<button id="dNft">Deploy NFT</button><p>NFT: <span class="mono" id="nftAddr">–</span></p></div>
+
+<div class="box"><h2>2 · Deploy kontrak Market (SpoxyMarket)</h2>
+<label>Alamat NFT<input id="mNft" placeholder="otomatis dari langkah 1"></label>
+<button id="dMkt">Deploy Market</button><p>Market: <span class="mono" id="mktAddr">–</span></p>
+<p class="mut">Kirim kedua alamat ini ke Hark untuk dipasang di situs.</p></div>
+
+<div class="box"><h2>3 · Admin NFT</h2>
+<label>Alamat NFT<input id="aNft" placeholder="0x..."></label>
+<button class="o" id="status">Cek status</button><p class="mut" id="stat"></p>
+<label>Fase mint<select id="phase"><option value="0">0 · Tutup</option><option value="1">1 · POA / Agent ID (0.0007 BNB)</option><option value="2">2 · Publik (0.007 BNB)</option></select></label>
+<button id="setPhase">Set fase</button>
+<label>Allowlist POA (satu alamat per baris)<textarea id="al" placeholder="0xabc...&#10;0xdef..."></textarea></label>
+<button id="addAl">Tambah ke allowlist</button><button class="o" id="rmAl">Hapus dari allowlist</button>
+<label>Reveal base URI (contoh ipfs://CID/)<input id="base" placeholder="ipfs://.../"></label>
+<button class="o" id="reveal">Reveal</button><button class="o" id="withdraw">Tarik saldo BNB</button></div>
+
+<div class="box"><h2>Log</h2><div id="log"></div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script>
+var $=function(i){return document.getElementById(i)},A,signer,acct,NETS={56:{chainId:'0x38',chainName:'BNB Smart Chain',nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},rpcUrls:['https://bsc-dataseed.binance.org'],blockExplorerUrls:['https://bscscan.com']},97:{chainId:'0x61',chainName:'BSC Testnet',nativeCurrency:{name:'tBNB',symbol:'tBNB',decimals:18},rpcUrls:['https://data-seed-prebsc-1-s1.bnbchain.org:8545'],blockExplorerUrls:['https://testnet.bscscan.com']}};
+function log(t){$('log').textContent=new Date().toLocaleTimeString()+'  '+t+'\n'+$('log').textContent}
+function exp(a){var n=NETS[$('net').value];return n.blockExplorerUrls[0]+'/address/'+a}
+fetch('/contracts/artifacts.json?v=2').then(function(r){return r.json()}).then(function(j){A=j;log('Artifacts loaded')});
+async function connect(){ if(!window.ethereum){alert('Buka halaman ini di browser wallet (MetaMask / Trust / Binance Wallet).');return}
+  acct=(await ethereum.request({method:'eth_requestAccounts'}))[0]; var n=NETS[$('net').value];
+  try{await ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:n.chainId}]})}catch(e){if(e.code===4902)await ethereum.request({method:'wallet_addEthereumChain',params:[n]});else throw e}
+  signer=await new ethers.BrowserProvider(window.ethereum).getSigner(); var bal=await signer.provider.getBalance(acct);
+  $('acct').textContent=acct+' · '+n.chainName+' · '+(+ethers.formatEther(bal)).toFixed(4)+' '+n.nativeCurrency.symbol; log('Connected '+acct); }
+$('connect').onclick=function(){connect().catch(function(e){log('ERR '+(e.shortMessage||e.message))})};
+$('net').onchange=function(){if(signer)$('connect').onclick()};
+async function need(){if(!signer)await connect();if(!A)throw new Error('artifacts belum termuat')}
+async function deploy(name,args){await need();var f=new ethers.ContractFactory(A[name].abi,A[name].bytecode,signer);log('Konfirmasi deploy '+name+' di wallet…');var c=await f.deploy.apply(f,args);log('Tx: '+c.deploymentTransaction().hash);await c.waitForDeployment();var a=await c.getAddress();log(name+' deployed: '+a+'  '+exp(a));return a}
+$('dNft').onclick=async function(){try{var r=$('royr').value.trim()||acct||(await need(),acct);var a=await deploy('SpoxySpirits',[$('hidden').value.trim(),r]);$('nftAddr').textContent=a;$('mNft').value=a;$('aNft').value=a;localStorage.spoxyNft=a}catch(e){log('ERR '+(e.shortMessage||e.message))}};
+$('dMkt').onclick=async function(){try{await need();var n=$('mNft').value.trim();if(!ethers.isAddress(n))throw new Error('alamat NFT tidak valid');var r=$('royr').value.trim()||acct;var a=await deploy('SpoxyMarket',[n,r]);$('mktAddr').textContent=a;localStorage.spoxyMkt=a}catch(e){log('ERR '+(e.shortMessage||e.message))}};
+function nft(){var a=$('aNft').value.trim();if(!ethers.isAddress(a))throw new Error('alamat NFT tidak valid');return new ethers.Contract(a,A.SpoxySpirits.abi,signer)}
+async function tx(fn,label){try{await need();log('Konfirmasi '+label+' di wallet…');var t=await fn();log('Tx: '+t.hash);await t.wait();log(label+' ✓')}catch(e){log('ERR '+(e.shortMessage||e.message))}}
+$('status').onclick=async function(){try{await need();var c=nft();var r=await Promise.all([c.phase(),c.totalSupply(),c.revealed(),signer.provider.getBalance(await c.getAddress()),c.owner()]);$('stat').textContent='Fase '+r[0]+' · Minted '+r[1]+'/1031 · Revealed '+r[2]+' · Saldo '+ethers.formatEther(r[3])+' BNB · Owner '+r[4]}catch(e){log('ERR '+(e.shortMessage||e.message))}};
+$('setPhase').onclick=function(){tx(function(){return nft().setPhase(+$('phase').value)},'Set fase '+$('phase').value)};
+function addrs(){var l=$('al').value.split(/[\s,]+/).map(function(s){return s.trim()}).filter(Boolean);var bad=l.filter(function(a){return!ethers.isAddress(a)});if(bad.length)throw new Error('alamat tidak valid: '+bad[0]);return l}
+$('addAl').onclick=function(){try{var l=addrs();tx(function(){return nft().setAllowlist(l,true)},'Allowlist +'+l.length)}catch(e){log('ERR '+e.message)}};
+$('rmAl').onclick=function(){try{var l=addrs();tx(function(){return nft().setAllowlist(l,false)},'Allowlist -'+l.length)}catch(e){log('ERR '+e.message)}};
+$('reveal').onclick=function(){var b=$('base').value.trim();if(!b){log('ERR isi base URI');return}tx(function(){return nft().reveal(b)},'Reveal')};
+$('withdraw').onclick=function(){tx(function(){return nft().withdraw()},'Withdraw')};
+if(localStorage.spoxyNft){$('nftAddr').textContent=$('mNft').value=$('aNft').value=localStorage.spoxyNft} if(localStorage.spoxyMkt)$('mktAddr').textContent=localStorage.spoxyMkt;
+</script></body></html>
