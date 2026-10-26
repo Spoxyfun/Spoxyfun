@@ -42,6 +42,7 @@ var ZH={
 "· Where lost data comes back to haunt.":"· 丢失的数据在此重返人间。","Cyber Spirits contract (BNB Chain): TBA":"Cyber Spirits 合约（BNB Chain）：待公布",
 "NFT ini adalah karya koleksi digital. Tidak menjanjikan keuntungan, dividen, atau harga.":"本 NFT 为数字收藏品，不承诺任何收益、分红或价格。",
 "🎁 Coba buka Blind Box":"🎁 试开盲盒","Tap kotak untuk membuka":"点击盒子开启","Demo · bukan mint sungguhan":"演示 · 并非真实铸造","Tutup":"关闭","Buka lagi":"再开一次",
+"Market":"市场","SPOXY Market":"SPOXY 市场","Trade the":"交易","Jual beli Cyber Spirits langsung di BNB Chain. NFT tetap di wallet kamu sampai terjual, pembayaran dalam BNB.":"直接在 BNB Chain 上买卖赛博幽灵。NFT 在售出前一直留在你的钱包中，以 BNB 支付。","Mode preview: kontrak market belum dideploy. Listing di bawah adalah contoh, belum bisa dibeli.":"预览模式：市场合约尚未部署。以下挂单仅为示例，暂不可购买。","Floor price":"地板价","Listed":"挂单数","Royalty":"版税","Buy":"购买","Sell":"出售","My Listings":"我的挂单","Harga: rendah ke tinggi":"价格：从低到高","Harga: tinggi ke rendah":"价格：从高到低","Token ID":"Token ID","Harga (BNB)":"价格 (BNB)","List for Sale":"挂单出售","Buy Now":"立即购买","Cancel Listing":"取消挂单","Langkah 1: setujui akses market (sekali saja). Langkah 2: konfirmasi listing di wallet. NFT tetap di wallet kamu sampai ada pembeli.":"第一步：授权市场（仅需一次）。第二步：在钱包中确认挂单。NFT 在有人购买前一直留在你的钱包中。","Belum ada listing.":"暂无挂单。","Connect wallet untuk melihat listing kamu.":"连接钱包查看你的挂单。","Kamu belum punya listing.":"你还没有挂单。","Selalu periksa harga dan alamat kontrak di wallet sebelum menandatangani. Spoxy tidak pernah meminta seed phrase.":"签名前请务必在钱包中核对价格和合约地址。Spoxy 绝不会索要助记词。","Market aktif setelah kontrak dideploy.":"合约部署后市场才会开放。","Konfirmasi pembelian di wallet…":"请在钱包中确认购买…","Menunggu konfirmasi…":"等待确认…","Listing dibatalkan.":"挂单已取消。","Transaksi gagal atau dibatalkan.":"交易失败或已取消。","Isi token ID dan harga.":"请填写 Token ID 和价格。","Token ini bukan milik wallet kamu.":"该 Token 不属于你的钱包。","Langkah 1: setujui akses market di wallet…":"第一步：在钱包中授权市场…","Langkah 2: konfirmasi listing di wallet…":"第二步：在钱包中确认挂单…","Listing aktif!":"挂单成功！","Koneksi wallet dibatalkan.":"钱包连接已取消。","Wallet tidak ditemukan. Buka di browser MetaMask / Trust Wallet / Binance Wallet.":"未检测到钱包。请在 MetaMask / Trust Wallet / Binance Wallet 浏览器中打开。","Gagal memuat listing. Coba refresh.":"挂单加载失败，请刷新。",
 "Spirit":"幽灵"
 };
 var ORIG=new WeakMap(), lang=localStorage.getItem('spoxy-lang')||((navigator.language||'').toLowerCase().indexOf('zh')===0?'zh':'id'), busy=false;
@@ -51,6 +52,7 @@ function tr(n){
     var zh=ZH[key];
     if(!zh){ // try prefix like "Legendary #01 · Golden Crown"
       var m=key.match(/^(Legendary|Spirit) (#\d+ · .+)$/); if(m) zh=(m[1]==='Legendary'?'传说':'幽灵')+' '+m[2];
+      var k=key.match(/^Kamu terima: (.+) BNB \(setelah royalti (.+)\)$/); if(k) zh='你将收到：'+k[1]+' BNB（扣除 '+k[2]+' 版税后）';
     }
     if(zh){ ORIG.set(n,raw); n.nodeValue=raw.replace(key,zh); }
   } else if(ORIG.has(n)){ n.nodeValue=ORIG.get(n); ORIG.delete(n); }
