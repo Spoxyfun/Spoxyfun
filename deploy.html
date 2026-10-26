@@ -32,6 +32,8 @@ button{min-height:44px;padding:0 16px;margin:6px 6px 0 0;border:1px solid var(--
 <button class="o" id="status">Cek status</button><p class="mut" id="stat"></p>
 <label>Fase mint<select id="phase"><option value="0">0 · Tutup</option><option value="1">1 · POA / Agent ID (0.0007 BNB)</option><option value="2">2 · Publik (0.007 BNB)</option></select></label>
 <button id="setPhase">Set fase</button>
+<label>Harga POA / Publik (BNB)<span style="display:flex;gap:8px"><input id="pPoa" value="0.0007"><input id="pPub" value="0.0007"></span></label>
+<button id="setPrice">Set harga</button><p class="mut">Tips: harga publik 0.0007 + fase 2 = semua wallet bisa mint harga POA tanpa allowlist.</p>
 <label>Allowlist POA (satu alamat per baris)<textarea id="al" placeholder="0xabc...&#10;0xdef..."></textarea></label>
 <button id="addAl">Tambah ke allowlist</button><button class="o" id="rmAl">Hapus dari allowlist</button>
 <label>Reveal base URI (contoh ipfs://CID/)<input id="base" placeholder="ipfs://.../"></label>
@@ -58,12 +60,13 @@ $('dNft').onclick=async function(){try{var r=$('royr').value.trim()||acct||(awai
 $('dMkt').onclick=async function(){try{await need();var n=$('mNft').value.trim();if(!ethers.isAddress(n))throw new Error('alamat NFT tidak valid');var r=$('royr').value.trim()||acct;var a=await deploy('SpoxyMarket',[n,r]);$('mktAddr').textContent=a;localStorage.spoxyMkt=a}catch(e){log('ERR '+(e.shortMessage||e.message))}};
 function nft(){var a=$('aNft').value.trim();if(!ethers.isAddress(a))throw new Error('alamat NFT tidak valid');return new ethers.Contract(a,A.SpoxySpirits.abi,signer)}
 async function tx(fn,label){try{await need();log('Konfirmasi '+label+' di wallet…');var t=await fn();log('Tx: '+t.hash);await t.wait();log(label+' ✓')}catch(e){log('ERR '+(e.shortMessage||e.message))}}
-$('status').onclick=async function(){try{await need();var c=nft();var r=await Promise.all([c.phase(),c.totalSupply(),c.revealed(),signer.provider.getBalance(await c.getAddress()),c.owner()]);$('stat').textContent='Fase '+r[0]+' · Minted '+r[1]+'/1031 · Revealed '+r[2]+' · Saldo '+ethers.formatEther(r[3])+' BNB · Owner '+r[4]}catch(e){log('ERR '+(e.shortMessage||e.message))}};
+$('status').onclick=async function(){try{await need();var c=nft();var r=await Promise.all([c.phase(),c.totalSupply(),c.revealed(),signer.provider.getBalance(await c.getAddress()),c.owner(),c.poaPrice(),c.publicPrice()]);$('stat').textContent='Fase '+r[0]+' · Minted '+r[1]+'/1031 · Harga POA '+ethers.formatEther(r[5])+' / Publik '+ethers.formatEther(r[6])+' BNB · Revealed '+r[2]+' · Saldo '+ethers.formatEther(r[3])+' BNB · Owner '+r[4]}catch(e){log('ERR '+(e.shortMessage||e.message))}};
 $('setPhase').onclick=function(){tx(function(){return nft().setPhase(+$('phase').value)},'Set fase '+$('phase').value)};
 function addrs(){var l=$('al').value.split(/[\s,]+/).map(function(s){return s.trim()}).filter(Boolean);var bad=l.filter(function(a){return!ethers.isAddress(a)});if(bad.length)throw new Error('alamat tidak valid: '+bad[0]);return l}
 $('addAl').onclick=function(){try{var l=addrs();tx(function(){return nft().setAllowlist(l,true)},'Allowlist +'+l.length)}catch(e){log('ERR '+e.message)}};
 $('rmAl').onclick=function(){try{var l=addrs();tx(function(){return nft().setAllowlist(l,false)},'Allowlist -'+l.length)}catch(e){log('ERR '+e.message)}};
 $('reveal').onclick=function(){var b=$('base').value.trim();if(!b){log('ERR isi base URI');return}tx(function(){return nft().reveal(b)},'Reveal')};
+$('setPrice').onclick=function(){try{var a=ethers.parseEther($('pPoa').value.trim()),b=ethers.parseEther($('pPub').value.trim());tx(function(){return nft().setPrices(a,b)},'Set harga')}catch(e){log('ERR '+e.message)}};
 $('withdraw').onclick=function(){tx(function(){return nft().withdraw()},'Withdraw')};
 if(localStorage.spoxyNft){$('nftAddr').textContent=$('mNft').value=$('aNft').value=localStorage.spoxyNft} if(localStorage.spoxyMkt)$('mktAddr').textContent=localStorage.spoxyMkt;
 </script></body></html>
