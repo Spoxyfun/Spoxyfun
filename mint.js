@@ -2,23 +2,27 @@
 var C=window.SPOXY_CONFIG||{}; if(!C.NFT_ADDRESS||!window.ethers) return;
 var ABI=["function mint(uint256 qty,bool publicTier) payable","function mintOpen() view returns (bool)","function freePrice() view returns (uint256)","function publicPrice() view returns (uint256)","function totalSupply() view returns (uint256)","function legendaryMinted() view returns (uint256)","function minted(address) view returns (uint256)","event Minted(address indexed to,uint256 indexed tokenId,bool legendary,bool publicTier)"];
 var btn=document.getElementById('mint-btn'), note=document.getElementById('mint-notice');
-var RPCS=[C.RPC,'https://bsc-dataseed1.defibit.io','https://bsc.publicnode.com','https://bsc-dataseed2.binance.org'], ri=0;
+var RPCS=['https://bsc-rpc.publicnode.com',C.RPC,'https://bsc-dataseed1.defibit.io','https://bsc-dataseed2.binance.org','https://1rpc.io/bnb'], ri=0;
 function mk(){ return new ethers.Contract(C.NFT_ADDRESS,ABI,new ethers.JsonRpcProvider(RPCS[ri%RPCS.length],56,{staticNetwork:true,batchMaxCount:1})); }
 var ro=mk(), prices=null;
 function emsg(e){ return (e&&(e.shortMessage||e.reason||(e.info&&e.info.error&&e.info.error.message)||(e.error&&e.error.message)||e.message))||String(e); }
 function say(t){ if(note){note.hidden=false;note.textContent=t;} }
 function isPublic(){ var b=document.querySelector('.x-tiers button[aria-pressed="true"]'); return !!(b&&b===document.querySelectorAll('.x-tiers button')[1]); }
+function setStatus(t){ document.querySelectorAll('.x-status').forEach(function(el){ el.textContent=t; }); }
+var busy=false;
 function refresh(){
-  Promise.all([ro.totalSupply(),ro.legendaryMinted(),ro.mintOpen(),ro.freePrice(),ro.publicPrice()]).then(function(r){
-    var n=Number(r[0]), l=Number(r[1]); prices=[r[3],r[4]];
+  if(busy) return; busy=true;
+  Promise.all([ro.totalSupply(),ro.legendaryMinted(),ro.mintOpen()]).then(function(r){
+    var n=Number(r[0]), l=Number(r[1]);
     var b=document.querySelector('.x-progress__top b'); if(b) b.textContent=n.toLocaleString('en-US')+' / 1,031';
     var bar=document.querySelector('.x-bar span'); if(bar) bar.style.width=(n/1031*100)+'%';
     var o=document.getElementById('odds-live'); if(o) o.textContent='Legendary tersisa: '+(66-l)+' / 66';
-    if(r[2]){ document.querySelectorAll('.x-status').forEach(function(el){ el.textContent='Mint LIVE · '+(66-l)+' Legendary left'; }); btn.textContent='Mint Now'; if(note) note.hidden=true; }
-    else btn.textContent='Mint opening soon';
-  }).catch(function(){ ri++; ro=mk(); });
+    if(n>=1031){ setStatus('Sold out'); btn.textContent='Sold out'; }
+    else if(r[2]){ setStatus('Mint LIVE · '+(66-l)+' Legendary left'); if(btn.textContent!=='Mint Now') btn.textContent='Mint Now'; }
+    else { setStatus('Mint paused'); btn.textContent='Mint paused'; }
+  }).catch(function(){ ri++; ro=mk(); }).finally(function(){ busy=false; });
 }
-refresh(); setInterval(refresh,20000);
+refresh(); setInterval(refresh,3000);
 btn.addEventListener('click',async function(e){
   e.stopImmediatePropagation(); e.preventDefault();
   if(!window.ethereum){ say('Buka di browser wallet (MetaMask / Trust Wallet / Binance Wallet).'); return; }
