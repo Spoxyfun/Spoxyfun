@@ -201,6 +201,7 @@
       .x-filter button:hover { color: #fff; }
       .x-filter button[aria-pressed="true"] { color: var(--x-gold); border-bottom-color: var(--x-gold); }
       .x-filter button:focus-visible { outline: 2px solid var(--x-gold); outline-offset: -2px; }
+      #faq summary::-webkit-details-marker{display:none} #faq summary::after{content:"+";float:right;color:var(--x-gold)} #faq details[open] summary::after{content:"−"}
       @media (prefers-reduced-motion: reduce) { .x-rarity--legendary { animation: none; } }
 
       /* lightbox */
@@ -222,7 +223,19 @@
 
       @media (prefers-reduced-motion: reduce) { .x-nft, .x-card, .x-btn { transition: none; } .x-nft:hover { transform: none; } .x-ghost img, .x-ghost::before, .x-ghost::after { transition: none; animation: none !important; } .x-nft:hover .x-ghost img { transform: none; } }
     </style>
-  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="description" content="SPOXY — 1.031 Cyber Spirits, arwah neon pixel di BNB Chain. Mint 31 Oktober 2026. Agent ID / POA 0.0007 BNB, publik 0.007 BNB." />
+<link rel="canonical" href="https://spoxydev.fun/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SPOXY" />
+<meta property="og:title" content="SPOXY · Cyber Spirits on BNB Chain" />
+<meta property="og:description" content="1.031 Cyber Spirits bangkit di BNB Chain. Mint 31 Oktober 2026." />
+<meta property="og:url" content="https://spoxydev.fun/" />
+<meta property="og:image" content="https://spoxydev.fun/spoxy-hero.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SPOXY · Cyber Spirits on BNB Chain" />
+<meta name="twitter:description" content="1.031 Cyber Spirits bangkit di BNB Chain. Mint 31 Oktober 2026." />
+<meta name="twitter:image" content="https://spoxydev.fun/spoxy-hero.png" />
+<link rel="manifest" href="/manifest.webmanifest" />
 <meta name="theme-color" content="#080808" />
 <link rel="icon" type="image/png" href="/favicon.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -244,6 +257,8 @@
             <li><a href="#poa">Proof of Agent</a></li>
             <li><a href="#collection">Collection</a></li>
             <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#faq">FAQ</a></li>
             <li><a href="https://x.com" target="_blank" rel="noopener">X</a></li>
             <li class="x-links__cta"><button class="x-btn js-connect" type="button">Connect Wallet</button></li>
           </ul>
@@ -387,6 +402,9 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
               <button type="button" data-filter="All" aria-pressed="true">All</button>
               <button type="button" data-filter="Rare" aria-pressed="false">Rare</button>
               <button type="button" data-filter="Legendary" aria-pressed="false">Legendary</button>
+              <button type="button" data-filter="Epic" aria-pressed="false">Epic</button>
+              <button type="button" data-filter="Uncommon" aria-pressed="false">Uncommon</button>
+              <button type="button" data-filter="Common" aria-pressed="false">Common</button>
             </div>
             <div class="x-gallery" id="gallery-grid">
               <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost"><img src="cut-golden.png" alt="Legendary #01, Golden Crown" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #01 · Golden Crown</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
@@ -404,6 +422,30 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
             </div>
           </div>
         </section>
+        <section class="x-sec" id="roadmap">
+          <div class="x-wrap">
+            <div class="x-sec__head">
+              <p class="x-kicker">Roadmap</p>
+              <h2 class="x-h2">From midnight <em>to haunt.</em></h2>
+            </div>
+            <ol class="x-steps">
+              <li><h3>Okt 2026 · Summoning</h3><p>Reveal koleksi, gallery, dan komunitas di X.</p></li>
+              <li><h3>31 Okt 2026 · Genesis Mint</h3><p>Fase Agent ID / POA, lalu fase publik di BNB Chain.</p></li>
+              <li><h3>Setelah mint · Reveal</h3><p>Metadata dan rarity setiap arwah dibuka.</p></li>
+              <li><h3>Selanjutnya · The Haunt</h3><p>Listing di marketplace NFT BNB Chain dan event untuk holder.</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="x-sec x-sec--alt" id="faq">
+          <div class="x-wrap" style="max-width:820px">
+            <div class="x-sec__head">
+              <p class="x-kicker">FAQ</p>
+              <h2 class="x-h2">Pertanyaan <em>umum.</em></h2>
+            </div>
+            <div style="border-bottom:1px solid rgba(240,185,11,.18)"><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Kapan mint dibuka?</summary><p class="x-muted" style="margin:10px 0 0">31 Oktober 2026. Pemegang Agent ID / POA masuk lebih dulu, lalu fase publik.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Berapa harganya?</summary><p class="x-muted" style="margin:10px 0 0">Agent ID / POA: 0.0007 BNB. Publik: 0.007 BNB. Belum termasuk gas BNB Chain.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Berapa maksimal per wallet?</summary><p class="x-muted" style="margin:10px 0 0">Maksimal 10 NFT per wallet.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Wallet apa yang bisa dipakai?</summary><p class="x-muted" style="margin:10px 0 0">Wallet EVM yang mendukung BNB Chain, seperti MetaMask, Trust Wallet, atau Binance Wallet.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Apa itu Golden Spirits?</summary><p class="x-muted" style="margin:10px 0 0">31 arwah Legendary bertema emas — jumlahnya mengikuti tanggal Halloween, 10/31.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Di mana alamat kontraknya?</summary><p class="x-muted" style="margin:10px 0 0">Kontrak belum diterapkan. Alamat resmi hanya diumumkan di situs ini dan akun X resmi SPOXY. Waspadai link mint palsu.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Kapan reveal?</summary><p class="x-muted" style="margin:10px 0 0">Setelah mint selesai, metadata dan gambar setiap arwah akan di-reveal.</p></details></div>
+          </div>
+        </section>
       </main>
 
       <footer class="x-wrap x-foot">
@@ -414,6 +456,7 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
           <li><a href="#mint">Mint</a></li>
           <li><a href="#poa">Proof of Agent</a></li>
           <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="https://x.com" target="_blank" rel="noopener">X</a></li>
         </ul>
         <p class="x-fine">NFT ini adalah karya koleksi digital. Tidak menjanjikan keuntungan, dividen, atau harga.</p>
