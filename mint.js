@@ -22,7 +22,7 @@ function refresh(){
     else { setStatus('Mint paused'); btn.textContent='Mint paused'; }
   }).catch(function(){ ri++; ro=mk(); }).finally(function(){ busy=false; });
 }
-refresh(); setInterval(refresh,3000);
+refresh(); setInterval(function(){ if(!document.hidden) refresh(); },3000);
 btn.addEventListener('click',async function(e){
   e.stopImmediatePropagation(); e.preventDefault();
   if(!window.ethereum){ say('Buka di browser wallet (MetaMask / Trust Wallet / Binance Wallet).'); return; }
