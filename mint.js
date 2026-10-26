@@ -6,10 +6,14 @@ var ro=new ethers.Contract(C.NFT_ADDRESS,ABI,new ethers.JsonRpcProvider(C.RPC));
 function say(t){ if(note){note.hidden=false;note.textContent=t;} }
 ro.totalSupply().then(function(n){ document.querySelectorAll('*').forEach(function(el){ if(el.children.length===0&&/^0 \/ 1,031$/.test(el.textContent.trim())) el.textContent=Number(n).toLocaleString('en-US')+' / 1,031'; }); var bar=document.querySelector('.x-bar span'); if(bar) bar.style.width=(Number(n)/1031*100)+'%'; }).catch(function(){});
 ro.phase().then(function(p){ p=Number(p); if(p===0){ btn.textContent='Mint opens 31 Oct 2026'; return; }
-  var live=p===1?'Mint LIVE · POA / Agent ID 0.0007 BNB':'Mint LIVE · Public 0.007 BNB';
-  document.querySelectorAll('.x-status').forEach(function(el){ el.textContent=live; });
   btn.textContent='Mint Now';
-  if(p===2){ var pub=document.querySelector('.x-tiers button[data-price="0.007"]'); if(pub) pub.click(); }
+  Promise.all([ro.poaPrice(),ro.publicPrice()]).then(function(pr){
+    var poa=ethers.formatEther(pr[0]), pub=ethers.formatEther(pr[1]);
+    var live=p===1?'Mint LIVE · POA / Agent ID '+poa+' BNB':(pub===poa?'Mint LIVE · Semua wallet '+pub+' BNB':'Mint LIVE · Public '+pub+' BNB');
+    document.querySelectorAll('.x-status').forEach(function(el){ el.textContent=live; });
+    var cur=p===1?poa:pub, b=document.querySelector('.x-tiers button[data-price="'+cur+'"]');
+    if(b) b.click(); else { var pb=document.querySelector('.x-tiers button[data-price="0.007"]'); if(pb){ pb.dataset.price=cur; pb.click(); } }
+  }).catch(function(){});
   var n=document.getElementById('mint-notice'); if(n){ n.hidden=true; }
 }).catch(function(){});
 btn.addEventListener('click',async function(e){
