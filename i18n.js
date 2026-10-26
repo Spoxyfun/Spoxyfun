@@ -41,6 +41,7 @@ var ZH={
 "Kapan reveal?":"什么时候揭示？","Setelah mint selesai, metadata dan gambar setiap arwah akan di-reveal.":"铸造结束后，将揭示每个幽灵的元数据和图片。",
 "· Where lost data comes back to haunt.":"· 丢失的数据在此重返人间。","Cyber Spirits contract (BNB Chain): TBA":"Cyber Spirits 合约（BNB Chain）：待公布",
 "NFT ini adalah karya koleksi digital. Tidak menjanjikan keuntungan, dividen, atau harga.":"本 NFT 为数字收藏品，不承诺任何收益、分红或价格。",
+"🎁 Coba buka Blind Box":"🎁 试开盲盒","Tap kotak untuk membuka":"点击盒子开启","Demo · bukan mint sungguhan":"演示 · 并非真实铸造","Tutup":"关闭","Buka lagi":"再开一次",
 "Spirit":"幽灵"
 };
 var ORIG=new WeakMap(), lang=localStorage.getItem('spoxy-lang')||((navigator.language||'').toLowerCase().indexOf('zh')===0?'zh':'id'), busy=false;
