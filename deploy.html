@@ -11,10 +11,10 @@ button{min-height:44px;padding:0 16px;margin:6px 6px 0 0;border:1px solid var(--
 </style></head><body><div class="w">
 <h1>SPOXY · DEPLOY</h1>
 <p class="mut">Halaman khusus pemilik. Semua transaksi ditandatangani di wallet kamu sendiri. Jangan pernah membagikan seed phrase.</p>
-<div class="warn">Kontrak belum diaudit. Deploy ke BSC Testnet dulu, coba mint dan jual-beli, baru ke Mainnet.</div>
+<div class="warn">Mainnet memakai BNB asli dan tidak bisa dibatalkan. Kontrak belum diaudit — periksa setiap detail di wallet sebelum konfirmasi. Siapkan sekitar 0.01–0.02 BNB untuk gas deploy.</div>
 
 <div class="box"><h2>0 · Wallet & jaringan</h2>
-<label>Jaringan<select id="net"><option value="97">BSC Testnet (chainId 97) — coba dulu</option><option value="56">BNB Smart Chain Mainnet (chainId 56)</option></select></label>
+<label>Jaringan<select id="net"><option value="56" selected>BNB Smart Chain Mainnet (chainId 56)</option><option value="97">BSC Testnet (chainId 97)</option></select></label>
 <button id="connect">Connect Wallet</button><p class="mut" id="acct">Belum terhubung</p></div>
 
 <div class="box"><h2>1 · Deploy kontrak NFT (SpoxySpirits)</h2>
