@@ -13,3 +13,13 @@ Fixed-price marketplace for SPOXY Cyber Spirits on BNB Smart Chain.
 2. Open remix.ethereum.org, paste `SpoxyMarket.sol`, compile with 0.8.24.
 3. Deploy with `nft_` = SPOXY NFT address, `royaltyReceiver_` = your wallet.
 4. Put both addresses into `/market-config.js` and push. The Market page leaves preview mode automatically.
+
+## SpoxySpirits.sol (NFT)
+- ERC-721 Enumerable + ERC-2981 (5% royalty), OpenZeppelin 5.1, solc 0.8.24, optimizer 200, evm paris.
+- 1,031 supply, token IDs 1..1031, max 10 per wallet.
+- Phase 0 closed, 1 POA allowlist (0.0007 BNB), 2 public (0.007 BNB).
+- Unrevealed URI: https://spoxydev.fun/meta/hidden.json; `reveal("ipfs://CID/")` later -> CID/{id}.json.
+- `withdraw()` sends mint BNB to owner.
+
+## Easiest deploy
+Open https://spoxydev.fun/deploy.html in a wallet browser, pick BSC Testnet, deploy NFT then Market.
