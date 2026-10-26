@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Market · SPOXY Cyber Spirits</title>
+<meta name="description" content="Jual beli SPOXY Cyber Spirits NFT di BNB Chain." />
+<meta property="og:title" content="SPOXY Market · Cyber Spirits" />
+<meta property="og:image" content="https://spoxydev.fun/spoxy-hero.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="theme-color" content="#080808" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+:root{--gold:#F0B90B;--line:#f0b90b2e;--bg:#050505;--card:#0c0c0c;--mut:#9a9a9a;--sans:"Geist",system-ui,sans-serif;--mono:"Geist Mono",monospace;--serif:"Cormorant Garamond",serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#eee;font:16px/1.55 var(--sans)}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:20;background:#050505e6;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:12px;height:64px}
+.logo{color:var(--gold);text-decoration:none;font-weight:600;letter-spacing:.24em;display:flex;gap:10px;align-items:center}
+.logo svg{width:24px;filter:drop-shadow(0 0 6px #f0b90b80)}
+.sp{flex:1}
+.btn{min-height:44px;padding:0 18px;border:1px solid var(--gold);background:none;color:var(--gold);font:500 14px var(--sans);letter-spacing:.06em;cursor:pointer}
+.btn.solid{background:var(--gold);color:#000}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.lnk{color:var(--mut);text-decoration:none;font-size:14px;padding:0 8px}
+.lnk:hover{color:var(--gold)}
+header.hero{padding:56px 0 24px}
+.kick{color:var(--gold);letter-spacing:.3em;font-size:12px;text-transform:uppercase;margin:0 0 10px}
+h1{font:600 clamp(40px,7vw,72px)/1 var(--serif);margin:0 0 14px}h1 em{color:var(--gold)}
+.lede{color:var(--mut);max-width:620px;margin:0}
+.banner{margin:24px 0 0;padding:14px 16px;border-left:3px solid var(--gold);background:#f0b90b10;color:#e8d9a8;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:32px 0}
+.stat{background:var(--bg);padding:18px}.stat b{display:block;font:500 26px var(--mono);color:#fff}.stat span{color:var(--mut);font-size:13px}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:24px;overflow-x:auto}
+.tabs button{min-height:48px;padding:0 18px;background:none;border:0;border-bottom:2px solid transparent;color:var(--mut);font:500 14px var(--sans);letter-spacing:.08em;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected=true]{color:var(--gold);border-color:var(--gold)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.tools select,.tools input,.form input{min-height:44px;background:#0c0c0c;border:1px solid var(--line);color:#eee;padding:0 12px;font:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid #ffffff12;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.art{aspect-ratio:1;display:grid;place-items:center;background:radial-gradient(circle at 50% 46%,rgb(var(--g,240 185 11)/.22),transparent 65%)}
+.art img{width:80%;height:80%;object-fit:contain;animation:fl 4.6s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-7px)}}
+.meta{padding:14px;border-top:1px solid #ffffff10;display:grid;gap:8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.name{font-weight:600}.mut{color:var(--mut);font-size:13px}.price{font:500 18px var(--mono);color:var(--gold)}
+.tag{font-size:11px;letter-spacing:.1em;padding:3px 8px;border:1px solid #ffffff30;color:#ccc}
+.tag.L{border-color:var(--gold);color:var(--gold)}.tag.R{border-color:#a855f7;color:#c79bff}
+.card .btn{width:100%}
+.empty{padding:48px 20px;text-align:center;color:var(--mut);border:1px dashed var(--line)}
+.form{max-width:520px;display:grid;gap:14px}
+.form label{display:grid;gap:6px;font-size:14px;color:var(--mut)}
+.note{font-size:13px;color:var(--mut)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111;border:1px solid var(--gold);padding:12px 18px;max-width:90vw;z-index:50;display:none;font-size:14px}
+.toast.on{display:block}
+footer{border-top:1px solid var(--line);margin-top:64px;padding:28px 0;color:var(--mut);font-size:13px}
+.x-lang{min-height:40px;padding:0 14px;background:none;border:1px solid var(--gold);color:var(--gold);font:inherit;font-size:14px;cursor:pointer}
+@media(max-width:600px){.hide-sm{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="logo" href="/"><svg viewBox="0 0 32 32"><path fill="currentColor" d="M16 2C9.4 2 5 7 5 13.5V29l3.6-2.6L12 29l4-2.6 4 2.6 3.4-2.6L27 29V13.5C27 7 22.6 2 16 2Z"/><ellipse cx="12" cy="14" rx="2.2" ry="3" fill="#050505"/><ellipse cx="20" cy="14" rx="2.2" ry="3" fill="#050505"/></svg>SPOXY</a>
+  <span class="sp"></span>
+  <a class="lnk hide-sm" href="/#mint">Mint</a>
+  <a class="lnk hide-sm" href="/#gallery">Gallery</a>
+  <button class="js-lang x-lang" type="button">中文</button>
+  <button class="btn solid" id="connect" type="button">Connect Wallet</button>
+</div></nav>
+
+<main class="wrap">
+  <header class="hero">
+    <p class="kick">SPOXY Market</p>
+    <h1>Trade the <em>haunt.</em></h1>
+    <p class="lede">Jual beli Cyber Spirits langsung di BNB Chain. NFT tetap di wallet kamu sampai terjual, pembayaran dalam BNB.</p>
+    <div class="banner" id="demo-banner" hidden>Mode preview: kontrak market belum dideploy. Listing di bawah adalah contoh, belum bisa dibeli.</div>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><b id="s-floor">–</b><span>Floor price</span></div>
+    <div class="stat"><b id="s-listed">–</b><span>Listed</span></div>
+    <div class="stat"><b>1,031</b><span>Supply</span></div>
+    <div class="stat"><b id="s-roy">5%</b><span>Royalty</span></div>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="buy">Buy</button>
+    <button role="tab" aria-selected="false" data-tab="sell">Sell</button>
+    <button role="tab" aria-selected="false" data-tab="mine">My Listings</button>
+  </div>
+
+  <section data-panel="buy">
+    <div class="tools">
+      <select id="sort"><option value="asc">Harga: rendah ke tinggi</option><option value="desc">Harga: tinggi ke rendah</option><option value="id">Token ID</option></select>
+      <input id="search" type="search" placeholder="Cari token ID" inputmode="numeric" />
+    </div>
+    <div class="grid" id="buy-grid"></div>
+  </section>
+
+  <section data-panel="sell" hidden>
+    <div class="form">
+      <label>Token ID<input id="sell-id" type="number" min="0" placeholder="contoh: 388" /></label>
+      <label>Harga (BNB)<input id="sell-price" type="number" min="0" step="0.0001" placeholder="contoh: 0.05" /></label>
+      <p class="note" id="sell-calc">Kamu terima: – BNB (setelah royalti 5%)</p>
+      <button class="btn solid" id="sell-btn" type="button">List for Sale</button>
+      <p class="note">Langkah 1: setujui akses market (sekali saja). Langkah 2: konfirmasi listing di wallet. NFT tetap di wallet kamu sampai ada pembeli.</p>
+    </div>
+  </section>
+
+  <section data-panel="mine" hidden>
+    <div class="grid" id="mine-grid"></div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <p>Market contract: <span id="f-market">TBA</span> · NFT contract: <span id="f-nft">TBA</span></p>
+  <p>Selalu periksa harga dan alamat kontrak di wallet sebelum menandatangani. Spoxy tidak pernah meminta seed phrase.</p>
+</div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/market-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="/market.js"></script>
+<script src="/i18n.js"></script>
+</body>
+</html>
