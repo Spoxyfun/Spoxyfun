@@ -6,11 +6,11 @@ var account=null, signer=null, listings=[], roy=500;
 var $=function(id){return document.getElementById(id)};
 function toast(t){var el=$('toast');el.textContent=t;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('on')},4200);}
 function short(a){return a?a.slice(0,6)+'…'+a.slice(-4):''}
-var DEMO=[["cut-golden.png","Legendary","Golden Crown",1,0.88,"240 185 11"],["new-pharaoh.png","Legendary","Pharaoh Spirit",2,0.75,"240 185 11"],["new-dragon.png","Legendary","Ember Dragon",3,0.69,"255 156 26"],["new-cosmic.png","Legendary","Cosmic Void",4,0.72,"110 80 255"],["cut-witch.png","Rare","Witch Violet",101,0.12,"168 85 247"],["cut-thunder.png","Rare","Thunder Imp",388,0.095,"59 130 246"],["new-samurai.png","Rare","Ronin Blade",612,0.11,"239 50 50"],["new-ice.png","Rare","Frost Wraith",845,0.09,"110 231 249"],["new-dj.png","Rare","Bass Phantom",903,0.1,"255 45 150"],["cut-agent.png","Epic","Agent Spirit",777,0.18,"240 185 11"],["cut-pumpkin.png","Uncommon","Pumpkin Ember",217,0.03,"255 106 26"],["cut-glitch2.png","Common","Glitch Witch",521,0.012,"34 197 94"]];
+var DEMO=[["cut-golden.webp","Legendary","Golden Crown",1,0.88,"240 185 11"],["new-pharaoh.webp","Legendary","Pharaoh Spirit",2,0.75,"240 185 11"],["new-dragon.webp","Legendary","Ember Dragon",3,0.69,"255 156 26"],["new-cosmic.webp","Legendary","Cosmic Void",4,0.72,"110 80 255"],["cut-witch.webp","Rare","Witch Violet",101,0.12,"168 85 247"],["cut-thunder.webp","Rare","Thunder Imp",388,0.095,"59 130 246"],["new-samurai.webp","Rare","Ronin Blade",612,0.11,"239 50 50"],["new-ice.webp","Rare","Frost Wraith",845,0.09,"110 231 249"],["new-dj.webp","Rare","Bass Phantom",903,0.1,"255 45 150"],["cut-agent.webp","Epic","Agent Spirit",777,0.18,"240 185 11"],["cut-pumpkin.webp","Uncommon","Pumpkin Ember",217,0.03,"255 106 26"],["cut-glitch2.webp","Common","Glitch Witch",521,0.012,"34 197 94"]];
 function fmt(n){return (+n).toLocaleString('en-US',{maximumFractionDigits:4})}
 function ipfs(u){return u&&u.indexOf('ipfs://')===0?C.IPFS_GATEWAY+u.slice(7):u}
 var meta={};
-async function loadMeta(id){ if(meta[id]) return meta[id]; try{var p=new ethers.JsonRpcProvider(C.RPC),n=new ethers.Contract(C.NFT_ADDRESS,NFT_ABI,p);var u=ipfs(await n.tokenURI(id));var j=await (await fetch(u)).json();meta[id]={img:ipfs(j.image),name:j.name||('Spirit #'+id),rar:(j.attributes||[]).filter(function(a){return /rarity/i.test(a.trait_type)}).map(function(a){return a.value})[0]||''};}catch(e){meta[id]={img:'/cut-witch.png',name:'Spirit #'+id,rar:''};} return meta[id]; }
+async function loadMeta(id){ if(meta[id]) return meta[id]; try{var p=new ethers.JsonRpcProvider(C.RPC),n=new ethers.Contract(C.NFT_ADDRESS,NFT_ABI,p);var u=ipfs(await n.tokenURI(id));var j=await (await fetch(u)).json();meta[id]={img:ipfs(j.image),name:j.name||('Spirit #'+id),rar:(j.attributes||[]).filter(function(a){return /rarity/i.test(a.trait_type)}).map(function(a){return a.value})[0]||''};}catch(e){meta[id]={img:'/cut-witch.webp',name:'Spirit #'+id,rar:''};} return meta[id]; }
 function card(l,mode){
   var d=document.createElement('div');d.className='card';
   var tg=l.rar?('<span class="tag '+(l.rar==='Legendary'?'L':l.rar==='Rare'?'R':'')+'">'+l.rar+'</span>'):'';
@@ -41,7 +41,7 @@ async function load(){
   try{
     var p=new ethers.JsonRpcProvider(C.RPC), m=new ethers.Contract(C.MARKET_ADDRESS,MKT_ABI,p);
     roy=Number(await m.royaltyBps()); var r=await m.activeListings();
-    listings=r[0].map(function(id,i){return{id:Number(id),seller:r[1][i],price:+ethers.formatEther(r[2][i]),priceWei:r[2][i],img:'/cut-witch.png',name:'Spirit #'+id,rar:''}});
+    listings=r[0].map(function(id,i){return{id:Number(id),seller:r[1][i],price:+ethers.formatEther(r[2][i]),priceWei:r[2][i],img:'/cut-witch.webp',name:'Spirit #'+id,rar:''}});
     render();
     for(const l of listings){ var mm=await loadMeta(l.id); l.img=mm.img;l.name=mm.name;l.rar=mm.rar; } render();
   }catch(e){ toast('Gagal memuat listing. Coba refresh.'); }
