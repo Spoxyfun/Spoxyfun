@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Market · SPOXY Cyber Spirits</title>
-<meta name="description" content="Jual beli SPOXY Cyber Spirits NFT di BNB Chain." />
+<meta name="description" content="Buy and sell SPOXY Cyber Spirits NFTs on BNB Chain." />
 <meta property="og:title" content="SPOXY Market · Cyber Spirits" />
 <meta property="og:image" content="https://spoxydev.fun/spoxy-hero.webp" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -80,8 +80,8 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:28px 0;color:var
   <header class="hero">
     <p class="kick">SPOXY Market</p>
     <h1>Trade the <em>haunt.</em></h1>
-    <p class="lede">Jual beli Cyber Spirits langsung di BNB Chain. NFT tetap di wallet kamu sampai terjual, pembayaran dalam BNB.</p>
-    <div class="banner" id="demo-banner" hidden>Mode preview: kontrak market belum dideploy. Listing di bawah adalah contoh, belum bisa dibeli.</div>
+    <p class="lede">Buy and sell Cyber Spirits directly on BNB Chain. Your NFT stays in your wallet until it sells, paid in BNB.</p>
+    <div class="banner" id="demo-banner" hidden>Preview mode: the market contract isn't deployed yet. Listings shown are examples and can't be bought.</div>
   </header>
 
   <section class="stats">
@@ -99,19 +99,19 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:28px 0;color:var
 
   <section data-panel="buy">
     <div class="tools">
-      <select id="sort"><option value="asc">Harga: rendah ke tinggi</option><option value="desc">Harga: tinggi ke rendah</option><option value="id">Token ID</option></select>
-      <input id="search" type="search" placeholder="Cari token ID" inputmode="numeric" />
+      <select id="sort"><option value="asc">Price: low to high</option><option value="desc">Price: high to low</option><option value="id">Token ID</option></select>
+      <input id="search" type="search" placeholder="Search token ID" inputmode="numeric" />
     </div>
     <div class="grid" id="buy-grid"></div>
   </section>
 
   <section data-panel="sell" hidden>
     <div class="form">
-      <label>Token ID<input id="sell-id" type="number" min="0" placeholder="contoh: 388" /></label>
-      <label>Harga (BNB)<input id="sell-price" type="number" min="0" step="0.0001" placeholder="contoh: 0.05" /></label>
-      <p class="note" id="sell-calc">Kamu terima: – BNB (setelah royalti 5%)</p>
+      <label>Token ID<input id="sell-id" type="number" min="0" placeholder="e.g. 388" /></label>
+      <label>Price (BNB)<input id="sell-price" type="number" min="0" step="0.0001" placeholder="e.g. 0.05" /></label>
+      <p class="note" id="sell-calc">You receive: – BNB (after royalty 5%)</p>
       <button class="btn solid" id="sell-btn" type="button">List for Sale</button>
-      <p class="note">Langkah 1: setujui akses market (sekali saja). Langkah 2: konfirmasi listing di wallet. NFT tetap di wallet kamu sampai ada pembeli.</p>
+      <p class="note">Step 1: approve market access (one time). Step 2: confirm the listing in your wallet. Your NFT stays in your wallet until someone buys it.</p>
     </div>
   </section>
 
@@ -122,13 +122,13 @@ footer{border-top:1px solid var(--line);margin-top:64px;padding:28px 0;color:var
 
 <footer><div class="wrap">
   <p>Market contract: <span id="f-market">TBA</span> · NFT contract: <span id="f-nft">TBA</span></p>
-  <p>Selalu periksa harga dan alamat kontrak di wallet sebelum menandatangani. Spoxy tidak pernah meminta seed phrase.</p>
+  <p>Always check the price and contract address in your wallet before signing. Spoxy never asks for your seed phrase.</p>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
 <script src="/market-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="/market.js"></script>
-<script src="/i18n.js"></script>
+<script src="/market.js?v=16"></script>
+<script src="/i18n.js?v=16"></script>
 </body>
 </html>
