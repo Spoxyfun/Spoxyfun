@@ -24,12 +24,12 @@ function render(){
   if(q) arr=arr.filter(function(l){return String(l.id).indexOf(q)>-1});
   arr.sort(function(a,b){return s==='asc'?a.price-b.price:s==='desc'?b.price-a.price:a.id-b.id});
   var g=$('buy-grid');g.innerHTML='';
-  if(!arr.length){g.innerHTML='<div class="empty">Belum ada listing.</div>';}
+  if(!arr.length){g.innerHTML='<div class="empty">No listings yet.</div>';}
   arr.forEach(function(l){g.appendChild(card(l,'buy'))});
   var m=$('mine-grid');m.innerHTML='';
   var mine=account?listings.filter(function(l){return l.seller&&l.seller.toLowerCase()===account.toLowerCase()}):[];
-  if(!account) m.innerHTML='<div class="empty">Connect wallet untuk melihat listing kamu.</div>';
-  else if(!mine.length) m.innerHTML='<div class="empty">Kamu belum punya listing.</div>';
+  if(!account) m.innerHTML='<div class="empty">Connect your wallet to see your listings.</div>';
+  else if(!mine.length) m.innerHTML='<div class="empty">You have no listings yet.</div>';
   mine.forEach(function(l){m.appendChild(card(l,'mine'))});
   $('s-listed').textContent=listings.length;
   $('s-floor').textContent=listings.length?fmt(Math.min.apply(null,listings.map(function(l){return l.price})))+' BNB':'–';
@@ -44,10 +44,10 @@ async function load(){
     listings=r[0].map(function(id,i){return{id:Number(id),seller:r[1][i],price:+ethers.formatEther(r[2][i]),priceWei:r[2][i],img:'/cut-witch.webp',name:'Spirit #'+id,rar:''}});
     render();
     for(const l of listings){ var mm=await loadMeta(l.id); l.img=mm.img;l.name=mm.name;l.rar=mm.rar; } render();
-  }catch(e){ toast('Gagal memuat listing. Coba refresh.'); }
+  }catch(e){ toast('Could not load listings. Try refreshing.'); }
 }
 async function connect(){
-  if(!window.ethereum){ toast('Wallet tidak ditemukan. Buka di browser MetaMask / Trust Wallet / Binance Wallet.'); return false; }
+  if(!window.ethereum){ toast('No wallet found. Open in the MetaMask / Trust Wallet / Binance Wallet browser.'); return false; }
   try{
     var accs=await window.ethereum.request({method:'eth_requestAccounts'}); account=accs[0];
     var hex='0x'+Number(C.CHAIN_ID||56).toString(16);
@@ -57,25 +57,25 @@ async function connect(){
     }
     if(window.ethers){ signer=await new ethers.BrowserProvider(window.ethereum).getSigner(); }
     $('connect').textContent=short(account); render(); return true;
-  }catch(e){ toast('Koneksi wallet dibatalkan.'); return false; }
+  }catch(e){ toast('Wallet connection cancelled.'); return false; }
 }
-function needLive(){ if(!LIVE){ toast('Market aktif setelah kontrak dideploy.'); return true; } return false; }
+function needLive(){ if(!LIVE){ toast('The market goes live once the contract is deployed.'); return true; } return false; }
 async function buy(l){ if(needLive())return; if(!signer&&!(await connect()))return;
-  try{ var m=new ethers.Contract(C.MARKET_ADDRESS,MKT_ABI,signer); toast('Konfirmasi pembelian di wallet…'); var tx=await m.buy(l.id,{value:l.priceWei}); toast('Menunggu konfirmasi…'); await tx.wait(); toast('Berhasil! #'+l.id+' sekarang milikmu.'); load(); }
-  catch(e){ toast('Transaksi gagal atau dibatalkan.'); } }
+  try{ var m=new ethers.Contract(C.MARKET_ADDRESS,MKT_ABI,signer); toast('Confirm the purchase in your wallet…'); var tx=await m.buy(l.id,{value:l.priceWei}); toast('Waiting for confirmation…'); await tx.wait(); toast('Success! #'+l.id+' is now yours.'); load(); }
+  catch(e){ toast('Transaction failed or cancelled.'); } }
 async function cancel(l){ if(needLive())return; if(!signer&&!(await connect()))return;
-  try{ var m=new ethers.Contract(C.MARKET_ADDRESS,MKT_ABI,signer); var tx=await m.cancel(l.id); toast('Menunggu konfirmasi…'); await tx.wait(); toast('Listing dibatalkan.'); load(); }
-  catch(e){ toast('Transaksi gagal atau dibatalkan.'); } }
+  try{ var m=new ethers.Contract(C.MARKET_ADDRESS,MKT_ABI,signer); var tx=await m.cancel(l.id); toast('Waiting for confirmation…'); await tx.wait(); toast('Listing cancelled.'); load(); }
+  catch(e){ toast('Transaction failed or cancelled.'); } }
 async function sell(){ if(needLive())return; if(!signer&&!(await connect()))return;
-  var id=$('sell-id').value, pr=$('sell-price').value; if(id===''||!(+pr>0)){ toast('Isi token ID dan harga.'); return; }
+  var id=$('sell-id').value, pr=$('sell-price').value; if(id===''||!(+pr>0)){ toast('Enter a token ID and price.'); return; }
   try{ var n=new ethers.Contract(C.NFT_ADDRESS,NFT_ABI,signer), m=new ethers.Contract(C.MARKET_ADDRESS,MKT_ABI,signer);
-    if((await n.ownerOf(id)).toLowerCase()!==account.toLowerCase()){ toast('Token ini bukan milik wallet kamu.'); return; }
-    if(!(await n.isApprovedForAll(account,C.MARKET_ADDRESS))){ toast('Langkah 1: setujui akses market di wallet…'); await (await n.setApprovalForAll(C.MARKET_ADDRESS,true)).wait(); }
-    toast('Langkah 2: konfirmasi listing di wallet…'); await (await m.list(id,ethers.parseEther(String(pr)))).wait(); toast('Listing aktif!'); $('sell-id').value='';$('sell-price').value=''; load();
-  }catch(e){ toast('Transaksi gagal atau dibatalkan.'); } }
+    if((await n.ownerOf(id)).toLowerCase()!==account.toLowerCase()){ toast('This token is not owned by your wallet.'); return; }
+    if(!(await n.isApprovedForAll(account,C.MARKET_ADDRESS))){ toast('Step 1: approve market access in your wallet…'); await (await n.setApprovalForAll(C.MARKET_ADDRESS,true)).wait(); }
+    toast('Step 2: confirm the listing in your wallet…'); await (await m.list(id,ethers.parseEther(String(pr)))).wait(); toast('Listing live!'); $('sell-id').value='';$('sell-price').value=''; load();
+  }catch(e){ toast('Transaction failed or cancelled.'); } }
 $('connect').addEventListener('click',connect); $('sell-btn').addEventListener('click',sell);
 $('sort').addEventListener('change',render); $('search').addEventListener('input',render);
-$('sell-price').addEventListener('input',function(){var v=+this.value;$('sell-calc').textContent='Kamu terima: '+(v>0?fmt(v*(1-roy/10000)):'–')+' BNB (setelah royalti '+(roy/100)+'%)';});
+$('sell-price').addEventListener('input',function(){var v=+this.value;$('sell-calc').textContent='You receive: '+(v>0?fmt(v*(1-roy/10000)):'–')+' BNB (after royalty '+(roy/100)+'%)';});
 document.querySelectorAll('[role=tab]').forEach(function(t){t.addEventListener('click',function(){document.querySelectorAll('[role=tab]').forEach(function(x){x.setAttribute('aria-selected',x===t)});document.querySelectorAll('[data-panel]').forEach(function(p){p.hidden=p.dataset.panel!==t.dataset.tab});});});
 if(window.ethereum&&window.ethereum.on) window.ethereum.on('accountsChanged',function(a){account=a[0]||null;signer=null;$('connect').textContent=account?short(account):'Connect Wallet';render();});
 load();
