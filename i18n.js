@@ -54,6 +54,7 @@ function tr(n){
     var zh=ZH[key];
     if(!zh){ // try prefix like "Legendary #01 · Golden Crown"
       var m=key.match(/^(Legendary|Spirit) (#\d+ · .+)$/); if(m) zh=(m[1]==='Legendary'?'传说':'幽灵')+' '+m[2];
+      var lv=key.match(/^Mint LIVE · Semua wallet (.+) BNB$/); if(lv) zh='铸造进行中 · 所有钱包 '+lv[1]+' BNB';
       var k=key.match(/^Kamu terima: (.+) BNB \(setelah royalti (.+)\)$/); if(k) zh='你将收到：'+k[1]+' BNB（扣除 '+k[2]+' 版税后）';
     }
     if(zh){ ORIG.set(n,raw); n.nodeValue=raw.replace(key,zh); }
