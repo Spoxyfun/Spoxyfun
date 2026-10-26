@@ -225,17 +225,17 @@
 
       @media (prefers-reduced-motion: reduce) { .x-nft, .x-card, .x-btn { transition: none; } .x-nft:hover { transform: none; } .x-ghost img, .x-ghost::before, .x-ghost::after { transition: none; animation: none !important; } .x-nft:hover .x-ghost img { transform: none; } }
     </style>
-  <meta name="description" content="SPOXY — 1.031 Cyber Spirits, arwah neon pixel di BNB Chain. Mint 31 Oktober 2026. Agent ID / POA 0.0007 BNB, publik 0.007 BNB." />
+  <meta name="description" content="SPOXY — 1.031 Cyber Spirits, arwah neon pixel di BNB Chain. Mint segera dibuka. Free Mint 0.0007 BNB, Publik 0.007 BNB dengan peluang 60% Legendary." />
 <link rel="canonical" href="https://spoxydev.fun/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="SPOXY" />
 <meta property="og:title" content="SPOXY · Cyber Spirits on BNB Chain" />
-<meta property="og:description" content="1.031 Cyber Spirits bangkit di BNB Chain. Mint 31 Oktober 2026." />
+<meta property="og:description" content="1.031 Cyber Spirits bangkit di BNB Chain. Mint segera dibuka." />
 <meta property="og:url" content="https://spoxydev.fun/" />
 <meta property="og:image" content="https://spoxydev.fun/spoxy-hero.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="SPOXY · Cyber Spirits on BNB Chain" />
-<meta name="twitter:description" content="1.031 Cyber Spirits bangkit di BNB Chain. Mint 31 Oktober 2026." />
+<meta name="twitter:description" content="1.031 Cyber Spirits bangkit di BNB Chain. Mint segera dibuka." />
 <meta name="twitter:image" content="https://spoxydev.fun/spoxy-hero.png" />
 <link rel="stylesheet" href="/fx.css" />
 <link rel="manifest" href="/manifest.webmanifest" />
@@ -258,7 +258,7 @@
           <ul class="x-links" id="nav-links">
             <li><a href="#mint">Mint</a></li>
             <li><a href="#agent-mint">Agent Mint</a></li>
-            <li><a href="#poa">Proof of Agent</a></li>
+            <li><a href="#odds">Legendary Odds</a></li>
             <li><a href="#collection">Collection</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="/market.html">Market</a></li>
@@ -295,19 +295,19 @@
               <div class="x-panel">
                 <p class="x-kicker">Genesis mint</p>
                 <h2 class="x-h2">Mint a Cyber Spirit</h2>
-                <p class="x-status">Mint opens 31 Oct 2026</p>
+                <p class="x-status">Mint opening soon</p>
                 <div>
                   <p class="x-progress__top"><span>Minted</span><b>0 / 1,031</b></p>
                   <div class="x-bar" role="progressbar" aria-label="Minted" aria-valuemin="0" aria-valuemax="1031" aria-valuenow="0"><span></span></div>
                 </div>
                 <dl class="x-prices" style="margin:0">
-                  <div><dt>Agent ID / POA holders</dt><dd>0.0007 BNB <small>Free Mint</small></dd></div>
-                  <div><dt>Public</dt><dd>0.007 BNB</dd></div>
+                  <div><dt>Free Mint · Legendary acak</dt><dd>0.0007 BNB</dd></div>
+                  <div><dt>Public · 60% Legendary</dt><dd>0.007 BNB</dd></div>
                   <div><dt>Limit</dt><dd>Max 10 per wallet</dd></div>
                 </dl>
                 <div class="x-tiers" role="group" aria-label="Price tier">
-                  <button type="button" data-price="0.0007" aria-pressed="true">POA</button>
-                  <button type="button" data-price="0.007" aria-pressed="false">Public</button>
+                  <button type="button" data-price="0.0007" aria-pressed="true">Free Mint</button>
+                  <button type="button" data-price="0.007" aria-pressed="false">Public · 60%</button>
                 </div>
                 <div class="x-qty">
                   <div class="x-step">
@@ -318,9 +318,9 @@
                   <p class="x-total"><span>Total</span><b id="total">0.0007 BNB</b></p>
                 </div>
                 <button class="x-btn x-btn--solid x-btn--big" type="button" id="mint-btn">Connect Wallet to Mint</button>
-                <p class="x-notice" id="mint-notice" role="status" hidden>Mint dibuka 31 Oktober 2026.</p>
+                <p class="x-notice" id="mint-notice" role="status" hidden>Mint segera dibuka. Pantau akun X resmi SPOXY.</p>
                 <div>
-                  <p class="x-fine">Contract: 0x2821…AAab · Network: BNB Smart Chain</p>
+                  <p class="x-fine">Contract: TBA · Network: BNB Smart Chain</p>
                   <p class="x-fine">Selalu periksa detail transaksi sebelum menandatangani di wallet.</p>
                 </div>
               </div>
@@ -346,37 +346,35 @@
               </ol>
               <div class="x-agent__box">
                 <pre class="x-prompt" id="agent-prompt" tabindex="0" aria-label="Prompt untuk Binance Agent">Mint Cyber Spirits NFT dari SPOXY di BNB Smart Chain.
-Kontrak: 0x28218C0C0C0b0D2E220a76BC9fa9904DC66cAAab
-Harga: 0.0007 BNB per NFT untuk pemegang Agent ID / POA, 0.007 BNB untuk publik. Maks 10 per wallet.
+Kontrak: TBA (cek di halaman Spoxy sebelum mint)
+Harga: Free Mint 0.0007 BNB per NFT, atau Publik 0.007 BNB per NFT (peluang 60% Legendary). Maks 10 per wallet.
+Tier: [Free Mint / Publik]
 Jumlah: [isi jumlah 1-10]
 Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT, total BNB, dan estimasi gas. Tunggu konfirmasi saya. Jangan tandatangani apa pun tanpa persetujuan saya.</pre>
                 <button class="x-btn x-btn--solid" type="button" id="copy-prompt">Copy Prompt</button>
                 <p class="x-notice" id="copy-notice" role="status" hidden>Tekan lama untuk menyalin</p>
-                <p class="x-status">Agent mint aktif saat kontrak dideploy · Mint dibuka 31 Okt 2026</p>
+                <p class="x-status">Agent mint aktif saat mint dibuka</p>
                 <p class="x-fine">Spoxy tidak pernah meminta seed phrase atau private key. Selalu cek alamat kontrak resmi.</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section class="x-sec x-sec--alt" id="poa">
+        <section class="x-sec x-sec--alt" id="odds">
           <div class="x-wrap x-split">
-            <div class="x-ghost x-ghost--float"><img src="cut-agent.png" alt="Agent Spirit" /></div>
+            <div class="x-ghost x-ghost--float" style="--glow: 240 185 11"><img src="cut-golden.png" alt="Legendary Spirit" /></div>
             <div>
               <div class="x-sec__head" style="margin-bottom:0">
-                <p class="x-kicker">Proof of Agent</p>
-                <h2 class="x-h2">Agents enter <em>first.</em></h2>
-                <p class="x-lede">Pemegang Agent ID dan POA di BNB Chain mendapat prioritas mint dan harga Free Mint 0.0007 BNB.</p>
+                <p class="x-kicker">Legendary Odds</p>
+                <h2 class="x-h2">66 Legendary. <em>Your luck.</em></h2>
+                <p class="x-lede">Tanpa allowlist. Semua wallet bisa memilih tier, rarity diundi on-chain saat mint.</p>
               </div>
               <ol class="x-steps">
-                <li><h3>Hubungkan wallet</h3><p>Connect wallet yang memegang Agent ID / POA.</p></li>
-                <li><h3>Verifikasi agent</h3><p>Sistem mengecek kepemilikan Agent ID secara on-chain.</p></li>
-                <li><h3>Mint prioritas</h3><p>Mint lebih awal dengan harga Free Mint.</p></li>
+                <li><h3>Free Mint · 0.0007 BNB</h3><p>Legendary acak, peluang = sisa Legendary ÷ sisa supply.</p></li>
+                <li><h3>Public · 0.007 BNB</h3><p>Peluang 60% Legendary per NFT, selama 66 Legendary belum habis.</p></li>
+                <li><h3>Langsung terlihat</h3><p>Legendary langsung tampil sebagai Legendary di wallet setelah mint.</p></li>
               </ol>
-              <div style="display:grid;gap:14px;justify-items:start">
-                <button class="x-btn" type="button" id="agent-btn">Check my Agent ID</button>
-                <p class="x-notice" id="agent-notice" role="status" hidden>Verifikasi akan aktif saat mint dibuka.</p>
-              </div>
+              <p class="x-muted" id="odds-live" style="margin:0">Legendary tersisa: 66 / 66</p>
             </div>
           </div>
         </section>
@@ -389,7 +387,7 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
             </div>
             <div class="x-stats" style="margin-bottom:0">
               <div class="x-stat"><b>1,031</b><span>Supply</span><small>10/31 Halloween</small></div>
-              <div class="x-stat"><b>31</b><span>Golden Spirits</span></div>
+              <div class="x-stat"><b>66</b><span>Legendary Spirits</span></div>
               <div class="x-stat"><b>5</b><span>Spirit colors</span></div>
               <div class="x-stat"><b>10</b><span>Max per wallet</span></div>
             </div>
@@ -435,7 +433,7 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
             </div>
             <ol class="x-steps">
               <li><h3>Okt 2026 · Summoning</h3><p>Reveal koleksi, gallery, dan komunitas di X.</p></li>
-              <li><h3>31 Okt 2026 · Genesis Mint</h3><p>Fase Agent ID / POA, lalu fase publik di BNB Chain.</p></li>
+              <li><h3>Genesis Mint</h3><p>Free Mint dan Publik terbuka untuk semua wallet di BNB Chain.</p></li>
               <li><h3>Setelah mint · Reveal</h3><p>Metadata dan rarity setiap arwah dibuka.</p></li>
               <li><h3>Selanjutnya · The Haunt</h3><p>Listing di marketplace NFT BNB Chain dan event untuk holder.</p></li>
             </ol>
@@ -448,7 +446,7 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
               <p class="x-kicker">FAQ</p>
               <h2 class="x-h2">Pertanyaan <em>umum.</em></h2>
             </div>
-            <div style="border-bottom:1px solid rgba(240,185,11,.18)"><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Kapan mint dibuka?</summary><p class="x-muted" style="margin:10px 0 0">31 Oktober 2026. Pemegang Agent ID / POA masuk lebih dulu, lalu fase publik.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Berapa harganya?</summary><p class="x-muted" style="margin:10px 0 0">Agent ID / POA: 0.0007 BNB. Publik: 0.007 BNB. Belum termasuk gas BNB Chain.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Berapa maksimal per wallet?</summary><p class="x-muted" style="margin:10px 0 0">Maksimal 10 NFT per wallet.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Wallet apa yang bisa dipakai?</summary><p class="x-muted" style="margin:10px 0 0">Wallet EVM yang mendukung BNB Chain, seperti MetaMask, Trust Wallet, atau Binance Wallet.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Apa itu Golden Spirits?</summary><p class="x-muted" style="margin:10px 0 0">31 arwah Legendary bertema emas — jumlahnya mengikuti tanggal Halloween, 10/31.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Di mana alamat kontraknya?</summary><p class="x-muted" style="margin:10px 0 0">Kontrak resmi: 0x28218C0C0C0b0D2E220a76BC9fa9904DC66cAAab (BNB Chain). Waspadai link mint palsu.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Kapan reveal?</summary><p class="x-muted" style="margin:10px 0 0">Setelah mint selesai, metadata dan gambar setiap arwah akan di-reveal.</p></details></div>
+            <div style="border-bottom:1px solid rgba(240,185,11,.18)"><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Kapan mint dibuka?</summary><p class="x-muted" style="margin:10px 0 0">Mint dibuka saat tombol menampilkan Mint LIVE. Pantau akun X resmi SPOXY.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Berapa harganya?</summary><p class="x-muted" style="margin:10px 0 0">Free Mint 0.0007 BNB, Publik 0.007 BNB per NFT. Belum termasuk gas BNB Chain.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Apa bedanya Free Mint dan Publik?</summary><p class="x-muted" style="margin:10px 0 0">Publik punya peluang 60% Legendary per NFT. Free Mint tetap bisa dapat Legendary secara acak dengan peluang lebih kecil.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Ada berapa Legendary?</summary><p class="x-muted" style="margin:10px 0 0">66 Legendary dari 1.031 total. Peluang 60% di Publik berlaku selama Legendary masih tersisa.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Berapa maksimal per wallet?</summary><p class="x-muted" style="margin:10px 0 0">Maksimal 10 NFT per wallet, gabungan kedua tier.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Wallet apa yang bisa dipakai?</summary><p class="x-muted" style="margin:10px 0 0">Wallet EVM yang mendukung BNB Chain, seperti MetaMask, Trust Wallet, atau Binance Wallet.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Di mana alamat kontraknya?</summary><p class="x-muted" style="margin:10px 0 0">Alamat resmi hanya diumumkan di situs ini dan akun X resmi SPOXY. Waspadai link mint palsu.</p></details></div>
           </div>
         </section>
       </main>
@@ -456,10 +454,10 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
       <footer class="x-wrap x-foot">
         <hr class="x-line" />
         <p class="x-foot__brand"><b>Spoxy</b> · Where lost data comes back to haunt.</p>
-        <p class="x-muted">Cyber Spirits contract (BNB Chain): 0x28218C0C0C0b0D2E220a76BC9fa9904DC66cAAab</p>
+        <p class="x-muted">Cyber Spirits contract (BNB Chain): TBA</p>
         <ul class="x-foot__links">
           <li><a href="#mint">Mint</a></li>
-          <li><a href="#poa">Proof of Agent</a></li>
+          <li><a href="#odds">Legendary Odds</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="/market.html">Market</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -515,7 +513,7 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
         var mintBtn = document.getElementById("mint-btn");
         mintBtn.addEventListener("click", function () {
           mintNotice.hidden = false;
-          mintBtn.textContent = "Mint opens 31 Oct 2026";
+          mintBtn.textContent = "Mint opening soon";
           mintBtn.setAttribute("aria-describedby", "mint-notice");
         });
         document.querySelectorAll(".js-connect").forEach(function (b) {
@@ -525,7 +523,7 @@ Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT
             document.getElementById("mint").scrollIntoView({ behavior: "smooth" });
           });
         });
-        document.getElementById("agent-btn").addEventListener("click", function () { document.getElementById("agent-notice").hidden = false; });
+        
 
         // gallery filter
         var tabs = document.querySelectorAll(".x-filter button");
