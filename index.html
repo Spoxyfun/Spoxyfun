@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SPOXY · Cyber Spirits on BNB Chain</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&family=Cormorant+Garamond:wght@500;600&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      :root, :root[data-theme="light"] { color-scheme: dark; }
+      :root {
+        --x-gold: #f0b90b;
+        --x-gold-soft: #2b220a;
+        --x-gold-line: #f0b90b40;
+        --x-gold-glow: 0 0 28px #f0b90b40;
+        --x-black: #050505;
+        --x-obsidian: #0d0c0a;
+        --x-panel: #12110e;
+        --x-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+        --x-nav-h: 68px;
+      }
+      html { scroll-padding-top: var(--x-nav-h); }
+      body { background: var(--x-black); color: var(--text-primary); }
+      ::selection { background: var(--x-gold); color: var(--x-black); }
+      :focus-visible { outline-color: var(--x-gold); }
+
+      .x-wrap { max-width: var(--page-max); margin: 0 auto; padding-inline: var(--gutter); }
+      .x-kicker { font: var(--type-tag); letter-spacing: 0.22em; text-transform: uppercase; color: var(--x-gold); }
+      .x-h1, .x-h2, .x-h3 { font-family: var(--x-serif); font-weight: 500; letter-spacing: -0.01em; line-height: 1.05; }
+      .x-h1 { font-size: clamp(48px, 8vw, 104px); color: #fff; }
+      .x-h2 { font-size: clamp(38px, 5.5vw, 64px); color: #fff; }
+      .x-h2 em, .x-h1 em { font-style: italic; color: var(--x-gold); }
+      .x-h3 { font-size: 26px; color: #fff; }
+      .x-lede { font: var(--type-lede); font-weight: var(--weight-regular); color: var(--text-secondary); max-width: 58ch; }
+      .x-muted { color: var(--text-secondary); }
+      .x-line { height: 1px; background: linear-gradient(90deg, transparent, var(--x-gold-line), transparent); border: 0; margin: 0; }
+
+      /* buttons */
+      .x-btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        min-height: var(--tap); padding: 0 22px; border-radius: 2px;
+        font: var(--type-label); letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+        border: 1px solid var(--x-gold); color: var(--x-gold); background: transparent; cursor: pointer;
+        transition: box-shadow var(--dur-quick) var(--ease-out), background var(--dur-quick) var(--ease-out), color var(--dur-quick) var(--ease-out);
+      }
+      .x-btn:hover { box-shadow: var(--x-gold-glow); background: var(--x-gold-soft); }
+      .x-btn--solid { background: var(--x-gold); color: var(--x-black); }
+      .x-btn--solid:hover { background: #ffcd2e; color: var(--x-black); }
+      .x-btn--ghost { border-color: #ffffff59; color: #fff; }
+      .x-btn--ghost:hover { border-color: var(--x-gold); color: var(--x-gold); }
+      .x-btn--big { width: 100%; min-height: 56px; font-size: var(--size-body); }
+
+      /* nav */
+      .x-nav { position: sticky; top: 0; z-index: 50; background: #050505e6; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--x-gold-line); }
+      .x-nav__in { height: var(--x-nav-h); display: flex; align-items: center; gap: 24px; }
+      .x-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--x-gold); text-decoration: none; font: var(--weight-bold) 20px/1 var(--sans); letter-spacing: 0.24em; min-height: var(--tap); }
+      .x-logo svg { width: 26px; height: 26px; filter: drop-shadow(0 0 6px #f0b90b80); }
+      .x-links { display: flex; gap: 4px; margin-left: auto; list-style: none; padding: 0; margin-block: 0; }
+      .x-links a { display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 14px; font: var(--type-label); color: var(--text-secondary); text-decoration: none; transition: color var(--dur-quick); }
+      .x-links a:hover { color: var(--x-gold); }
+      .x-burger { display: none; margin-left: auto; width: var(--tap); height: var(--tap); background: none; border: 1px solid var(--x-gold-line); border-radius: 2px; color: var(--x-gold); cursor: pointer; }
+      .x-burger span, .x-burger span::before, .x-burger span::after { display: block; width: 18px; height: 1.5px; background: currentColor; margin: auto; position: relative; content: ""; }
+      .x-burger span::before { position: absolute; top: -6px; } .x-burger span::after { position: absolute; top: 6px; }
+      @media (max-width: 860px) {
+        .x-burger { display: inline-block; }
+        .x-nav__cta { display: none; }
+        .x-links { display: none; position: absolute; left: 0; right: 0; top: var(--x-nav-h); flex-direction: column; background: var(--x-black); border-bottom: 1px solid var(--x-gold-line); padding: 8px var(--gutter) 20px; }
+        .x-nav.is-open .x-links { display: flex; }
+        .x-links a { padding: 0; font-size: var(--size-prose); border-bottom: 1px solid var(--stroke-secondary); }
+        .x-links .x-links__cta { display: block; padding-top: 16px; }
+        .x-links .x-links__cta .x-btn { width: 100%; }
+      }
+      @media (min-width: 861px) { .x-links__cta { display: none; } }
+
+      /* hero */
+      .x-hero { position: relative; min-height: calc(100svh - var(--x-nav-h)); display: flex; align-items: flex-end; overflow: hidden; border-bottom: 1px solid var(--x-gold-line); }
+      .x-hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .x-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(20deg, #050505 8%, #050505cc 32%, #05050526 65%, transparent), linear-gradient(0deg, #050505 0%, transparent 30%); }
+      .x-hero__copy { position: relative; z-index: 1; padding-block: 120px 72px; display: grid; gap: 22px; width: 100%; }
+      .x-hero__copy .x-lede { color: #f5f5f7d9; }
+      .x-row { display: flex; flex-wrap: wrap; gap: 12px; }
+      .x-tagline { font-family: var(--x-serif); font-style: italic; font-size: 20px; color: var(--x-gold); opacity: 0.9; margin-top: 8px; }
+
+      /* sections */
+      .x-sec { padding-block: clamp(72px, 10vw, 128px); border-bottom: 1px solid #f0b90b1f; }
+      .x-sec__head { display: grid; gap: 14px; margin-bottom: 48px; }
+      .x-sec--alt { background: radial-gradient(ellipse at 80% 0%, #f0b90b12, transparent 60%), var(--x-obsidian); }
+
+      /* mint */
+      .x-mint { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 4vw, 48px); align-items: center; }
+      .x-mint .x-panel { border: 1px solid var(--x-gold-line); background: var(--x-panel); }
+      .x-frame { padding: 20px; }
+
+      /* frameless ghost: cutout on black, soft glow + gold ellipse shadow */
+      .x-ghost { --glow: 240 185 11; --glow-a: 0.16; position: relative; display: grid; place-items: center; aspect-ratio: 1; isolation: isolate; background: transparent; }
+      .x-ghost::before { content: ""; position: absolute; inset: 4%; z-index: -1; border-radius: 50%; background: radial-gradient(circle at 50% 46%, rgb(var(--glow) / var(--glow-a)) 0%, rgb(var(--glow) / calc(var(--glow-a) * 0.45)) 32%, transparent 68%); transition: opacity var(--dur-quick) var(--ease-out), transform var(--dur-quick) var(--ease-out); }
+      .x-ghost::after { content: ""; position: absolute; left: 26%; right: 26%; bottom: 6%; height: 7%; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse at center, #f0b90b38 0%, #f0b90b14 45%, transparent 72%); transition: transform var(--dur-quick) var(--ease-out), opacity var(--dur-quick) var(--ease-out); }
+      .x-ghost img { width: 84%; height: 84%; object-fit: contain; border: 0; box-shadow: none; background: none; transition: transform 320ms var(--ease-out); }
+      .x-ghost--float img { animation: x-float 5s ease-in-out infinite; }
+      .x-ghost--float::after { animation: x-shadow 5s ease-in-out infinite; }
+      @keyframes x-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+      @keyframes x-shadow { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(0.85); opacity: 0.7; } }
+      .x-panel { padding: clamp(24px, 4vw, 44px); display: grid; gap: 22px; align-content: start; }
+      .x-status { justify-self: start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--x-gold); border-radius: var(--r-pill); color: var(--x-gold); font: var(--type-tag); background: var(--x-gold-soft); }
+      .x-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--x-gold); box-shadow: 0 0 8px var(--x-gold); }
+      .x-progress__top { display: flex; justify-content: space-between; font: var(--type-small); color: var(--text-secondary); margin-bottom: 10px; }
+      .x-progress__top b { color: #fff; font-weight: var(--weight-medium); }
+      .x-bar { height: 6px; background: #ffffff14; border: 1px solid var(--x-gold-line); }
+      .x-bar span { display: block; height: 100%; width: 0%; background: var(--x-gold); }
+      .x-prices { display: grid; border-top: 1px solid var(--x-gold-line); }
+      .x-prices div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid #f0b90b1f; font: var(--type-body); }
+      .x-prices dt { color: var(--text-secondary); } .x-prices dd { margin: 0; color: #fff; text-align: right; font-family: "Geist Mono", monospace; }
+      .x-prices small { color: var(--x-gold); font-family: var(--sans); }
+      .x-tiers { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--x-gold-line); }
+      .x-tiers button { min-height: var(--tap); background: none; border: 0; color: var(--text-secondary); font: var(--type-label); letter-spacing: 0.08em; cursor: pointer; }
+      .x-tiers button[aria-pressed="true"] { background: var(--x-gold); color: var(--x-black); }
+      .x-qty { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .x-step { display: inline-flex; align-items: center; border: 1px solid var(--x-gold-line); }
+      .x-step button { width: var(--tap); height: var(--tap); background: none; border: 0; color: var(--x-gold); font: var(--weight-regular) 22px/1 var(--sans); cursor: pointer; }
+      .x-step button:disabled { color: #ffffff40; cursor: not-allowed; }
+      .x-step output { min-width: 44px; text-align: center; font: var(--weight-medium) 18px/1 "Geist Mono", monospace; color: #fff; }
+      .x-total { text-align: right; }
+      .x-total span { display: block; font: var(--type-caption); color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.14em; }
+      .x-total b { font-family: var(--x-serif); font-size: 34px; font-weight: 600; color: var(--x-gold); }
+      .x-notice { border-left: 2px solid var(--x-gold); background: var(--x-gold-soft); padding: 12px 16px; color: #fff; font: var(--type-small); }
+      .x-notice[hidden] { display: none; }
+      .x-fine { font: var(--type-caption); color: var(--text-secondary); }
+      @media (max-width: 860px) {
+        .x-mint { grid-template-columns: 1fr; }
+        .x-frame { max-width: 420px; width: 100%; justify-self: center; }
+      }
+
+      /* proof of agent */
+      .x-split { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+      .x-split > .x-ghost { width: 100%; max-width: 480px; justify-self: center; }
+      .x-steps { display: grid; gap: 12px; margin-block: 32px; counter-reset: s; list-style: none; padding: 0; }
+      .x-steps li { display: grid; grid-template-columns: 56px 1fr; gap: 4px 16px; padding: 20px; border: 1px solid var(--x-gold-line); background: var(--x-panel); transition: border-color var(--dur-quick), box-shadow var(--dur-quick); }
+      .x-steps li:hover { border-color: var(--x-gold); box-shadow: var(--x-gold-glow); }
+      .x-steps li::before { counter-increment: s; content: "0" counter(s); grid-row: span 2; font-family: var(--x-serif); font-size: 40px; line-height: 1; color: var(--x-gold); }
+      .x-steps h3 { font: var(--type-body-strong); color: #fff; }
+      .x-steps p { font: var(--type-small); color: var(--text-secondary); }
+      @media (max-width: 860px) { .x-split { grid-template-columns: 1fr; } .x-split > .x-ghost { max-width: 360px; } }
+
+      /* agent mint */
+      .x-agent__head { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      .x-agent__head .x-ghost { flex: none; width: clamp(96px, 14vw, 160px); --glow-a: 0.26; }
+      .x-agent { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
+      .x-agent .x-steps { margin: 0; }
+      .x-agent__box { display: grid; gap: 16px; justify-items: start; }
+      .x-prompt { width: 100%; margin: 0; padding: 20px 22px; background: var(--x-black); border: 1px solid var(--x-gold); box-shadow: var(--x-gold-glow); color: #f5f5f7; font: 400 var(--size-small)/1.7 "Geist Mono", ui-monospace, monospace; white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+      .x-prompt.is-copied { box-shadow: 0 0 36px #f0b90b66; }
+      .x-prompt:focus-visible { outline: 2px solid var(--x-gold); outline-offset: 3px; }
+      .x-agent__box .x-notice { width: 100%; }
+      @media (max-width: 860px) { .x-agent { grid-template-columns: 1fr; } }
+
+      /* collection */
+      .x-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--x-gold-line); margin-bottom: 64px; }
+      .x-stat { padding: 32px 20px; display: grid; gap: 6px; border-right: 1px solid #f0b90b1f; }
+      .x-stat:last-child { border-right: 0; }
+      .x-stat b { font-family: var(--x-serif); font-weight: 500; font-size: clamp(44px, 6vw, 72px); line-height: 1; color: var(--x-gold); }
+      .x-stat span { font: var(--type-label); color: #fff; }
+      .x-stat small { color: var(--text-secondary); }
+      @media (max-width: 760px) { .x-stats { grid-template-columns: 1fr 1fr; } .x-stat:nth-child(2) { border-right: 0; } .x-stat:nth-child(-n+2) { border-bottom: 1px solid #f0b90b1f; } }
+      .x-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+      .x-card { padding: 24px; border: 1px solid var(--x-gold-line); background: var(--x-panel); display: grid; gap: 12px; align-content: start; transition: border-color var(--dur-quick), box-shadow var(--dur-quick), transform var(--dur-quick) var(--ease-out); }
+      .x-card:hover { border-color: var(--x-gold); box-shadow: var(--x-gold-glow); }
+      .x-card h3 { font: var(--type-tag); letter-spacing: 0.18em; text-transform: uppercase; color: var(--x-gold); }
+      .x-card h4 { margin: 0; font-family: var(--x-serif); font-weight: 500; font-size: 26px; color: #fff; }
+      .x-card p { color: var(--text-secondary); font: var(--type-small); }
+      .x-tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+      .x-tags li { padding: 4px 10px; border: 1px solid #ffffff26; border-radius: var(--r-pill); font: var(--type-caption); color: #fff; }
+      .x-sub { margin-block: 64px 24px; }
+
+      /* gallery */
+      .x-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      @media (max-width: 860px) { .x-gallery { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 520px) { .x-gallery { grid-template-columns: 1fr; } }
+      .x-nft { all: unset; box-sizing: border-box; cursor: pointer; display: grid; background: transparent; }
+      .x-nft:focus-visible { outline: 2px solid var(--x-gold); outline-offset: 4px; }
+      .x-nft:hover .x-ghost, .x-nft:focus-visible .x-ghost { --glow-a: 0.3; }
+      .x-nft:hover .x-ghost::before, .x-nft:focus-visible .x-ghost::before { transform: scale(1.06); }
+      .x-nft:hover .x-ghost img, .x-nft:focus-visible .x-ghost img { transform: translateY(-10px); }
+      .x-nft:hover .x-ghost::after, .x-nft:focus-visible .x-ghost::after { transform: scaleX(0.82); opacity: 0.65; }
+      .x-nft__meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 4px; border-top: 1px solid #f0b90b2e; }
+      .x-nft__name { font: var(--type-label); color: #fff; }
+      .x-rarity { flex: none; padding: 3px 10px; border: 1px solid #ffffff33; border-radius: var(--r-pill); font: var(--type-tag); color: var(--text-secondary); }
+      .x-rarity--rare { border-color: #9fc3ea; color: #d4e5f7; background: #9fc3ea14; box-shadow: 0 0 10px #9fc3ea26; }
+      .x-rarity--epic { border-color: var(--x-gold); color: var(--x-gold); background: var(--x-gold-soft); }
+      .x-rarity--legendary { border: 1px solid transparent; color: #ffd860; background: linear-gradient(var(--x-black), var(--x-black)) padding-box, linear-gradient(110deg, #7a5c06 0%, #f0b90b 30%, #fff4c8 50%, #f0b90b 70%, #7a5c06 100%) border-box; background-size: 100% 100%, 250% 100%; box-shadow: 0 0 14px #f0b90b59; animation: x-shimmer 2.6s ease-in-out infinite alternate; }
+      @keyframes x-shimmer { from { background-position: 0 0, 0% 50%; } to { background-position: 0 0, 100% 50%; } }
+      .x-nft--legend .x-ghost { --glow-a: 0.2; }
+      .x-nft[hidden] { display: none; }
+      .x-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; border-bottom: 1px solid #f0b90b1f; }
+      .x-filter button { min-height: var(--tap); padding: 0 16px; background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; color: var(--text-secondary); font: var(--type-label); letter-spacing: 0.08em; cursor: pointer; transition: color var(--dur-quick), border-color var(--dur-quick); }
+      .x-filter button:hover { color: #fff; }
+      .x-filter button[aria-pressed="true"] { color: var(--x-gold); border-bottom-color: var(--x-gold); }
+      .x-filter button:focus-visible { outline: 2px solid var(--x-gold); outline-offset: -2px; }
+      @media (prefers-reduced-motion: reduce) { .x-rarity--legendary { animation: none; } }
+
+      /* lightbox */
+      .x-lb { padding: 0; border: 0; background: var(--x-black); color: #fff; max-width: min(640px, calc(100vw - 32px)); width: 100%; box-shadow: none; overflow: visible; }
+      .x-lb::backdrop { background: #050505f2; }
+      .x-lb .x-ghost { --glow-a: 0.24; max-height: 70vh; margin-inline: auto; }
+      .x-lb__meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 4px; border-top: 1px solid #f0b90b2e; }
+      .x-lb__meta h3 { font-family: var(--x-serif); font-weight: 500; font-size: 26px; }
+      .x-lb__close { position: absolute; top: 10px; right: 10px; width: var(--tap); height: var(--tap); border: 1px solid var(--x-gold); background: #050505cc; color: var(--x-gold); font-size: 22px; cursor: pointer; }
+
+      /* footer */
+      .x-foot { padding-block: 64px 40px; display: grid; gap: 20px; }
+      .x-foot__brand { font-family: var(--x-serif); font-size: clamp(26px, 3.5vw, 36px); color: #fff; }
+      .x-foot__brand b { color: var(--x-gold); font-weight: 600; }
+      .x-foot__links { display: flex; flex-wrap: wrap; gap: 4px 20px; list-style: none; padding: 0; margin: 0; }
+      .x-foot__links a { display: inline-flex; align-items: center; justify-content: center; min-height: var(--tap); min-width: var(--tap); color: var(--text-secondary); text-decoration: none; font: var(--type-label); }
+      .x-foot__links a:hover { color: var(--x-gold); }
+      .x-foot .badge { justify-self: start; }
+
+      @media (prefers-reduced-motion: reduce) { .x-nft, .x-card, .x-btn { transition: none; } .x-nft:hover { transform: none; } .x-ghost img, .x-ghost::before, .x-ghost::after { transition: none; animation: none !important; } .x-nft:hover .x-ghost img { transform: none; } }
+    </style>
+  </head>
+  <body>
+    <div class="x-site" id="top">
+      <header class="x-nav" id="nav">
+        <div class="x-wrap x-nav__in">
+          <a class="x-logo" href="#top" aria-label="SPOXY, back to top">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 2C9.4 2 5 7 5 13.5V29l3.6-2.6L12 29l4-2.6 4 2.6 3.4-2.6L27 29V13.5C27 7 22.6 2 16 2Z"/><ellipse cx="12" cy="14" rx="2.2" ry="3" fill="#050505"/><ellipse cx="20" cy="14" rx="2.2" ry="3" fill="#050505"/></svg>
+            SPOXY
+          </a>
+          <button class="x-burger" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><span></span></button>
+          <ul class="x-links" id="nav-links">
+            <li><a href="#mint">Mint</a></li>
+            <li><a href="#agent-mint">Agent Mint</a></li>
+            <li><a href="#poa">Proof of Agent</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="https://x.com" target="_blank" rel="noopener">X</a></li>
+            <li class="x-links__cta"><button class="x-btn js-connect" type="button">Connect Wallet</button></li>
+          </ul>
+          <button class="x-btn x-nav__cta js-connect" type="button">Connect Wallet</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="x-hero" aria-label="Cyber Spirits">
+          <img class="x-hero__img" src="spoxy-hero.png" alt="A haunted black-gold digital temple with neon ghosts rising" />
+          <div class="x-wrap x-hero__copy">
+            <p class="x-kicker">Cyber Spirits · BNB Chain</p>
+            <h1 class="x-h1">The midnight <em>haunt.</em></h1>
+            <p class="x-lede">Data yang hilang di blockchain berubah menjadi arwah neon. 1.031 Cyber Spirits bangkit di BNB Chain — mint arwahmu sebelum tengah malam.</p>
+            <div class="x-row">
+              <a class="x-btn x-btn--solid" href="#mint">Mint Now</a>
+              <a class="x-btn x-btn--ghost" href="#gallery">View Gallery</a>
+            </div>
+            <p class="x-tagline">Named for the spirits of lost data. Built for the haunt.</p>
+          </div>
+        </section>
+
+        <section class="x-sec" id="mint">
+          <div class="x-wrap">
+            <div class="x-mint">
+              <div class="x-frame">
+                <div class="x-ghost x-ghost--float" style="--glow: 168 85 247"><img src="cut-witch.png" alt="Cyber Spirit, Witch Violet" /></div>
+              </div>
+              <div class="x-panel">
+                <p class="x-kicker">Genesis mint</p>
+                <h2 class="x-h2">Mint a Cyber Spirit</h2>
+                <p class="x-status">Mint opens 31 Oct 2026</p>
+                <div>
+                  <p class="x-progress__top"><span>Minted</span><b>0 / 1,031</b></p>
+                  <div class="x-bar" role="progressbar" aria-label="Minted" aria-valuemin="0" aria-valuemax="1031" aria-valuenow="0"><span></span></div>
+                </div>
+                <dl class="x-prices" style="margin:0">
+                  <div><dt>Agent ID / POA holders</dt><dd>0.0007 BNB <small>Free Mint</small></dd></div>
+                  <div><dt>Public</dt><dd>0.007 BNB</dd></div>
+                  <div><dt>Limit</dt><dd>Max 10 per wallet</dd></div>
+                </dl>
+                <div class="x-tiers" role="group" aria-label="Price tier">
+                  <button type="button" data-price="0.0007" aria-pressed="true">POA</button>
+                  <button type="button" data-price="0.007" aria-pressed="false">Public</button>
+                </div>
+                <div class="x-qty">
+                  <div class="x-step">
+                    <button type="button" id="qty-minus" aria-label="Decrease quantity">−</button>
+                    <output id="qty" aria-live="polite">1</output>
+                    <button type="button" id="qty-plus" aria-label="Increase quantity">+</button>
+                  </div>
+                  <p class="x-total"><span>Total</span><b id="total">0.0007 BNB</b></p>
+                </div>
+                <button class="x-btn x-btn--solid x-btn--big" type="button" id="mint-btn">Connect Wallet to Mint</button>
+                <p class="x-notice" id="mint-notice" role="status" hidden>Kontrak belum dideploy. Mint akan dibuka 31 Oktober 2026.</p>
+                <div>
+                  <p class="x-fine">Contract: TBA · Network: BNB Smart Chain</p>
+                  <p class="x-fine">Selalu periksa detail transaksi sebelum menandatangani di wallet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="x-sec" id="agent-mint">
+          <div class="x-wrap">
+            <div class="x-sec__head x-agent__head">
+              <div style="display:grid;gap:14px">
+                <p class="x-kicker">Binance Agent</p>
+                <h2 class="x-h2">Let your agent <em>mint.</em></h2>
+                <p class="x-lede">Punya Binance Agent / Agentic Wallet? Salin prompt di bawah, tempel ke agent kamu, dan agent akan menyiapkan transaksi mint Cyber Spirits. Kamu tetap yang memeriksa dan menyetujui sebelum ditandatangani.</p>
+              </div>
+              <div class="x-ghost x-ghost--float" aria-hidden="true"><img src="cut-agent.png" alt="" /></div>
+            </div>
+            <div class="x-agent">
+              <ol class="x-steps">
+                <li><h3>Salin prompt</h3><p>Tekan tombol Copy Prompt.</p></li>
+                <li><h3>Tempel ke Binance Agent</h3><p>Buka Binance Agent / Agentic Wallet lalu tempel prompt.</p></li>
+                <li><h3>Periksa &amp; konfirmasi</h3><p>Agent menampilkan preview (jumlah, harga, total, kontrak). Setujui hanya jika semuanya benar.</p></li>
+              </ol>
+              <div class="x-agent__box">
+                <pre class="x-prompt" id="agent-prompt" tabindex="0" aria-label="Prompt untuk Binance Agent">Mint Cyber Spirits NFT dari SPOXY di BNB Smart Chain.
+Kontrak: TBA (cek di halaman Spoxy sebelum mint)
+Harga: 0.0007 BNB per NFT untuk pemegang Agent ID / POA, 0.007 BNB untuk publik. Maks 10 per wallet.
+Jumlah: [isi jumlah 1-10]
+Sebelum menandatangani, tampilkan preview: alamat kontrak, jumlah, harga per NFT, total BNB, dan estimasi gas. Tunggu konfirmasi saya. Jangan tandatangani apa pun tanpa persetujuan saya.</pre>
+                <button class="x-btn x-btn--solid" type="button" id="copy-prompt">Copy Prompt</button>
+                <p class="x-notice" id="copy-notice" role="status" hidden>Tekan lama untuk menyalin</p>
+                <p class="x-status">Agent mint aktif saat kontrak dideploy · Mint dibuka 31 Okt 2026</p>
+                <p class="x-fine">Spoxy tidak pernah meminta seed phrase atau private key. Selalu cek alamat kontrak resmi.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="x-sec x-sec--alt" id="poa">
+          <div class="x-wrap x-split">
+            <div class="x-ghost x-ghost--float"><img src="cut-agent.png" alt="Agent Spirit" /></div>
+            <div>
+              <div class="x-sec__head" style="margin-bottom:0">
+                <p class="x-kicker">Proof of Agent</p>
+                <h2 class="x-h2">Agents enter <em>first.</em></h2>
+                <p class="x-lede">Pemegang Agent ID dan POA di BNB Chain mendapat prioritas mint dan harga Free Mint 0.0007 BNB.</p>
+              </div>
+              <ol class="x-steps">
+                <li><h3>Hubungkan wallet</h3><p>Connect wallet yang memegang Agent ID / POA.</p></li>
+                <li><h3>Verifikasi agent</h3><p>Sistem mengecek kepemilikan Agent ID secara on-chain.</p></li>
+                <li><h3>Mint prioritas</h3><p>Mint lebih awal dengan harga Free Mint.</p></li>
+              </ol>
+              <div style="display:grid;gap:14px;justify-items:start">
+                <button class="x-btn" type="button" id="agent-btn">Check my Agent ID</button>
+                <p class="x-notice" id="agent-notice" role="status" hidden>Verifikasi akan aktif saat mint dibuka.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="x-sec" id="collection">
+          <div class="x-wrap">
+            <div class="x-sec__head">
+              <p class="x-kicker">The collection</p>
+              <h2 class="x-h2">1,031 spirits. <em>One haunted chain.</em></h2>
+            </div>
+            <div class="x-stats" style="margin-bottom:0">
+              <div class="x-stat"><b>1,031</b><span>Supply</span><small>10/31 Halloween</small></div>
+              <div class="x-stat"><b>31</b><span>Golden Spirits</span></div>
+              <div class="x-stat"><b>5</b><span>Spirit colors</span></div>
+              <div class="x-stat"><b>10</b><span>Max per wallet</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="x-sec x-sec--alt" id="gallery">
+          <div class="x-wrap">
+            <div class="x-sec__head">
+              <p class="x-kicker">Sneak peek</p>
+              <h2 class="x-h2">The Gallery</h2>
+              <p class="x-lede">Sneak peek arwah-arwah pertama.</p>
+            </div>
+            <div class="x-filter" role="group" aria-label="Filter by rarity">
+              <button type="button" data-filter="All" aria-pressed="true">All</button>
+              <button type="button" data-filter="Rare" aria-pressed="false">Rare</button>
+              <button type="button" data-filter="Legendary" aria-pressed="false">Legendary</button>
+            </div>
+            <div class="x-gallery" id="gallery-grid">
+              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost"><img src="cut-golden.png" alt="Legendary #01, Golden Crown" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #01 · Golden Crown</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
+              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 240 185 11"><img src="new-pharaoh.png" alt="Legendary #02, Pharaoh Spirit" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #02 · Pharaoh Spirit</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
+              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 255 156 26"><img src="new-dragon.png" alt="Legendary #03, Ember Dragon" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #03 · Ember Dragon</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
+              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 110 80 255"><img src="new-cosmic.png" alt="Legendary #04, Cosmic Void" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #04 · Cosmic Void</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 168 85 247"><img src="cut-witch.png" alt="Spirit #0001, Witch Violet" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0001 · Witch Violet</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 59 130 246"><img src="cut-thunder.png" alt="Spirit #0388, Thunder Imp" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0388 · Thunder Imp</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 239 50 50"><img src="new-samurai.png" alt="Spirit #0612, Ronin Blade" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0612 · Ronin Blade</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 110 231 249"><img src="new-ice.png" alt="Spirit #0845, Frost Wraith" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0845 · Frost Wraith</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 255 45 150"><img src="new-dj.png" alt="Spirit #0903, Bass Phantom" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0903 · Bass Phantom</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Epic"><span class="x-ghost"><img src="cut-agent.png" alt="Spirit #0777, Agent Spirit" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0777 · Agent Spirit</span><span class="x-rarity x-rarity--epic">Epic</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Uncommon"><span class="x-ghost" style="--glow: 255 106 26"><img src="cut-pumpkin.png" alt="Spirit #0217, Pumpkin Ember" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0217 · Pumpkin Ember</span><span class="x-rarity">Uncommon</span></span></button>
+              <button class="x-nft" type="button" data-rarity="Common"><span class="x-ghost" style="--glow: 34 197 94"><img src="cut-glitch2.png" alt="Spirit #0521, Glitch Witch" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0521 · Glitch Witch</span><span class="x-rarity">Common</span></span></button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="x-wrap x-foot">
+        <hr class="x-line" />
+        <p class="x-foot__brand"><b>Spoxy</b> · Where lost data comes back to haunt.</p>
+        <p class="x-muted">Cyber Spirits contract (BNB Chain): TBA</p>
+        <ul class="x-foot__links">
+          <li><a href="#mint">Mint</a></li>
+          <li><a href="#poa">Proof of Agent</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="https://x.com" target="_blank" rel="noopener">X</a></li>
+        </ul>
+        <p class="x-fine">NFT ini adalah karya koleksi digital. Tidak menjanjikan keuntungan, dividen, atau harga.</p>
+        <a class="badge" href="https://hark.com/" target="_blank" rel="noopener"><span class="hark-mark"></span><span>built by hark</span></a>
+      </footer>
+    </div>
+
+    <dialog class="x-lb" id="lightbox" aria-labelledby="lb-name">
+      <button class="x-lb__close" type="button" id="lb-close" aria-label="Close">×</button>
+      <div class="x-ghost x-ghost--float" id="lb-img"></div>
+      <div class="x-lb__meta"><h3 id="lb-name">Spirit</h3><span class="x-rarity" id="lb-rarity"></span></div>
+    </dialog>
+
+    <script src="hark.js"></script>
+    <script>
+      (function () {
+        document.documentElement.setAttribute("data-theme", "dark");
+
+        // nav
+        var nav = document.getElementById("nav"), burger = nav.querySelector(".x-burger");
+        burger.addEventListener("click", function () {
+          var open = nav.classList.toggle("is-open");
+          burger.setAttribute("aria-expanded", open);
+          burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        });
+        nav.querySelectorAll(".x-links a").forEach(function (a) {
+          a.addEventListener("click", function () { nav.classList.remove("is-open"); burger.setAttribute("aria-expanded", "false"); });
+        });
+
+        // mint panel
+        var qty = 1, price = 0.0007;
+        var qEl = document.getElementById("qty"), tEl = document.getElementById("total");
+        var minus = document.getElementById("qty-minus"), plus = document.getElementById("qty-plus");
+        function render() {
+          qEl.textContent = qty;
+          tEl.textContent = parseFloat((qty * price).toFixed(4)) + " BNB";
+          minus.disabled = qty <= 1; plus.disabled = qty >= 10;
+        }
+        minus.addEventListener("click", function () { if (qty > 1) { qty--; render(); } });
+        plus.addEventListener("click", function () { if (qty < 10) { qty++; render(); } });
+        document.querySelectorAll(".x-tiers button").forEach(function (b, _, all) {
+          b.addEventListener("click", function () {
+            all.forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
+            price = parseFloat(b.dataset.price); render();
+          });
+        });
+        render();
+
+        var mintNotice = document.getElementById("mint-notice");
+        var mintBtn = document.getElementById("mint-btn");
+        mintBtn.addEventListener("click", function () {
+          mintNotice.hidden = false;
+          mintBtn.textContent = "Mint opens 31 Oct 2026";
+          mintBtn.setAttribute("aria-describedby", "mint-notice");
+        });
+        document.querySelectorAll(".js-connect").forEach(function (b) {
+          b.addEventListener("click", function () {
+            nav.classList.remove("is-open");
+            mintNotice.hidden = false;
+            document.getElementById("mint").scrollIntoView({ behavior: "smooth" });
+          });
+        });
+        document.getElementById("agent-btn").addEventListener("click", function () { document.getElementById("agent-notice").hidden = false; });
+
+        // gallery filter
+        var tabs = document.querySelectorAll(".x-filter button");
+        tabs.forEach(function (t) {
+          t.addEventListener("click", function () {
+            var f = t.dataset.filter;
+            tabs.forEach(function (x) { x.setAttribute("aria-pressed", x === t); });
+            document.querySelectorAll("#gallery-grid .x-nft").forEach(function (card) {
+              card.hidden = f !== "All" && card.dataset.rarity !== f;
+            });
+          });
+        });
+
+        // lightbox
+        var lb = document.getElementById("lightbox"), lbImg = document.getElementById("lb-img"),
+          lbName = document.getElementById("lb-name"), lbRarity = document.getElementById("lb-rarity");
+        document.querySelectorAll(".x-nft").forEach(function (card) {
+          card.addEventListener("click", function () {
+            var img = card.querySelector("img"), tag = card.querySelector(".x-rarity");
+            lbImg.replaceChildren(img.cloneNode());
+            lbImg.style.setProperty("--glow", card.querySelector(".x-ghost").style.getPropertyValue("--glow") || "240 185 11");
+            lbName.textContent = card.querySelector(".x-nft__name").textContent;
+            lbRarity.textContent = tag.textContent; lbRarity.className = tag.className;
+            lb.showModal();
+          });
+        });
+        document.getElementById("lb-close").addEventListener("click", function () { lb.close(); });
+        lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+
+        // agent prompt copy
+        var copyBtn = document.getElementById("copy-prompt"), promptBox = document.getElementById("agent-prompt"),
+          copyNotice = document.getElementById("copy-notice"), copyTimer;
+        function copyFallback() {
+          var range = document.createRange(); range.selectNodeContents(promptBox);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+          copyNotice.hidden = false;
+        }
+        copyBtn.addEventListener("click", function () {
+          var text = promptBox.textContent;
+          copyBtn.textContent = "Copying…";
+          copyBtn.setAttribute("aria-busy", "true");
+          promptBox.classList.add("is-copied");
+          function done() {
+            copyBtn.removeAttribute("aria-busy");
+            copyNotice.hidden = true;
+            copyBtn.textContent = "Copied!";
+            clearTimeout(copyTimer);
+            copyTimer = setTimeout(function () { copyBtn.textContent = "Copy Prompt"; promptBox.classList.remove("is-copied"); }, 2000);
+          }
+          var settled = false;
+          function ok() { if (!settled) { settled = true; done(); } }
+          function fail() {
+            if (settled) return; settled = true;
+            copyFallback();
+            copyBtn.removeAttribute("aria-busy");
+            copyBtn.textContent = "Copy Prompt";
+            var copied = false;
+            try { copied = document.execCommand("copy"); } catch (e) {}
+            if (copied) done();
+          }
+          if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+            try { navigator.clipboard.writeText(text).then(ok, fail); } catch (e) { fail(); }
+            setTimeout(fail, 600);
+          } else { fail(); }
+        });
+      })();
+    </script>
+  </body>
+</html>
