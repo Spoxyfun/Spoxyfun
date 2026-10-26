@@ -23,3 +23,9 @@ Fixed-price marketplace for SPOXY Cyber Spirits on BNB Smart Chain.
 
 ## Easiest deploy
 Open https://spoxydev.fun/deploy.html in a wallet browser, pick BSC Testnet, deploy NFT then Market.
+
+## v2 (current) — SpoxySpirits without allowlist
+- Free Mint 0.0007 BNB (Legendary chance = Legendary left / supply left), Public 0.007 BNB (60% Legendary until 66 are minted).
+- 66 Legendary cap; rarity rolled on-chain (pseudo-random, prevrandao + blockhash, EOA-only). Not VRF.
+- Owner: setMintOpen, setPrices, reveal, setPreviewURIs, setRoyalty, withdraw.
+- v1 (0x28218C0C...cAAab, allowlist version) is abandoned; it was never opened.
