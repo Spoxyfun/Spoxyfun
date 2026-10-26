@@ -29,5 +29,4 @@ bb.querySelector('.fx-close').addEventListener('click',function(){bb.classList.r
 bb.addEventListener('click',function(e){if(e.target===bb){bb.classList.remove('is-on');reset();}});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&bb.classList.contains('is-on')){bb.classList.remove('is-on');reset();}});
 var mb=document.getElementById('mint-btn');
-if(mb){var b=document.createElement('button');b.type='button';b.className='fx-boxbtn';b.textContent='🎁 Coba buka Blind Box';mb.parentNode.insertBefore(b,mb.nextSibling);b.addEventListener('click',function(){reset();bb.classList.add('is-on');});}
 })();
