@@ -124,6 +124,20 @@ input[type=text].valid{border-color:var(--green)}
 .note{border-left:3px solid var(--orange);padding:2px 0 2px 12px;color:var(--muted);font-size:13.5px;line-height:1.6;margin-top:18px}
 .contract{font-size:14px;color:var(--muted)}
 .contract b{color:var(--cyan);font-weight:400}
+.contract-hero{max-width:760px;margin:28px auto 4px;border:3px solid var(--cyan);background:rgba(8,22,32,.78);padding:18px 20px;text-align:left;box-shadow:8px 8px 0 rgba(255,138,30,.4)}
+.ch-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;letter-spacing:1.5px}
+.ch-live{color:var(--green);font-weight:700}
+.ch-label{color:var(--orange)}
+.ch-addr{font-size:clamp(15px,3.6vw,22px);color:var(--cyan2);font-weight:700;word-break:break-all;line-height:1.55;margin:12px 0 10px}
+.ch-row{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;font-size:14.5px;color:#c6cfe2}
+.ch-row b{color:#fff;font-size:16px}
+.ch-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:center}
+.ch-btns a{color:var(--cyan);text-decoration:underline;font-size:13.5px}
+.copy-status{font-size:13px;color:var(--green);min-height:18px;margin-top:8px}
+.wallet-contract{border:3px solid var(--cyan);background:var(--panel2);padding:16px 18px;margin-bottom:8px;box-shadow:6px 6px 0 rgba(255,138,30,.3)}
+.wc-addr{display:block;font-size:clamp(15px,3.8vw,21px);color:var(--cyan2);font-weight:700;word-break:break-all;line-height:1.55;margin:8px 0 6px}
+.wc-live{font-size:14.5px;color:#c6cfe2;margin-top:10px}
+.wc-live b{color:#fff;font-size:16px}
 .payrow{display:flex;gap:34px;flex-wrap:wrap}
 .btnrow{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;align-items:center}
 .statusline{font-size:13.5px;color:var(--green);min-height:20px;margin-top:14px}
@@ -219,15 +233,29 @@ footer .in{max-width:1060px;margin:0 auto;color:var(--muted);font-size:13.5px}
 <div class="hero" id="top">
   <div class="kicker">// 5,000 PIXEL AI AGENTS · BNB CHAIN</div>
   <h1 class="title">AGENTIC SPOXY</h1>
-  <p data-i="heroSub">5,000 pixel AI agents, each assembled from 8 trait layers and checked for duplicates. Art and metadata live fully on-chain on BNB Chain. Minting is only possible with a Binance Agent ID — no Binance Agent ID, no mint. The first 100 of the supply mint FREE with a Binance Agent ID; after those 100 are gone, minting costs 0.00025 BNB per mint.</p>
+  <p data-i="heroSub">5,000 pixel AI agents, each assembled from 8 trait layers and checked for duplicates. Mint is LIVE now on BNB Chain at contract 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee. Minting is only possible with a Binance Agent ID — no Binance Agent ID, no mint. The first 100 of the supply mint FREE with a Binance Agent ID; after those 100 are gone, minting costs 0.00025 BNB per mint, max 2 per wallet.</p>
+  <div class="contract-hero">
+    <div class="ch-head"><span class="ch-live">● MINT LIVE — BNB MAINNET</span><span class="ch-label">CONTRACT ADDRESS</span></div>
+    <div class="ch-addr">0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee</div>
+    <div class="ch-row">
+      <span><b id="heroMintedText">100</b> / 5,000 <span data-i="minted">minted</span> — live on-chain</span>
+      <span><b id="heroFreeText">0</b> / 100 <span data-i="freeLeft">free mints left</span></span>
+    </div>
+    <div class="ch-btns">
+      <button class="btn small" onclick="copyContractAddress()">COPY CONTRACT ADDRESS</button>
+      <a href="https://bscscan.com/address/0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee" target="_blank" rel="noopener">View contract on BscScan ↗</a>
+    </div>
+    <div class="copy-status" aria-live="polite"></div>
+  </div>
 </div>
 
 <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mqTrack"></div></div>
 
 <div class="progress">
-  <div class="row"><span><b>0 / 5,000</b> <span data-i="minted">minted</span></span><span data-i="opensSoon">Mint opens soon</span></div>
-  <div class="bar"><i></i></div>
-  <div class="freeline"><span data-i="freeLab">FREE MINT WINDOW — FIRST 100 SUPPLY, BINANCE AGENT ID ONLY</span><span><b>100 / 100</b> <span data-i="freeLeft">free mints left</span> · <span data-i="thenPrice">then 0.00025 BNB per mint</span></span></div>
+  <div class="row"><span><b id="mintedCountText">100 / 5,000</b> <span data-i="minted">minted</span></span><span id="mintStatusText" data-i="opensSoon">● MINT LIVE — BNB MAINNET</span></div>
+  <div class="bar"><i id="progressBarFill" style="width:1.94%"></i></div>
+  <div class="freeline"><span data-i="freeLab">FREE MINT WINDOW — FIRST 100 SUPPLY, BINANCE AGENT ID ONLY</span><span><b id="freeLeftText">0 / 100</b> <span data-i="freeLeft">free mints left</span> · <span data-i="thenPrice">then 0.00025 BNB per mint</span></span></div>
+  <div class="field-hint" id="liveStatus" style="text-align:center">Live on-chain count — reading totalMinted() from the contract, auto-refreshing every 15 seconds…</div>
 </div>
 <div class="chips">
   <span class="chip" data-i="chipFree">FREE FIRST 100 SUPPLY</span><span class="chip" data-i="chipPaid">THEN 0.00025 BNB PER MINT</span><span class="chip" data-i="chipBinance">BINANCE AGENT ID REQUIRED</span><span class="chip" data-i="chipMax">MAX 2 PER WALLET</span><span class="chip" data-i="chipReveal">REVEALED BLOCK BY BLOCK AFTER MINT</span>
@@ -241,7 +269,7 @@ footer .in{max-width:1060px;margin:0 auto;color:var(--muted);font-size:13.5px}
 <section id="agent">
   <div class="sec-k">01 · AGENT</div>
   <h2 data-i="agentH">Mint via your AI agent</h2>
-  <p class="sec-sub" data-i="agentSub">No separate wallet step here, the way agent minting works on the reference flow: choose how many, choose how to pay, enter your Binance Agent ID, then send the prompt below to an AI agent whose wallet holds that Binance Agent ID — it mints from its own wallet. The first 100 of the supply are FREE; after that, each mint costs 0.00025 BNB.</p>
+  <p class="sec-sub" data-i="agentSub">Mint is LIVE. Choose how many, choose how to pay, enter your Binance Agent ID, then send the prompt below to an AI agent whose wallet holds that Binance Agent ID — it mints from its own wallet on the live contract 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee. The first 100 of the supply are FREE; after that, each mint costs 0.00025 BNB.</p>
   <div class="panel">
     <div class="mintrow">
       <span class="lab" data-i="qty">Quantity</span>
@@ -263,7 +291,7 @@ footer .in{max-width:1060px;margin:0 auto;color:var(--muted);font-size:13.5px}
     </div>
     <textarea class="promptbox" id="promptBox" readonly style="margin-top:14px"></textarea>
     <button class="btn block" id="copyBtn" onclick="copyPrompt()" data-i="copy">COPY PROMPT</button>
-    <div class="note" data-i="agentNote">Mint isn't live yet — and when it opens, only a valid Binance Agent ID can mint: free for the first 100 supply, then 0.00025 BNB per mint, max 2 per wallet. Copy Prompt stays blocked until a valid Binance Agent ID is entered.</div>
+    <div class="note" data-i="agentNote">Mint is LIVE now — only a valid Binance Agent ID can mint: free for the first 100 supply, then 0.00025 BNB per mint, max 2 per wallet. Copy Prompt stays blocked until a valid Binance Agent ID is entered. Prefer minting yourself? Use the Wallet section below — Connect Wallet and MINT NOW are active.</div>
     <div class="statusline" id="copyStatus"></div>
   </div>
 </section>
@@ -273,8 +301,17 @@ footer .in{max-width:1060px;margin:0 auto;color:var(--muted);font-size:13.5px}
   <div class="sec-k">02 · WALLET</div>
   <h2 data-i="walletH">Mint with wallet — Binance Agent ID required</h2>
   <div class="panel">
-    <div class="contract"><span data-i="contract">Contract</span>: <b>0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee</b> <span data-i="placeholder">(live on BNB Chain)</span></div>
-    <div class="gate" data-i="walletGate">Wallet alone is not enough. This path is also locked to Binance Agent ID only — without a valid Binance Agent ID, wallet connection and minting stay blocked. Same pricing as the agent path: the first 100 supply mint FREE, then 0.00025 BNB per mint.</div>
+    <div class="contract wallet-contract">
+      <span class="lab" style="margin:0">CONTRACT — ● LIVE ON BNB MAINNET</span>
+      <b class="wc-addr">0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee</b>
+      <div class="wc-live">LIVE COUNT: <b id="walletMintedText">100</b> / 5,000 minted · <b id="walletFreeText">0</b> / 100 free mints left</div>
+      <div class="ch-btns">
+        <button class="btn small" onclick="copyContractAddress()">COPY CONTRACT ADDRESS</button>
+        <a href="https://bscscan.com/address/0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:underline;font-size:13.5px">View contract on BscScan ↗</a>
+      </div>
+      <div class="copy-status" aria-live="polite"></div>
+    </div>
+    <div class="gate" data-i="walletGate">MINT IS LIVE. The contract itself verifies on-chain that your wallet holds a Binance Agent ID (registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F) — a wallet without one reverts with NoAgentId. Same pricing as the agent path: the first 100 supply mint FREE, then 0.00025 BNB per mint, max 2 per wallet. Open this page in your wallet's dApp browser (OKX / Binance / MetaMask / Trust) to connect and mint.</div>
     <label class="lab" for="binanceIdW" data-i="binanceLab">Binance Agent ID — required to mint</label>
     <input type="text" id="binanceIdW" placeholder="Enter your Binance Agent ID" autocomplete="off" spellcheck="false">
     <div class="field-hint" data-i="binanceHint">Use the Binance Agent ID linked to your agent wallet. Wallet-only minting without a Binance Agent ID is not allowed.</div>
@@ -287,10 +324,12 @@ footer .in{max-width:1060px;margin:0 auto;color:var(--muted);font-size:13.5px}
     </div>
     <div class="costline" id="costLineW" aria-live="polite"></div>
     <div class="btnrow">
-      <button class="btn ghost" onclick="connectWallet()" data-i="connect">CONNECT WALLET</button>
-      <button class="btn disabled" disabled data-i="mintSoon">MINT OPENS SOON</button>
+      <button class="btn ghost" id="connectBtn" onclick="connectWallet()" data-i="connect">CONNECT WALLET</button>
+      <button class="btn" id="mintBtn" onclick="mintNow()" data-i="mintNow">MINT NOW — LIVE</button>
+      <button class="btn ghost" onclick="refreshLiveStats(true)" data-i="refreshLive">REFRESH LIVE COUNT</button>
     </div>
-    <div class="note" data-i="gasNote">Even with a connected wallet, a mint is rejected unless it carries a valid Binance Agent ID. Free mints (the first 100 supply) send 0 value; paid mints send exactly 0.00025 BNB per mint. Your wallet will request a 900,000 gas limit; you only pay for gas actually used.</div>
+    <div class="costline" id="walletInfo" aria-live="polite">Wallet not connected yet. Connect to check your Binance Agent ID holding, how many you already minted, and your AGENTIC SPOXY balance — all read live on-chain.</div>
+    <div class="note" data-i="gasNote">Direct wallet mint pays in BNB only (the contract is payable in BNB — pick USDT only on the agent-prompt path above, where your agent handles the conversion). Free mints (the first 100 supply) send 0 value; paid mints send exactly 0.00025 BNB per mint. Your wallet will request a 900,000 gas limit; you only pay for gas actually used.</div>
     <div class="statusline" id="walletStatus"></div>
   </div>
 </section>
@@ -352,7 +391,7 @@ footer .in{max-width:1060px;margin:0 auto;color:var(--muted);font-size:13.5px}
       <button class="btn small ghost" onclick="downloadAllMetadata()" data-i="metaDlAll">DOWNLOAD ALL 5,000 JSON</button>
       <button class="btn small ghost" onclick="downloadCollectionJSON()" data-i="metaDlColl">DOWNLOAD COLLECTION JSON</button>
     </div>
-    <div class="note" data-i="metaNote">The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. Contract is live on BNB Chain at 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee.</div>
+    <div class="note" data-i="metaNote">The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. The contract is LIVE at 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee on BNB Mainnet — its on-chain tokenURI currently uses the baseURI set at deploy, which the owner can update with setBaseURI after the IPFS upload.</div>
     <div class="mstatus" id="metaDlStatus"></div>
   </div>
 </section>
@@ -940,11 +979,39 @@ document.addEventListener('keydown', function(e){ if(e.key==="Escape") closeModa
 
 /* ================= MINT PANEL — BINANCE AGENT ID ONLY ================= */
 var qty={a:1,w:1}, pLang='en', pay='BNB', payAgent='BNB';
-/* Pricing model: minting is Binance Agent ID only. The first 100 of the
-   5,000 supply mint FREE; every mint after that costs 0.00025 BNB.
-   MINTED mirrors the progress bar on this static page (0 / 5,000), so the
-   free window is fully open: 100 of 100 free mints remain. */
-var SUPPLY_TOTAL = 5000, MINTED_COUNT = 44, FREE_SUPPLY = 100, PRICE_BNB = 0.00025, MAX_PER_WALLET = 2;
+/* LIVE CONTRACT — deployed on BNB Mainnet (chain 56) and verified at build time:
+   bytecode matches the compiled AgenticSpoxy contract, mintOpen = true.
+   The minted count is NEVER trusted from this file: the page reads
+   totalMinted() / mintOpen() live from the contract on load, then again every
+   15 seconds, whenever the tab becomes visible again, and on Refresh — trying
+   each public BSC RPC below in turn until one answers, so the count follows
+   new mints around the clock with no manual update. The snapshot here is only
+   the first-paint / all-RPCs-offline fallback: at the last build-time check
+   (28 Oct 2026, ~21:13 WIB) totalMinted was already 97 and rising fast, so
+   free window reached 100. */
+var CONTRACT_ADDRESS = "0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee";
+var AGENT_ID_REGISTRY = "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F";
+var BSC_RPC = "https://bsc-dataseed.binance.org";
+/* Public BSC RPC endpoints for the live count, in try-order. All were
+   verified answering eth_call for this contract at build time; if one is
+   down, rate-limited, or a block behind, the reader moves to the next and
+   remembers the last one that worked. */
+var BSC_RPCS = [
+  "https://bsc-dataseed.binance.org",
+  "https://bsc-dataseed1.binance.org",
+  "https://bsc-dataseed2.binance.org",
+  "https://bsc-dataseed3.binance.org",
+  "https://bsc-dataseed4.binance.org",
+  "https://bsc-dataseed1.defibit.io",
+  "https://bsc-rpc.publicnode.com"
+];
+var BSC_EXPLORER = "https://bscscan.com";
+var SEL_MINT = "0xa0712d68", SEL_TOTAL_MINTED = "0xa2309ff8", SEL_MINT_OPEN = "0x24bbd049",
+    SEL_MINTED_BY = "0x0d758111", SEL_BALANCE_OF = "0x70a08231";
+/* Pricing model: minting is Binance Agent ID only (enforced on-chain by the
+   contract via the Agent ID registry). The first 100 of the 5,000 supply mint
+   FREE; every mint after that costs 0.00025 BNB. Max 2 per wallet. */
+var SUPPLY_TOTAL = 5000, MINTED_COUNT = 100, MINT_OPEN = true, FREE_SUPPLY = 100, PRICE_BNB = 0.00025, MAX_PER_WALLET = 2;
 function freeLeft(){ return Math.max(0, FREE_SUPPLY - MINTED_COUNT); }
 function mintCost(q){
   var f = Math.min(q, freeLeft()), p = q - f;
@@ -961,9 +1028,15 @@ function costText(q, currency){
     : (isZh()
         ? ("总计：" + (currency === "USDT" ? "相当于 " : "") + fmtBNB(c.totalBNB) + " BNB" + (currency === "USDT" ? " 的 USDT" : ""))
         : ("Total: " + (currency === "USDT" ? "the USDT equivalent of " : "") + fmtBNB(c.totalBNB) + " BNB"));
+  if(!MINT_OPEN){
+    return isZh() ? "铸造目前被合约 owner 关闭 (mintOpen = false)。请稍后再刷新查看。" : "Mint is currently closed by the contract owner (mintOpen = false). Refresh again later.";
+  }
+  var phase = freeLeft() > 0
+    ? (isZh() ? ("当前阶段：<b>免费（LIVE）</b> — 前 100 个供应免费，剩余 " + freeLeft() + " / 100。") : ("Current phase: <b>FREE — LIVE</b> — the first 100 supply mint free, " + freeLeft() + " of 100 left. "))
+    : (isZh() ? "当前阶段：<b>付费（LIVE）</b> — 免费名额已用完，每次铸造 0.00025 BNB。" : "Current phase: <b>PAID — LIVE</b> — the free window is used up, 0.00025 BNB per mint. ");
   return isZh()
-    ? ("当前阶段：<b>免费</b> — 前 100 个供应免费，剩余 " + freeLeft() + " / 100。你的铸造：<b>" + c.free + " 个免费</b>，" + c.paid + " 个付费 × 0.00025 BNB。" + payPart + "（+ 网络 Gas）。前 100 个供应售完后，每次铸造 0.00025 BNB。")
-    : ("Current phase: <b>FREE</b> — the first 100 supply mint free, " + freeLeft() + " of 100 left. Your mint: <b>" + c.free + " free</b>, " + c.paid + " paid × 0.00025 BNB. " + payPart + " (+ network gas). Once the first 100 supply are gone, 0.00025 BNB per mint applies.");
+    ? (phase + "你的铸造：<b>" + c.free + " 个免费</b>，" + c.paid + " 个付费 × 0.00025 BNB。" + payPart + "（+ 网络 Gas）。")
+    : (phase + "Your mint: <b>" + c.free + " free</b>, " + c.paid + " paid × 0.00025 BNB. " + payPart + " (+ network gas).");
 }
 function refreshCost(){
   var a = document.getElementById('costLineA'); if(a) a.innerHTML = costText(qty.a, payAgent);
@@ -1052,8 +1125,8 @@ function writePrompt(){
       payZh,
       "",
       "步骤：",
-      "1. 验证上面的币安 Agent ID 并确认铸造已开启；如果尚未开启，请停止并报告。",
-      "2. 使用该币安 Agent ID 在合约 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee 上调用 mint("+q+")，并发送上面价格行中的价值。",
+      "1. 验证上面的币安 Agent ID。铸造已 LIVE：合约 mintOpen 为 true，且合约会链上验证你的钱包持有币安 Agent ID；如果验证失败（NoAgentId），请停止并报告。",
+      "2. 使用该币安 Agent ID 在合约 "+CONTRACT_ADDRESS+" 上调用 mint("+q+")，并发送上面价格行中的价值。",
       "3. Gas：自行将铸造交易的 Gas 上限设置为 900000；不要依赖自动估算。未使用的 Gas 不收费。",
       "4. 等待交易被打包。交易的 Minted 事件会给出第一个代币 ID 和数量。",
       "5. 从下一个区块开始（约半秒后），tokenURI(id) 会返回每个代币的元数据、图片和链上特征。",
@@ -1072,8 +1145,8 @@ function writePrompt(){
       payEn,
       "",
       "Steps:",
-      "1. Verify the Binance Agent ID above and check that minting is open; if it is not open, stop and report back.",
-      "2. Call mint("+q+") on contract 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee using that Binance Agent ID, sending the value from the price line above.",
+      "1. Verify the Binance Agent ID above. Mint is LIVE: mintOpen is true on the contract, and the contract verifies on-chain that your wallet holds a Binance Agent ID; if that check fails (NoAgentId), stop and report back.",
+      "2. Call mint("+q+") on contract "+CONTRACT_ADDRESS+" using that Binance Agent ID, sending the value from the price line above.",
       "3. Gas: set the mint transaction's gas limit yourself to 900000; do not rely on automatic estimation. Gas you do not use is not charged.",
       "4. Wait for it to be mined. The transaction's Minted event gives the first token id and the quantity.",
       "5. From the next block (about half a second later), tokenURI(id) returns each token's metadata, its picture and traits on chain.",
@@ -1097,28 +1170,243 @@ function copyPrompt(){
   if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(box.value).then(done, function(){ try{ box.select(); if(document.execCommand('copy')) done(); else fail(); }catch(e){ fail(); } }); }
   else { try{ box.select(); if(document.execCommand('copy')) done(); else fail(); }catch(e){ fail(); } }
 }
-function connectWallet(){
-  var st=document.getElementById('walletStatus');
-  st.style.color="";
-  if(!requireBinanceId(document.getElementById('binanceIdW'))){
-    st.textContent = binanceErrMsg();
-    st.style.color = "#ff8a1e";
+/* ================= LIVE ON-CHAIN STATE + WALLET MINT ================= */
+var walletProvider = null, walletAccount = null, walletName = "", walletMinted = null, walletAgentBal = null, walletNftBal = null;
+function padAddr(a){ return "000000000000000000000000" + String(a).replace(/^0x/i,"").toLowerCase(); }
+function padUint(n){ var h = Number(n).toString(16); while(h.length < 64) h = "0" + h; return h; }
+function hexToNum(hex){ if(!hex || hex === "0x") return 0; try{ return Number(BigInt(hex)); }catch(e){ return parseInt(hex, 16) || 0; } }
+var goodRpcIndex = 0;
+async function rpcFetch(url, method, params){
+  var ctrl = (typeof AbortController !== "undefined") ? new AbortController() : null;
+  var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 7000) : null;
+  try{
+    var res = await fetch(url, {method:"POST", headers:{"Content-Type":"application/json"}, signal: ctrl ? ctrl.signal : undefined, body: JSON.stringify({jsonrpc:"2.0", id:1, method:method, params:params})});
+    var j = await res.json();
+    if(j.error) throw new Error(j.error.message || "RPC error");
+    if(typeof j.result === "undefined") throw new Error("Empty RPC result");
+    return j.result;
+  } finally { if(timer) clearTimeout(timer); }
+}
+/* One JSON-RPC call, retried across every public BSC endpoint in BSC_RPCS
+   (starting from the last one that worked) until one answers — a single
+   endpoint being down or rate-limited must never freeze the live count. */
+async function publicRpc(method, params){
+  var lastErr = null;
+  for(var k = 0; k < BSC_RPCS.length; k++){
+    var idx = (goodRpcIndex + k) % BSC_RPCS.length;
+    try{ var out = await rpcFetch(BSC_RPCS[idx], method, params); goodRpcIndex = idx; return out; }
+    catch(e){ lastErr = e; }
+  }
+  throw lastErr || new Error("All BSC RPC endpoints unreachable");
+}
+async function ethCallPublic(to, data){ return publicRpc("eth_call", [{to:to, data:data}, "latest"]); }
+async function ethCallAny(to, data){
+  if(walletProvider){ try{ return await walletProvider.request({method:"eth_call", params:[{to:to, data:data}, "latest"]}); }catch(e){} }
+  return ethCallPublic(to, data);
+}
+function updateProgressUI(){
+  var mc = document.getElementById('mintedCountText'); if(mc) mc.textContent = fmtNum(MINTED_COUNT) + " / 5,000";
+  var bar = document.getElementById('progressBarFill'); if(bar) bar.style.width = (MINTED_COUNT / SUPPLY_TOTAL * 100) + "%";
+  var fl = document.getElementById('freeLeftText'); if(fl) fl.textContent = freeLeft() + " / 100";
+  var hm = document.getElementById('heroMintedText'); if(hm) hm.textContent = fmtNum(MINTED_COUNT);
+  var hf = document.getElementById('heroFreeText'); if(hf) hf.textContent = freeLeft();
+  var wm = document.getElementById('walletMintedText'); if(wm) wm.textContent = fmtNum(MINTED_COUNT);
+  var wf = document.getElementById('walletFreeText'); if(wf) wf.textContent = freeLeft();
+  var ms = document.getElementById('mintStatusText');
+  if(ms && !MINT_OPEN) ms.textContent = isZh() ? "铸造已被 OWNER 关闭" : "MINT CLOSED BY OWNER";
+  if(ms && MINT_OPEN && ms.getAttribute('data-i')) ms.textContent = I18N[lang].opensSoon;
+}
+var liveFetchInFlight = false, liveHasRead = false, liveFailCount = 0;
+async function refreshLiveStats(manual){
+  if(liveFetchInFlight && !manual) return false;
+  liveFetchInFlight = true;
+  var ls = document.getElementById('liveStatus');
+  try{
+    var results = await Promise.all([ ethCallPublic(CONTRACT_ADDRESS, SEL_TOTAL_MINTED), ethCallPublic(CONTRACT_ADDRESS, SEL_MINT_OPEN) ]);
+    var fresh = hexToNum(results[0]);
+    /* totalMinted() only ever goes up — a lower answer comes from a node that
+       is a block behind, so never let the displayed count move backwards. */
+    if(liveHasRead && fresh < MINTED_COUNT) fresh = MINTED_COUNT;
+    MINTED_COUNT = fresh;
+    MINT_OPEN = hexToNum(results[1]) !== 0;
+    liveHasRead = true; liveFailCount = 0;
+    updateProgressUI(); refreshCost(); writePrompt();
+    if(ls) ls.textContent = (isZh() ? "链上实时数据 · 已更新 " : "Live on-chain · updated ") + new Date().toLocaleTimeString() + (isZh() ? " · 每 15 秒自动刷新" : " · auto-refresh every 15s") + (MINT_OPEN ? (isZh() ? " · 铸造开启中" : " · mintOpen = true") : " · mintOpen = false");
+    if(manual){ var st = document.getElementById('walletStatus'); if(st){ st.style.color = ""; st.textContent = isZh() ? ("链上数据已刷新：已铸造 " + MINTED_COUNT + " / 5,000，剩余免费 " + freeLeft() + " 个。") : ("Live count refreshed: " + MINTED_COUNT + " / 5,000 minted, " + freeLeft() + " free mints left."); } }
+    return true;
+  }catch(e){
+    liveFailCount++;
+    if(ls) ls.textContent = isZh() ? "所有公共 RPC 暂时都读不到 — 显示最后已知数量，5 秒后自动重试。" : "All public RPCs unreachable right now — showing the last known count, retrying automatically in 5s.";
+    updateProgressUI();
+    if(liveFailCount <= 3) setTimeout(function(){ refreshLiveStats(false); }, 5000);
+    return false;
+  } finally { liveFetchInFlight = false; }
+}
+function copyContractAddress(){
+  var msg = isZh() ? "合约地址已复制： " : "Contract address copied: ";
+  var failMsg = isZh() ? "复制失败 — 请长按/手动复制上面的地址。" : "Copy failed — long-press or copy the address above manually.";
+  function done(){ var els = document.querySelectorAll('.copy-status'); for(var i = 0; i < els.length; i++){ els[i].style.color = ""; els[i].textContent = msg + CONTRACT_ADDRESS; } }
+  function fail(){ var els = document.querySelectorAll('.copy-status'); for(var i = 0; i < els.length; i++){ els[i].style.color = "#ff8a1e"; els[i].textContent = failMsg; } }
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(CONTRACT_ADDRESS).then(done, function(){ legacy(); }); } else { legacy(); }
+  function legacy(){
+    var ta = document.createElement('textarea'); ta.value = CONTRACT_ADDRESS; ta.setAttribute('readonly','');
+    ta.style.position = 'fixed'; ta.style.top = '-9999px'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    var ok = false; try{ ta.select(); ta.setSelectionRange(0, ta.value.length); ok = !!(document.execCommand && document.execCommand('copy')); }catch(e){ ok = false; }
+    document.body.removeChild(ta); if(ok) done(); else fail();
+  }
+}
+function getWalletProvider(){
+  if(window.okxwallet) return {p: window.okxwallet, name: "OKX"};
+  if(window.ethereum){
+    if(window.ethereum.isOkxWallet) return {p: window.ethereum, name: "OKX"};
+    if(window.ethereum.providers){ for(var i = 0; i < window.ethereum.providers.length; i++){ if(window.ethereum.providers[i].isOkxWallet) return {p: window.ethereum.providers[i], name: "OKX"}; } }
+    return {p: window.ethereum, name: window.ethereum.isBinance ? "Binance Wallet" : "MetaMask / Trust / Ethereum"};
+  }
+  return null;
+}
+async function ensureBnbChain(provider){
+  var chainId = await provider.request({method:"eth_chainId"});
+  if(chainId === "0x38") return;
+  try{ await provider.request({method:"wallet_switchEthereumChain", params:[{chainId:"0x38"}]}); }
+  catch(e){ await provider.request({method:"wallet_addEthereumChain", params:[{chainId:"0x38", chainName:"BNB Smart Chain", nativeCurrency:{name:"BNB", symbol:"BNB", decimals:18}, rpcUrls:[BSC_RPC], blockExplorerUrls:[BSC_EXPLORER]}]}); }
+}
+function setWalletStatus(msg, isErr, asHtml){
+  var st = document.getElementById('walletStatus'); if(!st) return;
+  st.style.color = isErr ? "#ff8a1e" : "";
+  if(asHtml) st.innerHTML = msg; else st.textContent = msg;
+}
+function renderWalletInfo(){
+  var el = document.getElementById('walletInfo'); if(!el) return;
+  if(!walletAccount){
+    el.textContent = isZh() ? "钱包尚未连接。连接后可查看你的币安 Agent ID 持有情况、已铸造数量和 AGENTIC SPOXY 余额 — 全部实时链上读取。" : "Wallet not connected yet. Connect to check your Binance Agent ID holding, how many you already minted, and your AGENTIC SPOXY balance — all read live on-chain.";
     return;
   }
-  var cw = mintCost(qty.w);
-  st.textContent = lang==='zh'
-    ? ("币安 Agent ID 已接受："+getBinanceId()+"。铸造尚未上线 — 铸造开启后才能连接钱包，且只能使用此币安 Agent ID。当前阶段免费：前 100 个供应免费铸造（剩余 "+freeLeft()+" 个），之后每次铸造 0.00025 BNB。你的数量 "+qty.w+" 个总计 "+fmtBNB(cw.totalBNB)+" BNB。")
-    : ("Binance Agent ID accepted: "+getBinanceId()+". Mint isn't live yet — the wallet can connect once mint opens, and only with this Binance Agent ID. Current phase is FREE: the first 100 supply mint free ("+freeLeft()+" left), then 0.00025 BNB per mint. Your quantity of "+qty.w+" totals "+fmtBNB(cw.totalBNB)+" BNB.");
+  var agentTxt = walletAgentBal === null ? "…" : (walletAgentBal > 0 ? (isZh() ? "持有 (" + walletAgentBal + ") ✓ 可以铸造" : "HELD (" + walletAgentBal + ") ✓ eligible to mint") : (isZh() ? "未持有 ✗ 铸造会以 NoAgentId 回滚" : "NOT HELD ✗ mint will revert with NoAgentId"));
+  el.innerHTML = (isZh() ? "钱包" : "Wallet") + " (" + walletName + "): <b>" + walletAccount + "</b><br>"
+    + "Binance Agent ID (on-chain): <b>" + agentTxt + "</b><br>"
+    + (isZh() ? "此钱包已铸造：" : "Already minted by this wallet:") + " <b>" + (walletMinted === null ? "…" : walletMinted + " / 2") + "</b> · AGENTIC SPOXY " + (isZh() ? "余额：" : "balance:") + " <b>" + (walletNftBal === null ? "…" : walletNftBal) + "</b>";
 }
+async function refreshWalletState(){
+  if(!walletAccount) return;
+  try{
+    var r = await Promise.all([
+      ethCallAny(CONTRACT_ADDRESS, SEL_MINTED_BY + padAddr(walletAccount)),
+      ethCallAny(AGENT_ID_REGISTRY, SEL_BALANCE_OF + padAddr(walletAccount)),
+      ethCallAny(CONTRACT_ADDRESS, SEL_BALANCE_OF + padAddr(walletAccount))
+    ]);
+    walletMinted = hexToNum(r[0]); walletAgentBal = hexToNum(r[1]); walletNftBal = hexToNum(r[2]);
+  }catch(e){ walletMinted = walletAgentBal = walletNftBal = null; }
+  renderWalletInfo();
+}
+async function connectWallet(){
+  var found = getWalletProvider();
+  if(!found){
+    setWalletStatus(isZh() ? "未检测到钱包。请在钱包的 dApp 浏览器中打开此页面：在 OKX / Binance / MetaMask / Trust 应用里打开 Browser / Discover，再粘贴此页面链接。仅在普通浏览器打开时钱包不会出现。" : "No wallet detected. Open this page inside your wallet's dApp browser: in the OKX / Binance / MetaMask / Trust app, open Browser / Discover and paste this page's link there. A wallet never appears in a normal browser tab.", true);
+    return null;
+  }
+  try{
+    walletProvider = found.p; walletName = found.name;
+    var accounts = await walletProvider.request({method:"eth_requestAccounts"});
+    walletAccount = accounts && accounts[0];
+    if(!walletAccount) throw new Error("No account returned");
+    await ensureBnbChain(walletProvider);
+    var cb = document.getElementById('connectBtn'); if(cb) cb.textContent = walletAccount.slice(0, 6) + "…" + walletAccount.slice(-4) + " ✓";
+    await refreshLiveStats(false);
+    await refreshWalletState();
+    var typed = getBinanceId();
+    setWalletStatus(isZh()
+      ? ("钱包已连接 (" + walletName + ")：" + walletAccount + (typed && isValidBinanceId(typed) ? "。已填写币安 Agent ID：" + typed + " — 最终以链上持有验证为准。" : "。最终以链上持有验证为准 — 见上方钱包信息。") + " 铸造已 LIVE，可以点 MINT NOW。")
+      : ("Wallet connected (" + walletName + "): " + walletAccount + (typed && isValidBinanceId(typed) ? ". Binance Agent ID entered: " + typed + " — the on-chain holding check above is what counts." : ". The on-chain holding check above is what counts.") + " Mint is LIVE — tap MINT NOW."), false);
+    return walletAccount;
+  }catch(e){
+    setWalletStatus((isZh() ? "连接失败：" : "Connect failed: ") + (e && e.message ? e.message : e), true);
+    return null;
+  }
+}
+function friendlyMintError(e){
+  var raw = (e && (e.data || e.message)) ? String(e.data || "") + " " + String(e.message || "") : String(e || "");
+  var map = [
+    ["f947691f", "NoAgentId — this wallet does not hold a Binance Agent ID, so the contract rejected the mint."],
+    ["589ed34b", "MintClosed — minting is closed on the contract right now."],
+    ["888e58a8", "BadQuantity — quantity must be 1 or 2."],
+    ["b92612ed", "OverLimit — this wallet would exceed the max of 2 per wallet."],
+    ["52df9fe5", "SoldOut — the 5,000 supply is sold out."],
+    ["949ce241", "Underpaid — the BNB value sent was below the amount required."],
+    ["NoAgentId", "NoAgentId — this wallet does not hold a Binance Agent ID, so the contract rejected the mint."],
+    ["OverLimit", "OverLimit — this wallet would exceed the max of 2 per wallet."],
+    ["MintClosed", "MintClosed — minting is closed on the contract right now."],
+    ["SoldOut", "SoldOut — the 5,000 supply is sold out."],
+    ["Underpaid", "Underpaid — the BNB value sent was below the amount required."],
+    ["BadQuantity", "BadQuantity — quantity must be 1 or 2."]
+  ];
+  for(var i = 0; i < map.length; i++){ if(raw.indexOf(map[i][0]) !== -1) return map[i][1]; }
+  if(/user rejected|denied|rejected the request/i.test(raw)) return isZh() ? "你在钱包里取消了交易。" : "You cancelled the transaction in your wallet.";
+  return (isZh() ? "铸造失败：" : "Mint failed: ") + (e && e.message ? e.message : raw);
+}
+async function mintNow(){
+  var btn = document.getElementById('mintBtn');
+  if(pay === "USDT"){
+    setWalletStatus(isZh() ? "直接钱包铸造只能用 BNB 支付（合约只收 BNB）。请把上面的支付方式切回 BNB；USDT 只适用于上方的智能体提示词路径。" : "Direct wallet mint pays in BNB only — the contract only accepts BNB. Switch Pay in back to BNB above; USDT is only for the agent-prompt path at the top.", true);
+    return;
+  }
+  if(!walletAccount){
+    var acc = await connectWallet();
+    if(!acc) return;
+  }
+  try{
+    if(btn){ btn.disabled = true; btn.classList.add('disabled'); btn.textContent = isZh() ? "铸造中…" : "MINTING…"; }
+    await refreshLiveStats(false);
+    if(!MINT_OPEN){ setWalletStatus(isZh() ? "铸造目前被合约 owner 关闭 (MintClosed)。" : "Mint is closed on the contract right now (MintClosed).", true); return; }
+    if(MINTED_COUNT + qty.w > SUPPLY_TOTAL){ setWalletStatus(isZh() ? "已售罄 (SoldOut)。" : "Sold out (SoldOut).", true); return; }
+    await refreshWalletState();
+    if(walletAgentBal !== null && walletAgentBal <= 0){ setWalletStatus(isZh() ? "此钱包未持有币安 Agent ID — 合约会以 NoAgentId 回滚，所以没有发送交易。用持有币安 Agent ID 的钱包连接。" : "This wallet does not hold a Binance Agent ID — the contract would revert with NoAgentId, so no transaction was sent. Connect with a wallet that holds a Binance Agent ID.", true); return; }
+    if(walletMinted !== null && walletMinted + qty.w > MAX_PER_WALLET){ setWalletStatus(isZh() ? ("此钱包已铸造 " + walletMinted + " 个 — 每个钱包最多 2 个 (OverLimit)。") : ("This wallet already minted " + walletMinted + " — max 2 per wallet (OverLimit)."), true); return; }
+    var c = mintCost(qty.w);
+    var valueWei = BigInt(Math.round(c.totalBNB * 1e18));
+    var valueHex = "0x" + valueWei.toString(16);
+    var data = SEL_MINT + padUint(qty.w);
+    setWalletStatus(isZh() ? ("在钱包里确认铸造 " + qty.w + " 个 — 发送 " + fmtBNB(c.totalBNB) + " BNB…") : ("Confirm in your wallet: mint " + qty.w + " — sending " + fmtBNB(c.totalBNB) + " BNB…"), false);
+    var txHash = await walletProvider.request({method:"eth_sendTransaction", params:[{from: walletAccount, to: CONTRACT_ADDRESS, data: data, value: valueHex, gas: "0xdbba0"}]});
+    setWalletStatus((isZh() ? "交易已发送，等待上链确认… Tx: " : "Transaction sent, waiting for confirmation… Tx: ") + txHash, false);
+    var receipt = null;
+    for(var i = 0; i < 40 && !receipt; i++){
+      await new Promise(function(r){ setTimeout(r, 3000); });
+      try{ receipt = await publicRpc("eth_getTransactionReceipt", [txHash]); }catch(e){}
+      if(!receipt && walletProvider){ try{ receipt = await walletProvider.request({method:"eth_getTransactionReceipt", params:[txHash]}); }catch(e){} }
+    }
+    if(receipt && receipt.status === "0x1"){
+      await refreshLiveStats(false); await refreshWalletState();
+      setWalletStatus((isZh() ? "✅ 铸造成功！你现在持有 " : "✅ Mint successful! You now hold ") + (walletNftBal === null ? "" : walletNftBal) + (isZh() ? " 个 AGENTIC SPOXY。Tx：" : " AGENTIC SPOXY. Tx: ") + '<a href="' + BSC_EXPLORER + "/tx/" + txHash + '" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:underline">' + txHash + "</a>", false, true);
+    } else if(receipt){
+      setWalletStatus((isZh() ? "交易上链但回滚了。Tx：" : "Transaction mined but reverted. Tx: ") + txHash, true);
+    } else {
+      setWalletStatus((isZh() ? "交易已发送，但确认等待超时 — 在 BscScan 查看：Tx：" : "Transaction sent, but confirmation timed out — track it on BscScan: Tx: ") + txHash, false);
+    }
+  }catch(e){
+    setWalletStatus(friendlyMintError(e), true);
+  }finally{
+    if(btn){ btn.disabled = false; btn.classList.remove('disabled'); btn.textContent = I18N[lang].mintNow || "MINT NOW — LIVE"; }
+  }
+}
+/* Live count around the clock, with no manual update ever needed: read on
+   load, re-read every 15 seconds while the page stays open, and re-read the
+   moment the visitor comes back to the tab, refocuses the window, or the
+   network comes back — so a page left open all day never shows a stale count. */
+refreshLiveStats(false);
+setInterval(function(){ refreshLiveStats(false); if(walletAccount) refreshWalletState(); }, 15000);
+document.addEventListener('visibilitychange', function(){ if(!document.hidden) refreshLiveStats(false); });
+window.addEventListener('focus', function(){ refreshLiveStats(false); });
+window.addEventListener('online', function(){ refreshLiveStats(false); });
 
 /* ================= LANGUAGE EN / ZH ================= */
 var lang='en';
 var I18N = {
-  en:{navMint:"Mint",navPrompt:"Prompt",navTraits:"Traits",navGallery:"Gallery",minted:"minted",opensSoon:"Mint opens soon",chipFree:"FREE FIRST 100 SUPPLY",chipPaid:"THEN 0.00025 BNB PER MINT",chipBinance:"BINANCE AGENT ID REQUIRED",chipMax:"MAX 2 PER WALLET",chipReveal:"REVEALED BLOCK BY BLOCK AFTER MINT",freeLab:"FREE MINT WINDOW — FIRST 100 SUPPLY, BINANCE AGENT ID ONLY",freeLeft:"free mints left",thenPrice:"then 0.00025 BNB per mint",
-    heroSub:"5,000 pixel AI agents, each assembled from 8 trait layers and checked for duplicates. Art and metadata live fully on-chain on BNB Chain. Minting is only possible with a Binance Agent ID — no Binance Agent ID, no mint. The first 100 of the supply mint FREE with a Binance Agent ID; after those 100 are gone, minting costs 0.00025 BNB per mint.",
-    agentH:"Mint via your AI agent",agentSub:"No separate wallet step here, the way agent minting works on the reference flow: choose how many, choose how to pay, enter your Binance Agent ID, then send the prompt below to an AI agent whose wallet holds that Binance Agent ID — it mints from its own wallet. The first 100 of the supply are FREE; after that, each mint costs 0.00025 BNB.",
-    qty:"Quantity",payBnbSub:"FREE for the first 100 supply, then 0.00025 BNB each",payUsdtSub:"FREE for the first 100 supply, then the USDT equivalent of 0.00025 BNB each",binanceLab:"Binance Agent ID — required to mint",binanceHint:"Use the Binance Agent ID linked to your agent wallet. Wallet-only minting without a Binance Agent ID is not allowed.",binancePh:"Enter your Binance Agent ID",promptLang:"Prompt language",copy:"COPY PROMPT",agentNote:"Mint isn't live yet — and when it opens, only a valid Binance Agent ID can mint: free for the first 100 supply, then 0.00025 BNB per mint, max 2 per wallet. Copy Prompt stays blocked until a valid Binance Agent ID is entered.",
-    walletH:"Mint with wallet — Binance Agent ID required",walletGate:"Wallet alone is not enough. This path is also locked to Binance Agent ID only — without a valid Binance Agent ID, wallet connection and minting stay blocked. Same pricing as the agent path: the first 100 supply mint FREE, then 0.00025 BNB per mint.",contract:"Contract",placeholder:"(live on BNB Chain)",payIn:"Pay in",connect:"CONNECT WALLET",mintSoon:"MINT OPENS SOON",gasNote:"Even with a connected wallet, a mint is rejected unless it carries a valid Binance Agent ID. Free mints (the first 100 supply) send 0 value; paid mints send exactly 0.00025 BNB per mint. Your wallet will request a 900,000 gas limit; you only pay for gas actually used.",
+  en:{navMint:"Mint",navPrompt:"Prompt",navTraits:"Traits",navGallery:"Gallery",minted:"minted",opensSoon:"● MINT LIVE — BNB MAINNET",chipFree:"FREE FIRST 100 SUPPLY",chipPaid:"THEN 0.00025 BNB PER MINT",chipBinance:"BINANCE AGENT ID REQUIRED",chipMax:"MAX 2 PER WALLET",chipReveal:"REVEALED BLOCK BY BLOCK AFTER MINT",freeLab:"FREE MINT WINDOW — FIRST 100 SUPPLY, BINANCE AGENT ID ONLY",freeLeft:"free mints left",thenPrice:"then 0.00025 BNB per mint",
+    heroSub:"5,000 pixel AI agents, each assembled from 8 trait layers and checked for duplicates. Mint is LIVE now on BNB Chain at contract 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee. Minting is only possible with a Binance Agent ID — no Binance Agent ID, no mint. The first 100 of the supply mint FREE with a Binance Agent ID; after those 100 are gone, minting costs 0.00025 BNB per mint, max 2 per wallet.",
+    agentH:"Mint via your AI agent",agentSub:"Mint is LIVE. Choose how many, choose how to pay, enter your Binance Agent ID, then send the prompt below to an AI agent whose wallet holds that Binance Agent ID — it mints from its own wallet on the live contract 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee. The first 100 of the supply are FREE; after that, each mint costs 0.00025 BNB.",
+    qty:"Quantity",payBnbSub:"FREE for the first 100 supply, then 0.00025 BNB each",payUsdtSub:"FREE for the first 100 supply, then the USDT equivalent of 0.00025 BNB each",binanceLab:"Binance Agent ID — required to mint",binanceHint:"Use the Binance Agent ID linked to your agent wallet. Wallet-only minting without a Binance Agent ID is not allowed.",binancePh:"Enter your Binance Agent ID",promptLang:"Prompt language",copy:"COPY PROMPT",agentNote:"Mint is LIVE now — only a valid Binance Agent ID can mint: free for the first 100 supply, then 0.00025 BNB per mint, max 2 per wallet. Copy Prompt stays blocked until a valid Binance Agent ID is entered. Prefer minting yourself? Use the Wallet section below — Connect Wallet and MINT NOW are active.",
+    walletH:"Mint with wallet — Binance Agent ID required",walletGate:"MINT IS LIVE. The contract itself verifies on-chain that your wallet holds a Binance Agent ID (registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F) — a wallet without one reverts with NoAgentId. Same pricing as the agent path: the first 100 supply mint FREE, then 0.00025 BNB per mint, max 2 per wallet. Open this page in your wallet's dApp browser (OKX / Binance / MetaMask / Trust) to connect and mint.",contract:"Contract",placeholder:"(LIVE on BNB Mainnet)",payIn:"Pay in",connect:"CONNECT WALLET",mintNow:"MINT NOW — LIVE",refreshLive:"REFRESH LIVE COUNT",gasNote:"Direct wallet mint pays in BNB only (the contract is payable in BNB — pick USDT only on the agent-prompt path above, where your agent handles the conversion). Free mints (the first 100 supply) send 0 value; paid mints send exactly 0.00025 BNB per mint. Your wallet will request a 900,000 gas limit; you only pay for gas actually used.",
     traitsH:"Stacked from 8 layers",traitsSub:"Every agent is stacked from 8 layers into 5,000 unique combos. Rarity tiers by rank:",rarest:"Rarest preview",
     galleryH:"Browse all 5,000 agents",
     gallerySub:"Search by agent number, filter by rarity, and load more to explore the full collection of 5,000.",
@@ -1128,12 +1416,12 @@ var I18N = {
     metaSub:"Every agent now has standard ERC-721 JSON: name, description, image URI, and 10 attributes — the 8 traits plus Rarity and Rank. Open any agent to preview and download its file, or download the full set below.",
     metaStandard:"STANDARD",metaImageUri:"IMAGE URI PATTERN",metaUri:"METADATA URI PATTERN",metaExample:"EXAMPLE — AGENTIC SPOXY #21",
     metaDl21:"DOWNLOAD #21 JSON",metaDlAll:"DOWNLOAD ALL 5,000 JSON",metaDlColl:"DOWNLOAD COLLECTION JSON",
-    metaNote:"The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. Contract is live on BNB Chain at 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee."},
-  zh:{navMint:"铸造",navPrompt:"提示词",navTraits:"特征",navGallery:"画廊",minted:"已铸造",opensSoon:"铸造即将开启",chipFree:"前100个供应免费",chipPaid:"之后每次铸造 0.00025 BNB",chipBinance:"必须使用币安 Agent ID",chipMax:"每个钱包最多2个",chipReveal:"铸造后逐区块揭示",freeLab:"免费铸造窗口 — 前100个供应，仅限币安 Agent ID",freeLeft:"剩余免费名额",thenPrice:"之后每次铸造 0.00025 BNB",
-    heroSub:"5,000个像素AI智能体，每个由8层特征组装并经过去重检查。艺术品和元数据完全上链于BNB Chain。只能使用币安 Agent ID 铸造——没有币安 Agent ID，就无法铸造。前100个供应使用币安 Agent ID 免费铸造；这100个用完后，每次铸造费用为 0.00025 BNB。",
-    agentH:"通过你的AI智能体铸造",agentSub:"这里没有单独的钱包步骤，与参考流程中的智能体铸造方式相同：选择数量，选择支付方式，输入你的币安 Agent ID，然后将下面的提示词发送给钱包持有该币安 Agent ID 的AI智能体——它会从自己的钱包铸造。前100个供应免费；之后每次铸造费用为 0.00025 BNB。",
-    qty:"数量",payBnbSub:"前100个供应免费，之后每个 0.00025 BNB",payUsdtSub:"前100个供应免费，之后每个相当于 0.00025 BNB 的 USDT",binanceLab:"币安 Agent ID — 铸造必填",binanceHint:"使用与你的智能体钱包关联的币安 Agent ID。不允许仅使用钱包而没有币安 Agent ID 进行铸造。",binancePh:"输入你的币安 Agent ID",promptLang:"提示词语言",copy:"复制提示词",agentNote:"铸造尚未上线——上线后，只有有效的币安 Agent ID 才能铸造：前100个供应免费，之后每次铸造 0.00025 BNB，每个钱包最多2个。在输入有效的币安 Agent ID 之前，复制提示词按钮将保持锁定。",
-    walletH:"使用钱包铸造 — 必须使用币安 Agent ID",walletGate:"仅有钱包是不够的。此路径同样仅限币安 Agent ID——没有有效的币安 Agent ID，钱包连接和铸造将保持锁定。价格与智能体路径相同：前100个供应免费铸造，之后每次铸造 0.00025 BNB。",contract:"合约",placeholder:"(已在 BNB Chain 上线)",payIn:"支付方式",connect:"连接钱包",mintSoon:"铸造即将开启",gasNote:"即使钱包已连接，如果没有携带有效的币安 Agent ID，铸造也会被拒绝。免费铸造（前100个供应）发送0价值；付费铸造每次正好发送 0.00025 BNB。你的钱包将请求 900,000 的 Gas 上限；你只需支付实际使用的 Gas。",
+    metaNote:"The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. The contract is LIVE at 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee on BNB Mainnet — its on-chain tokenURI currently uses the baseURI set at deploy, which the owner can update with setBaseURI after the IPFS upload."},
+  zh:{navMint:"铸造",navPrompt:"提示词",navTraits:"特征",navGallery:"画廊",minted:"已铸造",opensSoon:"● 铸造 LIVE — BNB 主网",chipFree:"前100个供应免费",chipPaid:"之后每次铸造 0.00025 BNB",chipBinance:"必须使用币安 Agent ID",chipMax:"每个钱包最多2个",chipReveal:"铸造后逐区块揭示",freeLab:"免费铸造窗口 — 前100个供应，仅限币安 Agent ID",freeLeft:"剩余免费名额",thenPrice:"之后每次铸造 0.00025 BNB",
+    heroSub:"5,000个像素AI智能体，每个由8层特征组装并经过去重检查。铸造已在 BNB Chain LIVE，合约 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee。只能使用币安 Agent ID 铸造——没有币安 Agent ID，就无法铸造。前100个供应使用币安 Agent ID 免费铸造；这100个用完后，每次铸造费用为 0.00025 BNB，每个钱包最多2个。",
+    agentH:"通过你的AI智能体铸造",agentSub:"铸造已 LIVE：选择数量，选择支付方式，输入你的币安 Agent ID，然后将下面的提示词发送给钱包持有该币安 Agent ID 的AI智能体——它会在 LIVE 合约 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee 上从自己的钱包铸造。前100个供应免费；之后每次铸造费用为 0.00025 BNB。",
+    qty:"数量",payBnbSub:"前100个供应免费，之后每个 0.00025 BNB",payUsdtSub:"前100个供应免费，之后每个相当于 0.00025 BNB 的 USDT",binanceLab:"币安 Agent ID — 铸造必填",binanceHint:"使用与你的智能体钱包关联的币安 Agent ID。不允许仅使用钱包而没有币安 Agent ID 进行铸造。",binancePh:"输入你的币安 Agent ID",promptLang:"提示词语言",copy:"复制提示词",agentNote:"铸造已 LIVE——只有有效的币安 Agent ID 才能铸造：前100个供应免费，之后每次铸造 0.00025 BNB，每个钱包最多2个。在输入有效的币安 Agent ID 之前，复制提示词按钮将保持锁定。想自己铸造？用下方钱包区——连接钱包和立即铸造都已启用。",
+    walletH:"使用钱包铸造 — 必须使用币安 Agent ID",walletGate:"铸造已 LIVE。合约会链上验证你的钱包持有币安 Agent ID（注册表 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F）——没有的钱包会以 NoAgentId 回滚。价格与智能体路径相同：前100个供应免费铸造，之后每次铸造 0.00025 BNB，每个钱包最多2个。请在钱包的 dApp 浏览器（OKX / Binance / MetaMask / Trust）中打开此页面来连接和铸造。",contract:"合约",placeholder:"(已在 BNB 主网 LIVE)",payIn:"支付方式",connect:"连接钱包",mintNow:"立即铸造 — LIVE",refreshLive:"刷新实时数量",gasNote:"直接钱包铸造只能用 BNB 支付（合约只收 BNB——USDT 只适用于上方智能体提示词路径，由你的智能体处理兑换）。免费铸造（前100个供应）发送0价值；付费铸造每次正好发送 0.00025 BNB。你的钱包将请求 900,000 的 Gas 上限；你只需支付实际使用的 Gas。",
     traitsH:"由8层堆叠而成",traitsSub:"每个智能体由8层堆叠成5,000种独特组合。按排名划分的稀有度等级：",rarest:"最稀有预览",
     galleryH:"浏览全部 5,000 个智能体",
     gallerySub:"按智能体编号搜索，按稀有度筛选，并加载更多以探索完整的 5,000 个收藏。",
@@ -1143,7 +1431,7 @@ var I18N = {
     metaSub:"每个智能体现在都有标准的 ERC-721 JSON：名称、描述、图片 URI 和10个属性——8个特征加上稀有度和排名。打开任意智能体可预览并下载其文件，或在下方下载完整套装。",
     metaStandard:"标准",metaImageUri:"图片 URI 模式",metaUri:"元数据 URI 模式",metaExample:"示例 — AGENTIC SPOXY #21",
     metaDl21:"下载 #21 JSON",metaDlAll:"下载全部 5,000 个 JSON",metaDlColl:"下载收藏 JSON",
-    metaNote:"ipfs:// URI 是模式，在将图片和 JSON 上传到 IPFS 后需替换为真实的 CID。每个代币的 PNG 可从其详情视图下载。合约地址在上线前仍为占位符，因此请在部署时在合约中设置 tokenURI / baseURI。"}
+    metaNote:"ipfs:// URI 是模式，在将图片和 JSON 上传到 IPFS 后需替换为真实的 CID。每个代币的 PNG 可从其详情视图下载。合约已在 BNB 主网 LIVE：0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee — 其链上 tokenURI 使用部署时设置的 baseURI，owner 可在 IPFS 上传后用 setBaseURI 更新。"}
 };
 function setLang(l){
   lang=l;
@@ -1154,6 +1442,9 @@ function setLang(l){
   var gs=document.getElementById('gSearch'); if(gs && dict.searchPh) gs.placeholder=dict.searchPh;
   ['binanceIdA','binanceIdW'].forEach(function(id){ var el=document.getElementById(id); if(el && dict.binancePh) el.placeholder=dict.binancePh; });
   if(typeof paintBinanceGate==='function') paintBinanceGate();
+  if(typeof renderWalletInfo==='function') renderWalletInfo();
+  if(typeof updateProgressUI==='function') updateProgressUI();
+  var ls2=document.getElementById('liveStatus'); if(ls2 && !walletAccount) ls2.textContent = l==='zh' ? "链上实时数量 — 正在从合约读取 totalMinted()，每 15 秒自动刷新…" : "Live on-chain count — reading totalMinted() from the contract, auto-refreshing every 15 seconds…";
   if(typeof refreshCost==='function') refreshCost();
   if(typeof writePrompt==='function') writePrompt();
   var dj=document.getElementById('mDlJsonBtn'); if(dj) dj.textContent = l==='zh' ? '下载 JSON' : 'DOWNLOAD JSON';
