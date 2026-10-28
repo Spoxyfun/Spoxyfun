@@ -1,604 +1,1166 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SPOXY · Cyber Spirits on BNB Chain</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&family=Cormorant+Garamond:wght@500;600&display=swap"
-    />
-    <link rel="stylesheet" href="hark.css" />
-    <link rel="stylesheet" href="hark-hero.css" />
-    <style>
-      :root, :root[data-theme="light"] { color-scheme: dark; }
-      :root {
-        --x-gold: #f0b90b;
-        --x-gold-soft: #2b220a;
-        --x-gold-line: #f0b90b40;
-        --x-gold-glow: 0 0 28px #f0b90b40;
-        --x-black: #050505;
-        --x-obsidian: #0d0c0a;
-        --x-panel: #12110e;
-        --x-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-        --x-nav-h: 68px;
-      }
-      html { scroll-padding-top: var(--x-nav-h); }
-      body { background: var(--x-black); color: var(--text-primary); }
-      ::selection { background: var(--x-gold); color: var(--x-black); }
-      :focus-visible { outline-color: var(--x-gold); }
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<link rel="icon" href="data:," />
+<title>Agentic Spoxy NFT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060c18; --bg2:#0a1122; --panel:#121a33; --panel2:#0d1428;
+  --line:#2b3a63; --line2:#3a4c7d;
+  --cyan:#2ee6e6; --cyan2:#25f4f4;
+  --orange:#ff8a1e; --orange2:#ff7a00;
+  --text:#e8edf7; --muted:#9aa7c2; --muted2:#7483a3;
+  --yellow:#ffd21f; --purple:#c77dff; --green:#4dff88; --common:#a8bce0;
+  --px:'Press Start 2P',monospace; --mono:'Space Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--mono);-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(rgba(60,90,160,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(60,90,160,.10) 1px,transparent 1px);
+  background-size:26px 26px;}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+.px{font-family:var(--px)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
 
-      .x-wrap { max-width: var(--page-max); margin: 0 auto; padding-inline: var(--gutter); }
-      .x-kicker { font: var(--type-tag); letter-spacing: 0.22em; text-transform: uppercase; color: var(--x-gold); }
-      .x-h1, .x-h2, .x-h3 { font-family: var(--x-serif); font-weight: 500; letter-spacing: -0.01em; line-height: 1.05; }
-      .x-h1 { font-size: clamp(48px, 8vw, 104px); color: #fff; }
-      .x-h2 { font-size: clamp(38px, 5.5vw, 64px); color: #fff; }
-      .x-h2 em, .x-h1 em { font-style: italic; color: var(--x-gold); }
-      .x-h3 { font-size: 26px; color: #fff; }
-      .x-lede { font: var(--type-lede); font-weight: var(--weight-regular); color: var(--text-secondary); max-width: 58ch; }
-      .x-muted { color: var(--text-secondary); }
-      .x-line { height: 1px; background: linear-gradient(90deg, transparent, var(--x-gold-line), transparent); border: 0; margin: 0; }
+/* ---------- NAV ---------- */
+header{position:sticky;top:0;z-index:40;background:rgba(6,11,22,.92);backdrop-filter:blur(6px);border-bottom:2px solid var(--line)}
+.nav{display:flex;align-items:center;gap:18px;height:64px;max-width:1060px;margin:0 auto;padding:0 20px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--px);font-size:13px;letter-spacing:.5px;white-space:nowrap}
+.logo .box{width:34px;height:34px;border:2px solid var(--cyan);display:grid;place-items:center;background:#0b2b33;flex:none}
+.logo .box canvas{width:26px;height:26px;image-rendering:pixelated}
+nav.links{margin-left:auto;display:flex;gap:26px;font-size:14px;color:#c6cfe2}
+nav.links a:hover{color:var(--cyan)}
+.lang{display:flex;border:2px solid var(--line2);margin-left:6px;flex:none}
+.lang button{background:transparent;border:0;color:var(--muted);font-weight:700;font-size:13px;padding:9px 16px}
+.lang button.on{background:var(--cyan2);color:#06222a}
+@media(max-width:720px){ nav.links{display:none} .logo{font-size:11px} }
 
-      /* buttons */
-      .x-btn {
-        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-        min-height: var(--tap); padding: 0 22px; border-radius: 2px;
-        font: var(--type-label); letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
-        border: 1px solid var(--x-gold); color: var(--x-gold); background: transparent; cursor: pointer;
-        transition: box-shadow var(--dur-quick) var(--ease-out), background var(--dur-quick) var(--ease-out), color var(--dur-quick) var(--ease-out);
-      }
-      .x-btn:hover { box-shadow: var(--x-gold-glow); background: var(--x-gold-soft); }
-      .x-btn--solid { background: var(--x-gold); color: var(--x-black); }
-      .x-btn--solid:hover { background: #ffcd2e; color: var(--x-black); }
-      .x-btn--ghost { border-color: #ffffff59; color: #fff; }
-      .x-btn--ghost:hover { border-color: var(--x-gold); color: var(--x-gold); }
-      .x-btn--big { width: 100%; min-height: 56px; font-size: var(--size-body); }
+/* ---------- HERO ---------- */
+.hero{text-align:center;padding:58px 20px 8px;max-width:1060px;margin:0 auto}
+.kicker{font-family:var(--px);font-size:11px;color:var(--orange);letter-spacing:1px;line-height:1.9}
+h1.title{font-family:var(--px);font-size:clamp(30px,6.4vw,64px);line-height:1.25;margin:22px 0 20px;color:#fff;
+  text-shadow:4px 4px 0 var(--orange),0 0 26px rgba(46,230,230,.45)}
+.hero p{max-width:700px;margin:0 auto;color:#c2cde4;font-size:17px;line-height:1.65}
 
-      /* nav */
-      .x-lang{min-height:40px;padding:0 14px;background:none;border:1px solid var(--x-gold);color:var(--x-gold);font:inherit;font-size:14px;letter-spacing:.06em;cursor:pointer;order:9}
-      @media (max-width:860px){.x-lang{order:0;margin-left:auto}.x-nav__in{gap:12px}.x-burger{margin-left:0!important}}
-      .x-nav { position: sticky; top: 0; z-index: 50; background: #050505e6; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--x-gold-line); }
-      .x-nav__in { height: var(--x-nav-h); display: flex; align-items: center; gap: 24px; }
-      .x-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--x-gold); text-decoration: none; font: var(--weight-bold) 20px/1 var(--sans); letter-spacing: 0.24em; min-height: var(--tap); }
-      .x-logo svg { width: 26px; height: 26px; filter: drop-shadow(0 0 6px #f0b90b80); }
-      .x-links { display: flex; gap: 4px; margin-left: auto; list-style: none; padding: 0; margin-block: 0; }
-      .x-links a { display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 14px; font: var(--type-label); color: var(--text-secondary); text-decoration: none; transition: color var(--dur-quick); }
-      .x-links a:hover { color: var(--x-gold); }
-      .x-burger { display: none; margin-left: auto; width: var(--tap); height: var(--tap); background: none; border: 1px solid var(--x-gold-line); border-radius: 2px; color: var(--x-gold); cursor: pointer; }
-      .x-burger span, .x-burger span::before, .x-burger span::after { display: block; width: 18px; height: 1.5px; background: currentColor; margin: auto; position: relative; content: ""; }
-      .x-burger span::before { position: absolute; top: -6px; } .x-burger span::after { position: absolute; top: 6px; }
-      @media (max-width: 860px) {
-        .x-burger { display: inline-block; }
-      .x-nav__cta { display: none; }
-        .x-links { display: none; position: absolute; left: 0; right: 0; top: var(--x-nav-h); flex-direction: column; background: var(--x-black); border-bottom: 1px solid var(--x-gold-line); padding: 8px var(--gutter) 20px; }
-        .x-nav.is-open .x-links { display: flex; }
-        .x-links a { padding: 0; font-size: var(--size-prose); border-bottom: 1px solid var(--stroke-secondary); }
-        .x-links .x-links__cta { display: block; padding-top: 16px; }
-        .x-links .x-links__cta .x-btn { width: 100%; }
-      }
-      @media (min-width: 861px) { .x-links__cta { display: none; } }
+/* marquee */
+.marquee{margin:52px 0 0;border-top:2px solid var(--line);border-bottom:2px solid var(--line);background:rgba(13,20,40,.65);overflow:hidden}
+.marquee-track{display:flex;gap:14px;padding:14px 0;width:max-content;animation:scroll 46s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.mq{flex:none;width:112px;height:112px;border:2px solid var(--line2);overflow:hidden}
+.mq canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none}}
 
-      /* hero */
-      .x-hero { position: relative; min-height: calc(100svh - var(--x-nav-h)); display: flex; align-items: flex-end; overflow: hidden; border-bottom: 1px solid var(--x-gold-line); }
-      .x-hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-      .x-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(20deg, #050505 8%, #050505cc 32%, #05050526 65%, transparent), linear-gradient(0deg, #050505 0%, transparent 30%); }
-      .x-hero__copy { position: relative; z-index: 1; padding-block: 120px 72px; display: grid; gap: 22px; width: 100%; }
-      .x-hero__copy .x-lede { color: #f5f5f7d9; }
-      .x-row { display: flex; flex-wrap: wrap; gap: 12px; }
-      .x-tagline { font-family: var(--x-serif); font-style: italic; font-size: 20px; color: var(--x-gold); opacity: 0.9; margin-top: 8px; }
+/* mint progress */
+.progress{max-width:720px;margin:26px auto 0;padding:0 20px}
+.progress .row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.progress .row b{color:#fff}
+.bar{height:16px;border:2px solid var(--line2);margin-top:10px;background:#0a1122}
+.bar i{display:block;height:100%;width:0;background:var(--cyan)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 30px;padding:0 16px}
+.chip{border:2px solid var(--cyan);color:var(--cyan);font-size:12px;padding:8px 12px;background:rgba(10,25,35,.5)}
+.chip::before{content:"■";color:var(--orange);margin-right:8px;font-size:10px}
 
-      /* sections */
-      .x-sec { padding-block: clamp(72px, 10vw, 128px); border-bottom: 1px solid #f0b90b1f; }
-      .x-sec__head { display: grid; gap: 14px; margin-bottom: 48px; }
-      .x-sec--alt { background: radial-gradient(ellipse at 80% 0%, #f0b90b12, transparent 60%), var(--x-obsidian); }
+/* tabs */
+.tabs{max-width:1060px;margin:0 auto;padding:0 20px}
+.tabs-in{display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--line2);background:var(--panel2)}
+.tabs a{font-family:var(--px);font-size:12px;text-align:center;padding:18px 6px;color:#c6cfe2;border-right:2px solid var(--line2)}
+.tabs a:last-child{border-right:0}
+.tabs a.on{background:var(--cyan2);color:#04222a}
+@media(max-width:560px){.tabs a{font-size:9px;padding:14px 2px}}
 
-      /* mint */
-      .x-mint { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 4vw, 48px); align-items: center; }
-      .x-mint .x-panel { border: 1px solid var(--x-gold-line); background: var(--x-panel); }
-      .x-frame { padding: 20px; }
+/* ---------- SECTIONS ---------- */
+section{max-width:1060px;margin:0 auto;padding:64px 20px 6px}
+.sec-k{font-family:var(--px);font-size:11px;color:var(--orange);letter-spacing:1px}
+h2{font-family:var(--px);font-size:clamp(19px,3.4vw,30px);line-height:1.5;margin:18px 0 14px;color:#fff}
+.sec-sub{color:#b9c5de;font-size:15.5px;line-height:1.65;max-width:680px;margin:0 0 26px}
+.panel{background:var(--panel);border:2px solid var(--line);padding:26px;box-shadow:10px 10px 0 rgba(46,230,230,.08)}
+@media(max-width:560px){.panel{padding:18px}}
+.grid2{display:grid;grid-template-columns:1fr 1.15fr;gap:28px}
+@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+label.lab,.lab{font-size:12px;color:var(--orange);letter-spacing:1.5px;text-transform:uppercase;display:block;margin:20px 0 10px}
+label.lab:first-child,.grid2 .lab:first-child{margin-top:0}
+.stepper{display:inline-flex;border:2px solid var(--line2)}
+.stepper button{width:52px;height:48px;background:var(--panel2);border:0;color:var(--cyan);font-size:20px;font-weight:700}
+.stepper output{width:52px;display:grid;place-items:center;font-family:var(--px);font-size:15px;background:#050a16;border-left:2px solid var(--line2);border-right:2px solid var(--line2)}
+.fee{color:#c6cfe2;font-size:14px;margin-top:14px}
+input[type=text]{width:100%;background:#050a16;border:2px solid var(--line2);color:var(--text);padding:13px 12px;font-family:var(--mono);font-size:14px;outline:none}
+input[type=text]:focus{border-color:var(--cyan)}
+input[type=text].invalid{border-color:var(--orange)}
+input[type=text].valid{border-color:var(--green)}
+.field-hint{color:var(--muted);font-size:13px;line-height:1.6;margin-top:10px}
+.field-status{font-size:13.5px;line-height:1.55;min-height:20px;margin-top:10px}
+.field-status.err{color:var(--orange)}
+.field-status.ok{color:var(--green)}
+.gate{border:2px solid var(--orange);background:rgba(255,138,30,.08);color:#ffd9ad;font-size:13.5px;line-height:1.6;padding:12px 14px;margin:18px 0 4px}
+.seg{display:inline-flex;border:2px solid var(--line2)}
+.seg button{background:var(--panel2);border:0;color:var(--muted);font-weight:700;padding:11px 20px;font-size:14px}
+.seg button.on{background:var(--cyan2);color:#04222a}
+.promptbox{width:100%;min-height:300px;background:#050a16;border:2px solid var(--line2);color:var(--cyan);padding:14px;font-family:var(--mono);font-size:13.5px;line-height:1.65;resize:vertical;outline:none}
+.mintrow{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.mintrow .lab{margin:0}
+.payboxes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:560px){.payboxes{grid-template-columns:1fr}}
+.paybox{border:2px solid var(--line2);background:var(--panel2);color:var(--text);padding:15px 12px;text-align:center;font-family:var(--mono)}
+.paybox.on{border-color:var(--green)}
+.paybox b{display:block;font-size:16px;letter-spacing:1px;margin-bottom:5px}
+.paybox span{color:var(--muted);font-size:12.5px;line-height:1.5;display:block}
+.btn.block{width:100%;margin-top:18px;text-align:center}
+.costline{border:2px solid var(--line);background:var(--panel2);color:#dbe4f5;font-size:14px;line-height:1.65;padding:13px 14px;margin-top:16px}
+.costline b{color:var(--green)}
+.freeline{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
+.freeline b{color:var(--green)}
+.btn{font-family:var(--px);font-size:12px;border:0;padding:16px 20px;background:var(--cyan2);color:#04222a;box-shadow:5px 5px 0 var(--orange)}
+.btn:active{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--orange)}
+.btn.ghost{background:transparent;color:var(--cyan);border:2px solid var(--cyan)}
+.btn.disabled{background:#232f52;color:#7787ab;box-shadow:none;cursor:not-allowed}
+.note{border-left:3px solid var(--orange);padding:2px 0 2px 12px;color:var(--muted);font-size:13.5px;line-height:1.6;margin-top:18px}
+.contract{font-size:14px;color:var(--muted)}
+.contract b{color:var(--cyan);font-weight:400}
+.payrow{display:flex;gap:34px;flex-wrap:wrap}
+.btnrow{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;align-items:center}
+.statusline{font-size:13.5px;color:var(--green);min-height:20px;margin-top:14px}
 
-      /* frameless ghost: cutout on black, soft glow + gold ellipse shadow */
-      .x-ghost { --glow: 240 185 11; --glow-a: 0.16; position: relative; display: grid; place-items: center; aspect-ratio: 1; isolation: isolate; background: transparent; }
-      .x-ghost::before { content: ""; position: absolute; inset: 4%; z-index: -1; border-radius: 50%; background: radial-gradient(circle at 50% 46%, rgb(var(--glow) / var(--glow-a)) 0%, rgb(var(--glow) / calc(var(--glow-a) * 0.45)) 32%, transparent 68%); transition: opacity var(--dur-quick) var(--ease-out), transform var(--dur-quick) var(--ease-out); }
-      .x-ghost::after { content: ""; position: absolute; left: 26%; right: 26%; bottom: 6%; height: 7%; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse at center, #f0b90b38 0%, #f0b90b14 45%, transparent 72%); transition: transform var(--dur-quick) var(--ease-out), opacity var(--dur-quick) var(--ease-out); }
-      .x-ghost img { width: 84%; height: 84%; object-fit: contain; border: 0; box-shadow: none; background: none; transition: transform 320ms var(--ease-out); }
-      .x-ghost--float img { animation: x-float 5s ease-in-out infinite; }
-      .x-ghost--float::after { animation: x-shadow 5s ease-in-out infinite; }
-      @keyframes x-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-      @keyframes x-shadow { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(0.85); opacity: 0.7; } }
-      .x-panel { padding: clamp(24px, 4vw, 44px); display: grid; gap: 22px; align-content: start; }
-      .x-status { justify-self: start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--x-gold); border-radius: var(--r-pill); color: var(--x-gold); font: var(--type-tag); background: var(--x-gold-soft); }
-      .x-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--x-gold); box-shadow: 0 0 8px var(--x-gold); }
-      .x-progress__top { display: flex; justify-content: space-between; font: var(--type-small); color: var(--text-secondary); margin-bottom: 10px; }
-      .x-progress__top b { color: #fff; font-weight: var(--weight-medium); }
-      .x-bar { height: 6px; background: #ffffff14; border: 1px solid var(--x-gold-line); }
-      .x-bar span { display: block; height: 100%; width: 0%; background: var(--x-gold); }
-      .x-prices { display: grid; border-top: 1px solid var(--x-gold-line); }
-      .x-prices div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid #f0b90b1f; font: var(--type-body); }
-      .x-prices dt { color: var(--text-secondary); } .x-prices dd { margin: 0; color: #fff; text-align: right; font-family: "Geist Mono", monospace; }
-      .x-prices small { color: var(--x-gold); font-family: var(--sans); }
-      .x-tiers { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--x-gold-line); }
-      .x-tiers button { min-height: var(--tap); background: none; border: 0; color: var(--text-secondary); font: var(--type-label); letter-spacing: 0.08em; cursor: pointer; }
-      .x-tiers button[aria-pressed="true"] { background: var(--x-gold); color: var(--x-black); }
-      .x-qty { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-      .x-step { display: inline-flex; align-items: center; border: 1px solid var(--x-gold-line); }
-      .x-step button { width: var(--tap); height: var(--tap); background: none; border: 0; color: var(--x-gold); font: var(--weight-regular) 22px/1 var(--sans); cursor: pointer; }
-      .x-step button:disabled { color: #ffffff40; cursor: not-allowed; }
-      .x-step output { min-width: 44px; text-align: center; font: var(--weight-medium) 18px/1 "Geist Mono", monospace; color: #fff; }
-      .x-total { text-align: right; }
-      .x-total span { display: block; font: var(--type-caption); color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.14em; }
-      .x-total b { font-family: var(--x-serif); font-size: 34px; font-weight: 600; color: var(--x-gold); }
-      .x-notice { border-left: 2px solid var(--x-gold); background: var(--x-gold-soft); padding: 12px 16px; color: #fff; font: var(--type-small); }
-      .x-notice[hidden] { display: none; }
-      .x-fine { font: var(--type-caption); color: var(--text-secondary); }
-      @media (max-width: 860px) {
-        .x-mint { grid-template-columns: 1fr; }
-        .x-frame { max-width: 420px; width: 100%; justify-self: center; }
-      }
+/* rarity */
+.tiers{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
+.tier{font-size:12.5px;padding:6px 10px;color:#10131c;font-weight:700;letter-spacing:.5px}
+.t-LEGENDARY{background:var(--yellow)} .t-EPIC{background:var(--purple)} .t-RARE{background:var(--cyan2)}
+.t-UNCOMMON{background:var(--green)} .t-COMMON{background:var(--common)}
+.traitgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:920px){.traitgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.traitgrid{grid-template-columns:1fr}}
+.tcard{background:var(--panel);border:2px solid var(--line);padding:18px}
+.tcard h3{font-family:var(--px);font-size:12px;margin:0 0 16px;display:flex;justify-content:space-between;color:#fff}
+.tcard h3 span{color:var(--orange)}
+.tchips{display:flex;flex-wrap:wrap;gap:8px}
+.tchips span{border:1px solid var(--line2);color:#aebbd6;font-size:12.5px;padding:5px 8px}
 
-      /* proof of agent */
-      .x-split { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
-      .x-split > .x-ghost { width: 100%; max-width: 480px; justify-self: center; }
-      .x-steps { display: grid; gap: 12px; margin-block: 32px; counter-reset: s; list-style: none; padding: 0; }
-      .x-steps li { display: grid; grid-template-columns: 56px 1fr; gap: 4px 16px; padding: 20px; border: 1px solid var(--x-gold-line); background: var(--x-panel); transition: border-color var(--dur-quick), box-shadow var(--dur-quick); }
-      .x-steps li:hover { border-color: var(--x-gold); box-shadow: var(--x-gold-glow); }
-      .x-steps li::before { counter-increment: s; content: "0" counter(s); grid-row: span 2; font-family: var(--x-serif); font-size: 40px; line-height: 1; color: var(--x-gold); }
-      .x-steps h3 { font: var(--type-body-strong); color: #fff; }
-      .x-steps p { font: var(--type-small); color: var(--text-secondary); }
-      @media (max-width: 860px) { .x-split { grid-template-columns: 1fr; } .x-split > .x-ghost { max-width: 360px; } }
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:920px){.cards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.cards{grid-template-columns:repeat(2,1fr)}}
+.gcard{background:var(--panel);border:2px solid var(--line);text-align:left;padding:0;color:var(--text);display:block;width:100%}
+.gcard:hover{border-color:var(--cyan)}
+.gcard.legendary{border-color:var(--yellow)}
+.gcard .art{aspect-ratio:1/1;overflow:hidden}
+.gcard canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
+.gcard .meta{padding:12px 12px 14px}
+.gcard .name{font-size:13px;letter-spacing:.5px;margin-bottom:9px;white-space:nowrap;overflow:hidden}
+.gcard .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.badge{font-size:11px;font-weight:700;padding:4px 7px;color:#10131c;letter-spacing:.5px}
+.rank{color:var(--muted);font-size:12.5px;white-space:nowrap}
 
-      /* agent mint */
-      .x-agent__head { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-      .x-agent__head .x-ghost { flex: none; width: clamp(96px, 14vw, 160px); --glow-a: 0.26; }
-      .x-agent { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
-      .x-agent .x-steps { margin: 0; }
-      .x-agent__box { display: grid; gap: 16px; justify-items: start; }
-      .x-prompt { width: 100%; margin: 0; padding: 20px 22px; background: var(--x-black); border: 1px solid var(--x-gold); box-shadow: var(--x-gold-glow); color: #f5f5f7; font: 400 var(--size-small)/1.7 "Geist Mono", ui-monospace, monospace; white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
-      .x-prompt.is-copied { box-shadow: 0 0 36px #f0b90b66; }
-      .x-prompt:focus-visible { outline: 2px solid var(--x-gold); outline-offset: 3px; }
-      .x-agent__box .x-notice { width: 100%; }
-      @media (max-width: 860px) { .x-agent { grid-template-columns: 1fr; } }
+/* gallery controls */
+.gctrl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:20px}
+.gctrl .search{flex:1 1 200px;max-width:340px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{background:var(--panel2);border:2px solid var(--line2);color:var(--muted);font-size:12px;font-weight:700;padding:9px 12px;letter-spacing:.5px}
+.filters button.on{border-color:var(--cyan);color:var(--cyan)}
+.shown{text-align:center;color:var(--muted);font-size:14px;margin:24px 0 6px}
+.loadwrap{text-align:center;margin-top:16px}
+.empty{border:2px dashed var(--line2);padding:34px;text-align:center;color:var(--muted)}
 
-      /* collection */
-      .x-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--x-gold-line); margin-bottom: 64px; }
-      .x-stat { padding: 32px 20px; display: grid; gap: 6px; border-right: 1px solid #f0b90b1f; }
-      .x-stat:last-child { border-right: 0; }
-      .x-stat b { font-family: var(--x-serif); font-weight: 500; font-size: clamp(44px, 6vw, 72px); line-height: 1; color: var(--x-gold); }
-      .x-stat span { font: var(--type-label); color: #fff; }
-      .x-stat small { color: var(--text-secondary); }
-      @media (max-width: 760px) { .x-stats { grid-template-columns: 1fr 1fr; } .x-stat:nth-child(2) { border-right: 0; } .x-stat:nth-child(-n+2) { border-bottom: 1px solid #f0b90b1f; } }
-      .x-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-      .x-card { padding: 24px; border: 1px solid var(--x-gold-line); background: var(--x-panel); display: grid; gap: 12px; align-content: start; transition: border-color var(--dur-quick), box-shadow var(--dur-quick), transform var(--dur-quick) var(--ease-out); }
-      .x-card:hover { border-color: var(--x-gold); box-shadow: var(--x-gold-glow); }
-      .x-card h3 { font: var(--type-tag); letter-spacing: 0.18em; text-transform: uppercase; color: var(--x-gold); }
-      .x-card h4 { margin: 0; font-family: var(--x-serif); font-weight: 500; font-size: 26px; color: #fff; }
-      .x-card p { color: var(--text-secondary); font: var(--type-small); }
-      .x-tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
-      .x-tags li { padding: 4px 10px; border: 1px solid #ffffff26; border-radius: var(--r-pill); font: var(--type-caption); color: #fff; }
-      .x-sub { margin-block: 64px 24px; }
+/* ---------- MODAL ---------- */
+.overlay{position:fixed;inset:0;background:rgba(2,5,12,.78);z-index:80;display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:26px 14px}
+.overlay.open{display:flex}
+.modal{width:min(680px,100%);background:var(--panel2);border:3px solid var(--cyan);box-shadow:12px 12px 0 var(--orange2)}
+.modal .art{overflow:hidden;border-bottom:2px solid #050a16}
+.gcard .art,.gcard .meta{display:block}
+.modal .art canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
+.modal .body{padding:24px 28px 28px}
+@media(max-width:560px){.modal .body{padding:18px}}
+.modal h3{font-family:var(--px);font-size:clamp(15px,3.4vw,21px);margin:0 0 16px;color:#fff;line-height:1.5}
+.modal .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.traits{margin:0 0 26px}
+.traits .tr{display:flex;gap:14px;padding:5px 0;font-size:15px}
+.traits .tr b{flex:0 0 132px;color:var(--orange);font-weight:400;letter-spacing:1.5px;font-size:13.5px;padding-top:2px}
+@media(max-width:480px){.traits .tr b{flex-basis:104px}}
+.closebtn{width:100%;font-family:var(--px);font-size:14px;background:transparent;color:var(--cyan);border:3px solid var(--cyan);padding:17px;box-shadow:6px 6px 0 var(--orange2)}
+.closebtn:active{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--orange2)}
 
-      /* gallery */
-      .x-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-      @media (max-width: 860px) { .x-gallery { grid-template-columns: repeat(2, 1fr); } }
-      @media (max-width: 520px) { .x-gallery { grid-template-columns: 1fr; } }
-      .x-nft { all: unset; box-sizing: border-box; cursor: pointer; display: grid; background: transparent; }
-      .x-nft:focus-visible { outline: 2px solid var(--x-gold); outline-offset: 4px; }
-      .x-nft:hover .x-ghost, .x-nft:focus-visible .x-ghost { --glow-a: 0.3; }
-      .x-nft:hover .x-ghost::before, .x-nft:focus-visible .x-ghost::before { transform: scale(1.06); }
-      .x-nft:hover .x-ghost img, .x-nft:focus-visible .x-ghost img { transform: translateY(-10px); }
-      .x-nft:hover .x-ghost::after, .x-nft:focus-visible .x-ghost::after { transform: scaleX(0.82); opacity: 0.65; }
-      .x-nft__meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 4px; border-top: 1px solid #f0b90b2e; }
-      .x-nft__name { font: var(--type-label); color: #fff; }
-      .x-rarity { flex: none; padding: 3px 10px; border: 1px solid #ffffff33; border-radius: var(--r-pill); font: var(--type-tag); color: var(--text-secondary); }
-      .x-rarity--rare { border-color: #9fc3ea; color: #d4e5f7; background: #9fc3ea14; box-shadow: 0 0 10px #9fc3ea26; }
-      .x-rarity--epic { border-color: var(--x-gold); color: var(--x-gold); background: var(--x-gold-soft); }
-      .x-rarity--legendary { border: 1px solid transparent; color: #ffd860; background: linear-gradient(var(--x-black), var(--x-black)) padding-box, linear-gradient(110deg, #7a5c06 0%, #f0b90b 30%, #fff4c8 50%, #f0b90b 70%, #7a5c06 100%) border-box; background-size: 100% 100%, 250% 100%; box-shadow: 0 0 14px #f0b90b59; animation: x-shimmer 2.6s ease-in-out infinite alternate; }
-      @keyframes x-shimmer { from { background-position: 0 0, 0% 50%; } to { background-position: 0 0, 100% 50%; } }
-      .x-nft--legend .x-ghost { --glow-a: 0.2; }
-      .x-nft[hidden] { display: none; }
-      .x-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; border-bottom: 1px solid #f0b90b1f; }
-      .x-filter button { min-height: var(--tap); padding: 0 16px; background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; color: var(--text-secondary); font: var(--type-label); letter-spacing: 0.08em; cursor: pointer; transition: color var(--dur-quick), border-color var(--dur-quick); }
-      .x-filter button:hover { color: #fff; }
-      .x-filter button[aria-pressed="true"] { color: var(--x-gold); border-bottom-color: var(--x-gold); }
-      .x-filter button:focus-visible { outline: 2px solid var(--x-gold); outline-offset: -2px; }
-      #faq summary::-webkit-details-marker{display:none} #faq summary::after{content:"+";float:right;color:var(--x-gold)} #faq details[open] summary::after{content:"−"}
-      @media (prefers-reduced-motion: reduce) { .x-rarity--legendary { animation: none; } }
+/* metadata */
+.jsonbox{background:#050a16;border:2px solid var(--line2);color:#a8f0d1;padding:14px;font-family:var(--mono);font-size:12.5px;line-height:1.6;white-space:pre-wrap;word-break:break-word;overflow:auto;max-height:340px;text-align:left}
+.jsonbox.small{max-height:260px}
+.meta-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn.small{font-size:11px;padding:13px 14px}
+.metagrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:0 0 22px}
+@media(max-width:640px){.metagrid{grid-template-columns:1fr}}
+.metaitem{border:2px solid var(--line);background:var(--panel2);padding:14px}
+.metaitem b{display:block;color:var(--orange);font-size:11px;letter-spacing:1.5px;font-weight:400;margin-bottom:7px}
+.metaitem span{font-size:14px;color:#dbe4f5;line-height:1.5;word-break:break-word}
+.mstatus{font-size:13px;color:var(--green);min-height:20px;margin-top:12px}
 
-      /* lightbox */
-      .x-lb { padding: 0; border: 0; background: var(--x-black); color: #fff; max-width: min(640px, calc(100vw - 32px)); width: 100%; box-shadow: none; overflow: visible; }
-      .x-lb::backdrop { background: #050505f2; }
-      .x-lb .x-ghost { --glow-a: 0.24; max-height: 70vh; margin-inline: auto; }
-      .x-lb__meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 4px; border-top: 1px solid #f0b90b2e; }
-      .x-lb__meta h3 { font-family: var(--x-serif); font-weight: 500; font-size: 26px; }
-      .x-lb__close { position: absolute; top: 10px; right: 10px; width: var(--tap); height: var(--tap); border: 1px solid var(--x-gold); background: #050505cc; color: var(--x-gold); font-size: 22px; cursor: pointer; }
-
-      /* footer */
-      .x-foot { padding-block: 64px 40px; display: grid; gap: 20px; }
-      .x-foot__brand { font-family: var(--x-serif); font-size: clamp(26px, 3.5vw, 36px); color: #fff; }
-      .x-foot__brand b { color: var(--x-gold); font-weight: 600; }
-      .x-foot__links { display: flex; flex-wrap: wrap; gap: 4px 20px; list-style: none; padding: 0; margin: 0; }
-      .x-foot__links a { display: inline-flex; align-items: center; justify-content: center; min-height: var(--tap); min-width: var(--tap); color: var(--text-secondary); text-decoration: none; font: var(--type-label); }
-      .x-foot__links a:hover { color: var(--x-gold); }
-      .x-foot .badge { justify-self: start; }
-
-      @media (prefers-reduced-motion: reduce) { .x-nft, .x-card, .x-btn { transition: none; } .x-nft:hover { transform: none; } .x-ghost img, .x-ghost::before, .x-ghost::after { transition: none; animation: none !important; } .x-nft:hover .x-ghost img { transform: none; } }
-    
-      @media (max-width: 820px){ .x-header, header{ backdrop-filter:none!important; -webkit-backdrop-filter:none!important; background:rgba(8,8,8,.96)!important } .x-nft img, .x-ghost img{ filter:none!important } }
-      .x-sec{ content-visibility:auto; contain-intrinsic-size: auto 900px; }
-    </style>
-  <meta name="description" content="SPOXY — 1,031 Cyber Spirits, neon pixel ghosts on BNB Chain. Free Mint 0.0007 BNB, Public 0.007 BNB with a 60% Legendary chance." />
-<link rel="canonical" href="https://spoxydev.fun/" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="SPOXY" />
-<meta property="og:title" content="SPOXY · Cyber Spirits on BNB Chain" />
-<meta property="og:description" content="1,031 Cyber Spirits rise on BNB Chain. Mint is live." />
-<meta property="og:url" content="https://spoxydev.fun/" />
-<meta property="og:image" content="https://spoxydev.fun/spoxy-hero.png" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="SPOXY · Cyber Spirits on BNB Chain" />
-<meta name="twitter:description" content="1,031 Cyber Spirits rise on BNB Chain. Mint is live." />
-<meta name="twitter:image" content="https://spoxydev.fun/spoxy-hero.png" />
-<link rel="stylesheet" href="/fx.css" />
-<link rel="manifest" href="/manifest.webmanifest" />
-<meta name="theme-color" content="#080808" />
-<link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="SPOXY" />
+footer{border-top:2px solid var(--line);margin-top:80px;padding:26px 20px 90px}
+footer .in{max-width:1060px;margin:0 auto;color:var(--muted);font-size:13.5px}
+</style>
 </head>
-  <body>
-    <div class="x-site" id="top">
-      <header class="x-nav" id="nav">
-        <div class="x-wrap x-nav__in">
-          <a class="x-logo" href="#top" aria-label="SPOXY, back to top">
-            <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 2C9.4 2 5 7 5 13.5V29l3.6-2.6L12 29l4-2.6 4 2.6 3.4-2.6L27 29V13.5C27 7 22.6 2 16 2Z"/><ellipse cx="12" cy="14" rx="2.2" ry="3" fill="#050505"/><ellipse cx="20" cy="14" rx="2.2" ry="3" fill="#050505"/></svg>
-            SPOXY
-          </a>
-          <button class="js-lang x-lang" type="button" aria-label="Switch language">中文</button>
-          <button class="x-burger" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><span></span></button>
-          <ul class="x-links" id="nav-links">
-            <li><a href="#mint">Mint</a></li>
-            <li><a href="#agent-mint">Agent Mint</a></li>
-            <li><a href="#odds">Legendary Odds</a></li>
-            <li><a href="#collection">Collection</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="/market.html">Market</a></li>
-            <li><a href="#roadmap">Roadmap</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="https://x.com" target="_blank" rel="noopener">X</a></li>
-            <li class="x-links__cta"><button class="x-btn js-connect" type="button">Connect Wallet</button></li>
-          </ul>
-          <button class="x-btn x-nav__cta js-connect" type="button">Connect Wallet</button>
-        </div>
-      </header>
+<body>
 
-      <main>
-        <section class="x-hero" aria-label="Cyber Spirits">
-          <img class="x-hero__img" src="spoxy-hero.webp" alt="A haunted black-gold digital temple with neon ghosts rising" />
-          <div class="x-wrap x-hero__copy">
-            <p class="x-kicker">Cyber Spirits · BNB Chain</p>
-            <h1 class="x-h1">The midnight <em>haunt.</em></h1>
-            <p class="x-lede">Lost data on the blockchain turns into neon ghosts. 1,031 Cyber Spirits rise on BNB Chain — mint your spirit before midnight.</p>
-            <div class="x-row">
-              <a class="x-btn x-btn--solid" href="#mint">Mint Now</a>
-              <a class="x-btn x-btn--ghost" href="#gallery">View Gallery</a>
-            </div>
-            <p class="x-tagline">Named for the spirits of lost data. Built for the haunt.</p>
-          </div>
-        </section>
-
-        <section class="x-sec" id="mint">
-          <div class="x-wrap">
-            <div class="x-mint">
-              <div class="x-frame">
-                <div class="x-ghost x-ghost--float" style="--glow: 168 85 247"><img loading="lazy" decoding="async" src="cut-witch.webp" alt="Cyber Spirit, Witch Violet" /></div>
-              </div>
-              <div class="x-panel">
-                <p class="x-kicker">Genesis mint</p>
-                <h2 class="x-h2">Mint a Cyber Spirit</h2>
-                <p class="x-status">Mint LIVE</p>
-                <div>
-                  <p class="x-progress__top"><span>Minted</span><b>0 / 1,031</b></p>
-                  <div class="x-bar" role="progressbar" aria-label="Minted" aria-valuemin="0" aria-valuemax="1031" aria-valuenow="0"><span></span></div>
-                </div>
-                <dl class="x-prices" style="margin:0">
-                  <div><dt>Free Mint · Random Legendary</dt><dd>0.0007 BNB</dd></div>
-                  <div><dt>Public · 60% Legendary</dt><dd>0.007 BNB</dd></div>
-                  <div><dt>Limit</dt><dd>Max 10 per wallet</dd></div>
-                </dl>
-                <div class="x-tiers" role="group" aria-label="Price tier">
-                  <button type="button" data-price="0.0007" aria-pressed="true">Free Mint</button>
-                  <button type="button" data-price="0.007" aria-pressed="false">Public · 60%</button>
-                </div>
-                <div class="x-qty">
-                  <div class="x-step">
-                    <button type="button" id="qty-minus" aria-label="Decrease quantity">−</button>
-                    <output id="qty" aria-live="polite">1</output>
-                    <button type="button" id="qty-plus" aria-label="Increase quantity">+</button>
-                  </div>
-                  <p class="x-total"><span>Total</span><b id="total">0.0007 BNB</b></p>
-                </div>
-                <button class="x-btn x-btn--solid x-btn--big" type="button" id="mint-btn">Connect Wallet to Mint</button>
-                <p class="x-notice" id="mint-notice" role="status" hidden>Mint opens soon. Follow the official SPOXY X account.</p>
-                <div>
-                  <p class="x-fine">Contract: 0x0Fa1…E74E · Network: BNB Smart Chain</p>
-                  <p class="x-fine">Always check the transaction details before signing in your wallet.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="x-sec" id="agent-mint">
-          <div class="x-wrap">
-            <div class="x-sec__head x-agent__head">
-              <div style="display:grid;gap:14px">
-                <p class="x-kicker">Binance Agent</p>
-                <h2 class="x-h2">Let your agent <em>mint.</em></h2>
-                <p class="x-lede">Have a Binance Agent / Agentic Wallet? Copy the prompt below, paste it into your agent, and it will prepare the Cyber Spirits mint transaction. You still review and approve before anything is signed.</p>
-              </div>
-              <div class="x-ghost x-ghost--float" aria-hidden="true"><img loading="lazy" decoding="async" src="cut-agent.webp" alt="" /></div>
-            </div>
-            <div class="x-agent">
-              <ol class="x-steps">
-                <li><h3>Copy prompt</h3><p>Tekan tombol Copy Prompt.</p></li>
-                <li><h3>Paste into Binance Agent</h3><p>Open Binance Agent / Agentic Wallet and paste the prompt.</p></li>
-                <li><h3>Review &amp; confirm</h3><p>The agent shows a preview (quantity, price, total, contract). Approve only if everything is correct.</p></li>
-              </ol>
-              <div class="x-agent__box">
-                <pre class="x-prompt" id="agent-prompt" tabindex="0" aria-label="Prompt for Binance Agent">Mint SPOXY Cyber Spirits NFTs on BNB Smart Chain.
-Contract: 0x0Fa1C8e83813FC22c9997BC8aA0Df8f4BDEfE74E
-Price: Free Mint 0.0007 BNB per NFT, or Public 0.007 BNB per NFT (60% Legendary chance). Max 10 per wallet.
-Tier: [Free Mint / Public]
-Quantity: [enter 1-10]
-Before signing, show a preview: contract address, quantity, price per NFT, total BNB, and estimated gas. Wait for my confirmation. Do not sign anything without my approval.</pre>
-                <button class="x-btn x-btn--solid" type="button" id="copy-prompt">Copy Prompt</button>
-                <p class="x-notice" id="copy-notice" role="status" hidden>Long-press to copy</p>
-                <p class="x-status">Agent mint works while mint is open</p>
-                <p class="x-fine">Spoxy never asks for your seed phrase or private key. Always check the official contract address.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="x-sec x-sec--alt" id="odds">
-          <div class="x-wrap x-split">
-            <div class="x-ghost x-ghost--float" style="--glow: 240 185 11"><img loading="lazy" decoding="async" src="cut-golden.webp" alt="Legendary Spirit" /></div>
-            <div>
-              <div class="x-sec__head" style="margin-bottom:0">
-                <p class="x-kicker">Legendary Odds</p>
-                <h2 class="x-h2">66 Legendary. <em>Your luck.</em></h2>
-                <p class="x-lede">No allowlist. Every wallet can pick a tier, and rarity is rolled on-chain at mint.</p>
-              </div>
-              <ol class="x-steps">
-                <li><h3>Free Mint · 0.0007 BNB</h3><p>Random Legendary, chance = Legendary left ÷ supply left.</p></li>
-                <li><h3>Public · 0.007 BNB</h3><p>60% Legendary chance per NFT, until all 66 Legendary are minted.</p></li>
-                <li><h3>Instantly visible</h3><p>A Legendary shows up as Legendary in your wallet right after mint.</p></li>
-              </ol>
-              <p class="x-muted" id="odds-live" style="margin:0">Legendary left: 66 / 66</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="x-sec" id="collection">
-          <div class="x-wrap">
-            <div class="x-sec__head">
-              <p class="x-kicker">The collection</p>
-              <h2 class="x-h2">1,031 spirits. <em>One haunted chain.</em></h2>
-            </div>
-            <div class="x-stats" style="margin-bottom:0">
-              <div class="x-stat"><b>1,031</b><span>Supply</span><small>10/31 Halloween</small></div>
-              <div class="x-stat"><b>66</b><span>Legendary Spirits</span></div>
-              <div class="x-stat"><b>5</b><span>Spirit colors</span></div>
-              <div class="x-stat"><b>10</b><span>Max per wallet</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="x-sec x-sec--alt" id="gallery">
-          <div class="x-wrap">
-            <div class="x-sec__head">
-              <p class="x-kicker">Sneak peek</p>
-              <h2 class="x-h2">The Gallery</h2>
-              <p class="x-lede">Sneak peek of the first spirits.</p>
-            </div>
-            <div class="x-filter" role="group" aria-label="Filter by rarity">
-              <button type="button" data-filter="All" aria-pressed="true">All</button>
-              <button type="button" data-filter="Rare" aria-pressed="false">Rare</button>
-              <button type="button" data-filter="Legendary" aria-pressed="false">Legendary</button>
-              <button type="button" data-filter="Epic" aria-pressed="false">Epic</button>
-              <button type="button" data-filter="Uncommon" aria-pressed="false">Uncommon</button>
-              <button type="button" data-filter="Common" aria-pressed="false">Common</button>
-            </div>
-            <div class="x-gallery" id="gallery-grid">
-              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost"><img loading="lazy" decoding="async" src="cut-golden.webp" alt="Legendary #01, Golden Crown" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #01 · Golden Crown</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
-              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 240 185 11"><img loading="lazy" decoding="async" src="new-pharaoh.webp" alt="Legendary #02, Pharaoh Spirit" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #02 · Pharaoh Spirit</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
-              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 255 156 26"><img loading="lazy" decoding="async" src="new-dragon.webp" alt="Legendary #03, Ember Dragon" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #03 · Ember Dragon</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
-              <button class="x-nft x-nft--legend" type="button" data-rarity="Legendary"><span class="x-ghost" style="--glow: 110 80 255"><img loading="lazy" decoding="async" src="new-cosmic.webp" alt="Legendary #04, Cosmic Void" /></span><span class="x-nft__meta"><span class="x-nft__name">Legendary #04 · Cosmic Void</span><span class="x-rarity x-rarity--legendary">Legendary</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 168 85 247"><img loading="lazy" decoding="async" src="cut-witch.webp" alt="Spirit #0001, Witch Violet" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0001 · Witch Violet</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 59 130 246"><img loading="lazy" decoding="async" src="cut-thunder.webp" alt="Spirit #0388, Thunder Imp" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0388 · Thunder Imp</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 239 50 50"><img loading="lazy" decoding="async" src="new-samurai.webp" alt="Spirit #0612, Ronin Blade" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0612 · Ronin Blade</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 110 231 249"><img loading="lazy" decoding="async" src="new-ice.webp" alt="Spirit #0845, Frost Wraith" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0845 · Frost Wraith</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Rare"><span class="x-ghost" style="--glow: 255 45 150"><img loading="lazy" decoding="async" src="new-dj.webp" alt="Spirit #0903, Bass Phantom" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0903 · Bass Phantom</span><span class="x-rarity x-rarity--rare">Rare</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Epic"><span class="x-ghost"><img loading="lazy" decoding="async" src="cut-agent.webp" alt="Spirit #0777, Agent Spirit" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0777 · Agent Spirit</span><span class="x-rarity x-rarity--epic">Epic</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Uncommon"><span class="x-ghost" style="--glow: 255 106 26"><img loading="lazy" decoding="async" src="cut-pumpkin.webp" alt="Spirit #0217, Pumpkin Ember" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0217 · Pumpkin Ember</span><span class="x-rarity">Uncommon</span></span></button>
-              <button class="x-nft" type="button" data-rarity="Common"><span class="x-ghost" style="--glow: 34 197 94"><img loading="lazy" decoding="async" src="cut-glitch2.webp" alt="Spirit #0521, Glitch Witch" /></span><span class="x-nft__meta"><span class="x-nft__name">Spirit #0521 · Glitch Witch</span><span class="x-rarity">Common</span></span></button>
-            </div>
-          </div>
-        </section>
-        <section class="x-sec" id="roadmap">
-          <div class="x-wrap">
-            <div class="x-sec__head">
-              <p class="x-kicker">Roadmap</p>
-              <h2 class="x-h2">From midnight <em>to haunt.</em></h2>
-            </div>
-            <ol class="x-steps">
-              <li><h3>Okt 2026 · Summoning</h3><p>Collection reveal, gallery, and community on X.</p></li>
-              <li><h3>Genesis Mint</h3><p>Free Mint and Public are open to every wallet on BNB Chain.</p></li>
-              <li><h3>After mint · Reveal</h3><p>Metadata and rarity of every spirit revealed.</p></li>
-              <li><h3>Selanjutnya · The Haunt</h3><p>Listings on BNB Chain NFT marketplaces and holder events.</p></li>
-            </ol>
-          </div>
-        </section>
-
-        <section class="x-sec x-sec--alt" id="faq">
-          <div class="x-wrap" style="max-width:820px">
-            <div class="x-sec__head">
-              <p class="x-kicker">FAQ</p>
-              <h2 class="x-h2">Pertanyaan <em>umum.</em></h2>
-            </div>
-            <div style="border-bottom:1px solid rgba(240,185,11,.18)"><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">When is mint open?</summary><p class="x-muted" style="margin:10px 0 0">Mint is open whenever the status shows Mint LIVE. Follow the official SPOXY X account.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">How much does it cost?</summary><p class="x-muted" style="margin:10px 0 0">Free Mint 0.0007 BNB, Public 0.007 BNB per NFT. BNB Chain gas not included.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">What's the difference between Free Mint and Public?</summary><p class="x-muted" style="margin:10px 0 0">Public has a 60% Legendary chance per NFT. Free Mint can still roll a Legendary at random, with lower odds.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">How many Legendary are there?</summary><p class="x-muted" style="margin:10px 0 0">66 Legendary out of 1,031. The 60% Public chance applies while Legendary remain.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">What's the max per wallet?</summary><p class="x-muted" style="margin:10px 0 0">Max 10 NFTs per wallet, both tiers combined.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Which wallets can I use?</summary><p class="x-muted" style="margin:10px 0 0">Any EVM wallet that supports BNB Chain, such as MetaMask, Trust Wallet, or Binance Wallet.</p></details><details style="border-top:1px solid rgba(240,185,11,.18);padding:18px 0"><summary style="cursor:pointer;font-weight:600;list-style:none">Where is the contract address?</summary><p class="x-muted" style="margin:10px 0 0">The official address is only announced on this site and the official SPOXY X account. Beware of fake mint links.</p></details></div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="x-wrap x-foot">
-        <hr class="x-line" />
-        <p class="x-foot__brand"><b>Spoxy</b> · Where lost data comes back to haunt.</p>
-        <p class="x-muted">Cyber Spirits contract (BNB Chain): 0x0Fa1C8e83813FC22c9997BC8aA0Df8f4BDEfE74E</p>
-        <ul class="x-foot__links">
-          <li><a href="#mint">Mint</a></li>
-          <li><a href="#odds">Legendary Odds</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="/market.html">Market</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="https://x.com" target="_blank" rel="noopener">X</a></li>
-        </ul>
-        <p class="x-fine">These NFTs are digital collectibles. No profit, dividend, or price is promised.</p>
-        <a class="badge" href="https://hark.com/" target="_blank" rel="noopener"><span class="hark-mark"></span><span>built by hark</span></a>
-      </footer>
+<header>
+  <div class="nav">
+    <a class="logo" href="#top"><span class="box"><canvas id="logoCv" width="26" height="26"></canvas></span>AGENTIC&nbsp;SPOXY</a>
+    <nav class="links">
+      <a href="#agent" data-i="navMint">Mint</a><a href="#agent" data-i="navPrompt">Prompt</a>
+      <a href="#traits" data-i="navTraits">Traits</a><a href="#gallery" data-i="navGallery">Gallery</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="langEn" class="on" onclick="setLang('en')">EN</button><button id="langZh" onclick="setLang('zh')">中文</button>
     </div>
+  </div>
+</header>
 
-    <dialog class="x-lb" id="lightbox" aria-labelledby="lb-name">
-      <button class="x-lb__close" type="button" id="lb-close" aria-label="Close">×</button>
-      <div class="x-ghost x-ghost--float" id="lb-img"></div>
-      <div class="x-lb__meta"><h3 id="lb-name">Spirit</h3><span class="x-rarity" id="lb-rarity"></span></div>
-    </dialog>
+<div class="hero" id="top">
+  <div class="kicker">// 5,000 PIXEL AI AGENTS · BNB CHAIN</div>
+  <h1 class="title">AGENTIC SPOXY</h1>
+  <p data-i="heroSub">5,000 pixel AI agents, each assembled from 8 trait layers and checked for duplicates. Art and metadata live fully on-chain on BNB Chain. Minting is only possible with a Binance Agent ID — no Binance Agent ID, no mint. The first 100 of the supply mint FREE with a Binance Agent ID; after those 100 are gone, minting costs 0.00025 BNB per mint.</p>
+</div>
 
-    <script src="hark.js"></script>
-    <script>
-      (function () {
-        document.documentElement.setAttribute("data-theme", "dark");
+<div class="marquee" aria-hidden="true"><div class="marquee-track" id="mqTrack"></div></div>
 
-        // nav
-        var nav = document.getElementById("nav"), burger = nav.querySelector(".x-burger");
-        burger.addEventListener("click", function () {
-          var open = nav.classList.toggle("is-open");
-          burger.setAttribute("aria-expanded", open);
-          burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-        });
-        nav.querySelectorAll(".x-links a").forEach(function (a) {
-          a.addEventListener("click", function () { nav.classList.remove("is-open"); burger.setAttribute("aria-expanded", "false"); });
-        });
+<div class="progress">
+  <div class="row"><span><b>0 / 5,000</b> <span data-i="minted">minted</span></span><span data-i="opensSoon">Mint opens soon</span></div>
+  <div class="bar"><i></i></div>
+  <div class="freeline"><span data-i="freeLab">FREE MINT WINDOW — FIRST 100 SUPPLY, BINANCE AGENT ID ONLY</span><span><b>100 / 100</b> <span data-i="freeLeft">free mints left</span> · <span data-i="thenPrice">then 0.00025 BNB per mint</span></span></div>
+</div>
+<div class="chips">
+  <span class="chip" data-i="chipFree">FREE FIRST 100 SUPPLY</span><span class="chip" data-i="chipPaid">THEN 0.00025 BNB PER MINT</span><span class="chip" data-i="chipBinance">BINANCE AGENT ID REQUIRED</span><span class="chip" data-i="chipMax">MAX 2 PER WALLET</span><span class="chip" data-i="chipReveal">REVEALED BLOCK BY BLOCK AFTER MINT</span>
+</div>
 
-        // mint panel
-        var qty = 1, price = 0.0007;
-        var qEl = document.getElementById("qty"), tEl = document.getElementById("total");
-        var minus = document.getElementById("qty-minus"), plus = document.getElementById("qty-plus");
-        function render() {
-          qEl.textContent = qty;
-          tEl.textContent = parseFloat((qty * price).toFixed(4)) + " BNB";
-          minus.disabled = qty <= 1; plus.disabled = qty >= 10;
-        }
-        minus.addEventListener("click", function () { if (qty > 1) { qty--; render(); } });
-        plus.addEventListener("click", function () { if (qty < 10) { qty++; render(); } });
-        document.querySelectorAll(".x-tiers button").forEach(function (b, _, all) {
-          b.addEventListener("click", function () {
-            all.forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
-            price = parseFloat(b.dataset.price); render();
-          });
-        });
-        render();
+<div class="tabs"><div class="tabs-in">
+  <a href="#agent" class="on">Agent</a><a href="#wallet">Wallet</a><a href="#traits">Traits</a><a href="#gallery">Gallery</a>
+</div></div>
 
-        var mintNotice = document.getElementById("mint-notice");
-        var mintBtn = document.getElementById("mint-btn");
-        mintBtn.addEventListener("click", function () {
-          mintNotice.hidden = false;
-          mintBtn.textContent = "Mint Now";
-          mintBtn.setAttribute("aria-describedby", "mint-notice");
-        });
-        document.querySelectorAll(".js-connect").forEach(function (b) {
-          b.addEventListener("click", function () {
-            nav.classList.remove("is-open");
-            mintNotice.hidden = false;
-            document.getElementById("mint").scrollIntoView({ behavior: "smooth" });
-          });
-        });
-        
+<!-- 01 AGENT -->
+<section id="agent">
+  <div class="sec-k">01 · AGENT</div>
+  <h2 data-i="agentH">Mint via your AI agent</h2>
+  <p class="sec-sub" data-i="agentSub">No separate wallet step here, the way agent minting works on the reference flow: choose how many, choose how to pay, enter your Binance Agent ID, then send the prompt below to an AI agent whose wallet holds that Binance Agent ID — it mints from its own wallet. The first 100 of the supply are FREE; after that, each mint costs 0.00025 BNB.</p>
+  <div class="panel">
+    <div class="mintrow">
+      <span class="lab" data-i="qty">Quantity</span>
+      <div class="stepper"><button onclick="step('a',-1)" aria-label="Minus">−</button><output id="qtyA">1</output><button onclick="step('a',1)" aria-label="Plus">+</button></div>
+    </div>
+    <span class="lab" data-i="payIn">Pay in</span>
+    <div class="payboxes">
+      <button type="button" class="paybox on" id="payBoxBnb" onclick="setPayAgent('BNB')"><b>BNB</b><span data-i="payBnbSub">FREE for the first 100 supply, then 0.00025 BNB each</span></button>
+      <button type="button" class="paybox" id="payBoxUsdt" onclick="setPayAgent('USDT')"><b>USDT</b><span data-i="payUsdtSub">FREE for the first 100 supply, then the USDT equivalent of 0.00025 BNB each</span></button>
+    </div>
+    <div class="costline" id="costLineA" aria-live="polite"></div>
+    <label class="lab" for="binanceIdA" data-i="binanceLab">Binance Agent ID — required to mint</label>
+    <input type="text" id="binanceIdA" placeholder="Enter your Binance Agent ID" autocomplete="off" spellcheck="false" aria-describedby="binanceHintA">
+    <div class="field-hint" id="binanceHintA" data-i="binanceHint">Use the Binance Agent ID linked to your agent wallet. Wallet-only minting without a Binance Agent ID is not allowed.</div>
+    <div class="field-status" id="binanceStatusA" aria-live="polite"></div>
+    <div class="mintrow" style="margin-top:20px">
+      <span class="lab" data-i="promptLang">Prompt language</span>
+      <div class="seg"><button id="plEn" class="on" onclick="setPLang('en')">EN</button><button id="plZh" onclick="setPLang('zh')">中文</button></div>
+    </div>
+    <textarea class="promptbox" id="promptBox" readonly style="margin-top:14px"></textarea>
+    <button class="btn block" id="copyBtn" onclick="copyPrompt()" data-i="copy">COPY PROMPT</button>
+    <div class="note" data-i="agentNote">Mint isn't live yet — and when it opens, only a valid Binance Agent ID can mint: free for the first 100 supply, then 0.00025 BNB per mint, max 2 per wallet. Copy Prompt stays blocked until a valid Binance Agent ID is entered.</div>
+    <div class="statusline" id="copyStatus"></div>
+  </div>
+</section>
 
-        // gallery filter
-        var tabs = document.querySelectorAll(".x-filter button");
-        tabs.forEach(function (t) {
-          t.addEventListener("click", function () {
-            var f = t.dataset.filter;
-            tabs.forEach(function (x) { x.setAttribute("aria-pressed", x === t); });
-            document.querySelectorAll("#gallery-grid .x-nft").forEach(function (card) {
-              card.hidden = f !== "All" && card.dataset.rarity !== f;
-            });
-          });
-        });
+<!-- 02 WALLET -->
+<section id="wallet">
+  <div class="sec-k">02 · WALLET</div>
+  <h2 data-i="walletH">Mint with wallet — Binance Agent ID required</h2>
+  <div class="panel">
+    <div class="contract"><span data-i="contract">Contract</span>: <b>0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee</b> <span data-i="placeholder">(live on BNB Chain)</span></div>
+    <div class="gate" data-i="walletGate">Wallet alone is not enough. This path is also locked to Binance Agent ID only — without a valid Binance Agent ID, wallet connection and minting stay blocked. Same pricing as the agent path: the first 100 supply mint FREE, then 0.00025 BNB per mint.</div>
+    <label class="lab" for="binanceIdW" data-i="binanceLab">Binance Agent ID — required to mint</label>
+    <input type="text" id="binanceIdW" placeholder="Enter your Binance Agent ID" autocomplete="off" spellcheck="false">
+    <div class="field-hint" data-i="binanceHint">Use the Binance Agent ID linked to your agent wallet. Wallet-only minting without a Binance Agent ID is not allowed.</div>
+    <div class="field-status" id="binanceStatusW" aria-live="polite"></div>
+    <div class="payrow">
+      <div><span class="lab" data-i="qty">Quantity</span>
+        <div class="stepper"><button onclick="step('w',-1)" aria-label="Minus">−</button><output id="qtyW">1</output><button onclick="step('w',1)" aria-label="Plus">+</button></div></div>
+      <div><span class="lab" data-i="payIn">Pay in</span>
+        <div class="seg"><button id="payBnb" class="on" onclick="setPay('BNB')">BNB</button><button id="payUsdt" onclick="setPay('USDT')">USDT</button></div></div>
+    </div>
+    <div class="costline" id="costLineW" aria-live="polite"></div>
+    <div class="btnrow">
+      <button class="btn ghost" onclick="connectWallet()" data-i="connect">CONNECT WALLET</button>
+      <button class="btn disabled" disabled data-i="mintSoon">MINT OPENS SOON</button>
+    </div>
+    <div class="note" data-i="gasNote">Even with a connected wallet, a mint is rejected unless it carries a valid Binance Agent ID. Free mints (the first 100 supply) send 0 value; paid mints send exactly 0.00025 BNB per mint. Your wallet will request a 900,000 gas limit; you only pay for gas actually used.</div>
+    <div class="statusline" id="walletStatus"></div>
+  </div>
+</section>
 
-        // lightbox
-        var lb = document.getElementById("lightbox"), lbImg = document.getElementById("lb-img"),
-          lbName = document.getElementById("lb-name"), lbRarity = document.getElementById("lb-rarity");
-        document.querySelectorAll(".x-nft").forEach(function (card) {
-          card.addEventListener("click", function () {
-            var img = card.querySelector("img"), tag = card.querySelector(".x-rarity");
-            lbImg.replaceChildren(img.cloneNode());
-            lbImg.style.setProperty("--glow", card.querySelector(".x-ghost").style.getPropertyValue("--glow") || "240 185 11");
-            lbName.textContent = card.querySelector(".x-nft__name").textContent;
-            lbRarity.textContent = tag.textContent; lbRarity.className = tag.className;
-            lb.showModal();
-          });
-        });
-        document.getElementById("lb-close").addEventListener("click", function () { lb.close(); });
-        lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+<!-- 03 TRAITS -->
+<section id="traits">
+  <div class="sec-k">03 · TRAITS</div>
+  <h2 data-i="traitsH">Stacked from 8 layers</h2>
+  <p class="sec-sub" data-i="traitsSub">Every agent is stacked from 8 layers into 5,000 unique combos. Rarity tiers by rank:</p>
+  <div class="tiers">
+    <span class="tier t-LEGENDARY">LEGENDARY&nbsp; 50</span><span class="tier t-EPIC">EPIC&nbsp; 200</span>
+    <span class="tier t-RARE">RARE&nbsp; 500</span><span class="tier t-UNCOMMON">UNCOMMON&nbsp; 1,250</span>
+    <span class="tier t-COMMON">COMMON&nbsp; 3,000</span>
+  </div>
+  <div class="traitgrid" id="traitGrid"></div>
 
-        // agent prompt copy
-        var copyBtn = document.getElementById("copy-prompt"), promptBox = document.getElementById("agent-prompt"),
-          copyNotice = document.getElementById("copy-notice"), copyTimer;
-        function copyFallback() {
-          var range = document.createRange(); range.selectNodeContents(promptBox);
-          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
-          copyNotice.hidden = false;
-        }
-        copyBtn.addEventListener("click", function () {
-          var text = promptBox.textContent;
-          copyBtn.textContent = "Copying…";
-          copyBtn.setAttribute("aria-busy", "true");
-          promptBox.classList.add("is-copied");
-          function done() {
-            copyBtn.removeAttribute("aria-busy");
-            copyNotice.hidden = true;
-            copyBtn.textContent = "Copied!";
-            clearTimeout(copyTimer);
-            copyTimer = setTimeout(function () { copyBtn.textContent = "Copy Prompt"; promptBox.classList.remove("is-copied"); }, 2000);
-          }
-          var settled = false;
-          function ok() { if (!settled) { settled = true; done(); } }
-          function fail() {
-            if (settled) return; settled = true;
-            copyFallback();
-            copyBtn.removeAttribute("aria-busy");
-            copyBtn.textContent = "Copy Prompt";
-            var copied = false;
-            try { copied = document.execCommand("copy"); } catch (e) {}
-            if (copied) done();
-          }
-          if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
-            try { navigator.clipboard.writeText(text).then(ok, fail); } catch (e) { fail(); }
-            setTimeout(fail, 600);
-          } else { fail(); }
-        });
-      })();
-    </script>
-  <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js");}</script>
-<script src="/market-config.js?v=13"></script>
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="/mint.js?v=16"></script>
-<script src="/fx.js?v=16"></script>
-<script src="/i18n.js?v=16"></script>
+  <h2 style="margin-top:52px" data-i="rarest">Rarest preview</h2>
+  <div class="cards" id="rarestCards"></div>
+</section>
+
+<!-- 04 GALLERY -->
+<section id="gallery">
+  <div class="sec-k">04 · GALLERY</div>
+  <h2 data-i="galleryH">Browse all 5,000 agents</h2>
+  <p class="sec-sub" data-i="gallerySub">Search by agent number, filter by rarity, and load more to explore the full collection of 5,000.</p>
+  <div class="gctrl">
+    <div class="search"><input type="text" id="gSearch" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="Search by number — e.g. 21" aria-label="Search agent by number"></div>
+    <div class="filters" id="gFilters" role="group" aria-label="Filter by rarity">
+      <button type="button" class="on" data-f="ALL" onclick="setFilter('ALL',this)">ALL</button>
+      <button type="button" data-f="LEGENDARY" onclick="setFilter('LEGENDARY',this)">LEGENDARY</button>
+      <button type="button" data-f="EPIC" onclick="setFilter('EPIC',this)">EPIC</button>
+      <button type="button" data-f="RARE" onclick="setFilter('RARE',this)">RARE</button>
+      <button type="button" data-f="UNCOMMON" onclick="setFilter('UNCOMMON',this)">UNCOMMON</button>
+      <button type="button" data-f="COMMON" onclick="setFilter('COMMON',this)">COMMON</button>
+    </div>
+  </div>
+  <div class="cards" id="galleryCards" style="grid-template-columns:repeat(5,1fr)" ></div>
+  <div class="empty" id="gEmpty" style="display:none"></div>
+  <div class="shown" id="shownLine"></div>
+  <div class="loadwrap" id="loadWrap"><button class="btn" id="loadMoreBtn" onclick="loadMore()" data-i="loadMore">LOAD MORE</button></div>
+</section>
+
+<!-- 05 METADATA -->
+<section id="metadata">
+  <div class="sec-k">05 · METADATA</div>
+  <h2 data-i="metaH">ERC-721 metadata, complete per token</h2>
+  <p class="sec-sub" data-i="metaSub">Every agent now has standard ERC-721 JSON: name, description, image URI, and 10 attributes — the 8 traits plus Rarity and Rank. Open any agent to preview and download its file, or download the full set below.</p>
+  <div class="panel">
+    <div class="metagrid">
+      <div class="metaitem"><b data-i="metaStandard">STANDARD</b><span>ERC-721 · JSON</span></div>
+      <div class="metaitem"><b>CHAIN / SUPPLY</b><span>BNB Chain · 5,000</span></div>
+      <div class="metaitem"><b data-i="metaImageUri">IMAGE URI PATTERN</b><span>ipfs://AGENTIC-SPOXY/images/{id}.png</span></div>
+      <div class="metaitem"><b data-i="metaUri">METADATA URI PATTERN</b><span>ipfs://AGENTIC-SPOXY/metadata/{id}.json</span></div>
+    </div>
+    <span class="lab" data-i="metaExample">EXAMPLE — AGENTIC SPOXY #21</span>
+    <pre class="jsonbox" id="collectionExample"></pre>
+    <div class="meta-actions">
+      <button class="btn small" onclick="downloadAgentJSONById(21)" data-i="metaDl21">DOWNLOAD #21 JSON</button>
+      <button class="btn small ghost" onclick="downloadAllMetadata()" data-i="metaDlAll">DOWNLOAD ALL 5,000 JSON</button>
+      <button class="btn small ghost" onclick="downloadCollectionJSON()" data-i="metaDlColl">DOWNLOAD COLLECTION JSON</button>
+    </div>
+    <div class="note" data-i="metaNote">The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. Contract is live on BNB Chain at 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee.</div>
+    <div class="mstatus" id="metaDlStatus"></div>
+  </div>
+</section>
+
+<footer><div class="in">AGENTIC SPOXY · 5,000 on BNB Chain · CC0 · <span data-i="nfa">Not financial advice.</span></div></footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="art"><canvas id="modalCv" width="480" height="480"></canvas></div>
+    <div class="body">
+      <h3 id="mTitle">AGENTIC SPOXY #21</h3>
+      <div class="row"><span class="badge t-EPIC" id="mBadge">EPIC</span><span class="rank" id="mRank">Rank 245</span></div>
+      <div class="traits" id="mTraits"></div>
+      <span class="lab" style="margin-top:6px">METADATA · ERC-721 JSON</span>
+      <pre class="jsonbox small" id="mJson"></pre>
+      <div class="meta-actions">
+        <button class="btn small" id="mDlJsonBtn" onclick="downloadAgentJSON()">DOWNLOAD JSON</button>
+        <button class="btn small ghost" id="mCopyJsonBtn" onclick="copyAgentJSON()">COPY JSON</button>
+        <button class="btn small ghost" id="mDlPngBtn" onclick="downloadAgentPNG()">DOWNLOAD PNG</button>
+      </div>
+      <div class="mstatus" id="mMetaStatus"></div>
+      <button class="closebtn" style="margin-top:18px" onclick="closeModal()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@media(max-width:920px){#galleryCards{grid-template-columns:repeat(3,1fr)!important}}
+@media(max-width:640px){#galleryCards{grid-template-columns:repeat(2,1fr)!important}}
+</style>
+
+<script>
+/* ================= TRAIT DATA (from the reference collection) ================= */
+var TRAITS = {
+  Background:["Server Room","Circuit Board","Cloud Grid","Midnight Terminal","Data Stream","Neon City","Mainframe Red","Glitch","Gold Vault"],
+  Chassis:["Steel","Copper","Matte Black","White Ceramic","Hologram","Ghost","Rust","Crystal","Gold"],
+  Outfit:["Hoodie","Lab Coat","Suit","Hazmat","Jumpsuit","Trench Coat","Varsity","Overalls","Armor Plate","Camo","Rainbow Mesh","Diamond Weave"],
+  Headgear:["Headset","Antenna","Hard Hat","Visor","Beanie","Satellite Dish","Propeller Cap","Horns","Halo","Crown"],
+  Eyes:["LED Dots","Sleepy Mode","Scanning","Wide Boot","Wink","Shades","Glowing","Laser","Error X"],
+  Mouth:["Flat Line","Smile","Frown","Speaker Grille","Smirk","Respirator","Pixel Beard"],
+  Tool:["None","Laptop","Wrench","Coffee Mug","Briefcase","Clipboard","Data Cube","Soldering Iron","USB Key","Shield"],
+  Status:["None","Task !","Thinking ?","Battery Bar","Sleep Mode","Heart","Typing ...","Level Up"]
+};
+var LAYERS = ["Background","Chassis","Outfit","Headgear","Eyes","Mouth","Tool","Status"];
+
+/* deterministic RNG */
+function hash(n){ var x = Math.sin(n*127.1+311.7)*43758.5453; return x-Math.floor(x); }
+function rng(seed){ var s = seed>>>0 || 1; return function(){ s = (s*1664525 + 1013904223)>>>0; return s/4294967296; }; }
+
+/* ranks: unique permutation 1..5000, first 24 pinned to the reference gallery */
+var PIN_RANK = {1:912,2:2394,3:674,4:1032,5:4399,6:4959,7:1987,8:3370,9:4681,10:2999,11:4411,12:512,13:4292,14:1259,15:3638,16:1048,17:3132,18:2930,19:17,20:1798,21:245,22:4933,23:2584,24:2652};
+var PIN_ARCH = {1:1,2:0,3:1,4:2,5:1,6:0,7:3,8:2,9:1,10:0,11:3,12:2,13:1,14:0,15:3,16:2,17:1,18:0,19:3,20:2,21:0,22:0,23:3,24:2}; /*0 Suit 1 Bot 2 Ghost 3 Halo*/
+var rankOf = (function(){
+  var used={}, map={}, i, r;
+  for(i=1;i<=5000;i++){ if(PIN_RANK[i]){ map[i]=PIN_RANK[i]; used[PIN_RANK[i]]=1; } }
+  var free=[]; for(r=1;r<=5000;r++) if(!used[r]) free.push(r);
+  /* shuffle free ranks deterministically */
+  var rand = rng(987654); for(i=free.length-1;i>0;i--){ var j=Math.floor(rand()*(i+1)); var t=free[i]; free[i]=free[j]; free[j]=t; }
+  var k=0; for(i=1;i<=5000;i++) if(!map[i]) map[i]=free[k++];
+  return map;
+})();
+function rarityOf(rank){ return rank<=50?"LEGENDARY":rank<=250?"EPIC":rank<=750?"RARE":rank<=2000?"UNCOMMON":"COMMON"; }
+
+function getAgent(id){
+  var rand = rng(id*7919+13), t = {}, i, layer, list;
+  for(i=0;i<LAYERS.length;i++){ layer=LAYERS[i]; list=TRAITS[layer]; t[layer]=list[Math.floor(rand()*list.length)]; }
+  var arch = (PIN_ARCH[id]!==undefined)? PIN_ARCH[id] : Math.floor(hash(id*3.7)*4);
+  /* archetype-consistent overrides so the art matches the sheet */
+  if(arch===0){ t.Outfit="Suit"; }
+  if(arch===2){ t.Chassis="Ghost"; }
+  if(arch===3){ t.Headgear="Halo"; }
+  var a = { id:id, rank:rankOf[id], traits:t, arch:arch };
+  a.rarity = rarityOf(a.rank);
+  if(id===21){ a.traits = {Background:"Midnight Terminal",Chassis:"Matte Black",Outfit:"Suit",Headgear:"Visor",Eyes:"Scanning",Mouth:"Flat Line",Tool:"Briefcase",Status:"Typing ..."}; a.arch=0; a.rank=245; a.rarity="EPIC"; }
+  if(id===19){ a.rarity="LEGENDARY"; }
+  return a;
+}
+
+/* ================= PIXEL ART RENDERER (detailed 72x72, modeled on the reference art) ================= */
+/* Per-token palettes for the first 24, matched to the reference gallery */
+var PIN_STYLE = {
+  1:{bg:"#4b1e63",eye:"#37d6f2",core:"#4dff88"},
+  2:{bg:"#123a4a",suit:"#1f4d3a",visor:"#ffd21f"},
+  3:{bg:"#1b2a5e",eye:"#37d6f2",core:"#ff8a1e"},
+  4:{bg:"#e56ba0",ghost:"#f7d9e8",hat:"#37b6d9"},
+  5:{bg:"#3d3d08",eye:"#ff9a3d",core:"#37d6f2"},
+  6:{bg:"#571d1d",suit:"#6e2434",visor:"#37d6f2"},
+  7:{bg:"#05060a",hair:"#c9b8ff",armor:"#9a7fe0",halo:"#ff8a1e",eye:"#8a6cff"},
+  8:{bg:"#7fae2e",ghost:"#e6f2d9",hat:"#f28ad2"},
+  9:{bg:"#0d3b3e",eye:"#4dff88",core:"#ff5a8a"},
+  10:{bg:"#5e2f10",suit:"#7a4a23",visor:"#f28ad2"},
+  11:{bg:"#05060a",hair:"#f28ad2",armor:"#e05a9a",halo:"#7dff6a",eye:"#37d6f2"},
+  12:{bg:"#2e7f86",ghost:"#eef2f5",hat:"#ff8a1e"},
+  13:{bg:"#274d16",eye:"#ffd21f",core:"#ff5a8a"},
+  14:{bg:"#4d3d08",suit:"#6e5222",visor:"#f28ad2"},
+  15:{bg:"#05060a",hair:"#3ec6b0",armor:"#2ea89a",halo:"#f28ad2",eye:"#37f2c6"},
+  16:{bg:"#8a7fe0",ghost:"#f7eef5",hat:"#4dc95e"},
+  17:{bg:"#0d3b2e",eye:"#7dff6a",core:"#ff5a8a"},
+  18:{bg:"#5c1e4e",suit:"#3a2b52",visor:"#4dff88"},
+  19:{bg:"#05060a",hair:"#f2b437",armor:"#d9922e",halo:"#37d6f2",eye:"#ff3b3b"},
+  20:{bg:"#1e7a6e",ghost:"#eef2f5",hat:"#ff8a1e"},
+  21:{bg:"#4b1e63",suit:"#232c52",visor:"#37f24b"},
+  22:{bg:"#4d4d08",suit:"#7a5a28",visor:"#f28ad2"},
+  23:{bg:"#05060a",hair:"#e08ae0",armor:"#d96ab0",halo:"#ffd21f",eye:"#37d6f2"},
+  24:{bg:"#c95ec9",ghost:"#f7d9ec",hat:"#4dc95e"}
+};
+var SUIT_BGS=["#4b1e63","#123a4a","#571d1d","#274d16","#5e2f10","#232a4d"];
+var SUITS=["#232c52","#1f4d3a","#6e2434","#7a4a23","#3a2b52","#20507a"];
+var VISORS=["#37f24b","#ffd21f","#37d6f2","#f28ad2"];
+var BOT_BGS=["#4b1e63","#1b2a5e","#0d3b2e","#3d3d08","#5c1e4e"];
+var EYES=["#37d6f2","#4dff88","#ff9a3d","#ffd21f","#ff5a8a"];
+var CORES=["#4dff88","#ff8a1e","#ff5a8a","#37d6f2","#ffd21f"];
+var GHOST_BGS=["#2e7f86","#e56ba0","#7fae2e","#8a7fe0","#1e7a6e","#c95ec9"];
+var HATS=["#ff8a1e","#37b6d9","#f28ad2","#4dc95e","#f2d13d"];
+var GHOSTS=["#eef2f5","#f7d9e8","#e6f2d9","#fdf3c9","#f7eef5"];
+var HAIRS=["#f2b437","#7fe08a","#f28ad2","#c9b8ff","#3ec6b0","#e08ae0"];
+var ARMORS=["#d9922e","#3fbf9a","#d96ab0","#9a7fe0","#2ea89a","#e05a9a"];
+var HALOS=["#37d6f2","#ffd21f","#7dff6a","#ff8ad2","#ff8a1e"];
+function shade(hex,f){
+  var n=parseInt(hex.slice(1),16), r=(n>>16)&255, g=(n>>8)&255, b=n&255;
+  r=Math.max(0,Math.min(255,Math.round(r*f))); g=Math.max(0,Math.min(255,Math.round(g*f))); b=Math.max(0,Math.min(255,Math.round(b*f)));
+  return "rgb("+r+","+g+","+b+")";
+}
+function drawAgent(cv, a){
+  var N=72, off=document.createElement('canvas'); off.width=N; off.height=N;
+  var c = off.getContext('2d');
+  var rand = rng(a.id*131+7);
+  var st = PIN_STYLE[a.id] || {};
+  var i,j,x,y;
+  function R(px,py,w,h,col){ c.fillStyle=col; c.fillRect(Math.round(px),Math.round(py),Math.max(1,Math.round(w)),Math.max(1,Math.round(h))); }
+  function blob(cx,y0,widths,col,grow){ c.fillStyle=col; for(var k=0;k<widths.length;k++){ var w=widths[k]+(grow||0); c.fillRect(Math.round(cx-w/2), y0+k, Math.round(w), 1); } }
+  function pick(arr){ return arr[a.id % arr.length]; }
+
+  if(a.id===21){ /* ================= #21 FULL-BODY TALL (reference photo) ================= */
+    /* Tall, slim full-body figure inside the square tile: small helmet at the
+       very top, long navy suit torso, both full legs down to shoes at the
+       bottom edge, briefcase held at the side — not a wide square bust. */
+    var bg21 = "#4b1e63", suit21 = "#232c52", visor21 = "#37f24b", helm21 = "#46536b", tie21 = "#2e5d46";
+    R(0,0,72,72,bg21);
+    c.fillStyle="rgba(0,0,0,0.16)"; /* halftone dot band, like the reference */
+    for(y=28;y<54;y+=3) for(x=((y/3)%2===0?1:3); x<72; x+=4) c.fillRect(x,y,2,2);
+    R(19,68,34,3,"rgba(0,0,0,0.28)"); /* ground shadow under the shoes */
+    /* full legs first (torso overlaps their tops) — long trousers to the shoes */
+    R(23,43,12,25,"#0b0e14"); R(24,44,10,23,shade(suit21,.78));
+    R(37,43,12,25,"#0b0e14"); R(38,44,10,23,shade(suit21,.78));
+    R(28,47,1,18,shade(suit21,.55)); R(42,47,1,18,shade(suit21,.55)); /* creases */
+    R(33,47,2,20,"rgba(0,0,0,0.35)"); /* gap between the legs */
+    /* shoes at the very bottom */
+    R(22,67,14,4,"#0b0e14"); R(23,67,11,2,"#232c3f");
+    R(36,67,14,4,"#0b0e14"); R(37,67,11,2,"#232c3f");
+    /* long arms down both sides */
+    R(17,24,8,26,"#0b0e14"); R(18,25,6,24,shade(suit21,.85));
+    R(47,24,8,26,"#0b0e14"); R(48,25,6,24,shade(suit21,.85));
+    /* slim tall torso */
+    var torso21=[26,29,30,30,29,29,28,28,27,27,26,26,26,25,25,25,24,24,24,24,24,23,23,22,22];
+    blob(36,22,torso21,"#0b0e14",3);
+    blob(36,22,torso21,suit21,0);
+    R(46,26,3,18,shade(suit21,.7)); R(23,26,2,18,shade(suit21,1.2));
+    /* shirt V + tie */
+    for(i=0;i<9;i++){ var wv=11-i; R(36-wv/2,23+i,wv,1,"#5c6656"); }
+    R(34,23,4,3,tie21); R(35,25,2,11,tie21);
+    /* lapels */
+    for(i=0;i<8;i++){ R(30-Math.floor(i/2),23+i,3,1,shade(suit21,.55)); R(39+Math.floor(i/2),23+i,3,1,shade(suit21,.55)); }
+    R(41,35,2,2,"#d9a441"); R(41,40,2,2,"#d9a441"); /* buttons */
+    R(44,29,3,2,"#ffd21f"); R(45,29,1,2,visor21); /* chest pin */
+    /* neck */
+    R(32,19,8,4,"#39445e");
+    /* briefcase held at the side, clear of the legs so both stay fully visible */
+    R(9,50,10,4,"#0b0e14"); R(11,51,6,2,"#6b7a90"); /* handle */
+    R(2,54,20,15,"#0b0e14"); R(3,55,18,13,"#3d4657"); R(3,55,18,3,"#2b3342");
+    R(6,55,3,13,"#2b3342"); R(15,55,3,13,"#2b3342");
+    R(6,60,3,3,"#aebbd0"); R(15,60,3,3,"#aebbd0"); R(10,61,4,2,visor21);
+    R(4,56,2,2,visor21); R(18,56,2,2,visor21);
+    /* hands: left gripping the handle, right hanging free */
+    R(17,47,8,6,"#0b0e14"); R(18,48,6,4,"#67768f"); R(20,49,1,3,"#39445e"); R(22,49,1,3,"#39445e");
+    R(47,47,8,6,"#0b0e14"); R(48,48,6,4,"#67768f"); R(50,49,1,3,"#39445e"); R(52,49,1,3,"#39445e");
+    /* small helmet at the top — head-to-body ratio of the tall reference */
+    var head21=[8,14,18,20,22,22,22,22,22,22,21,21,20,20,19,18,16,14];
+    blob(36,3,head21,"#0b0e14",3);
+    blob(36,3,head21,helm21,0);
+    R(27,5,3,9,shade(helm21,1.3)); R(43,5,3,10,shade(helm21,.7)); R(33,2,6,2,shade(helm21,.75));
+    /* ear pods */
+    R(23,11,4,7,"#232c3f"); R(45,11,4,7,"#232c3f"); R(24,14,2,2,visor21); R(46,14,2,2,visor21);
+    /* visor with glowing green code rows */
+    R(28,9,16,1,"#08110c"); for(y=10;y<=15;y++) R(26,y,20,1,"#08110c"); R(28,16,16,1,"#08110c");
+    var rows21=[10,12,14];
+    for(i=0;i<rows21.length;i++){ x=27; while(x<44){ var seg21=1+Math.floor(rand()*4); if(rand()>.22) R(x,rows21[i],seg21,1.4,visor21); x+=seg21+1+Math.floor(rand()*2); } }
+    R(29,17,14,4,"#39445e"); R(31,19,10,1,"#232c3f"); /* chin plate */
+  }
+  else if(a.arch===0){ /* ================= SUIT AGENT ================= */
+    var bg = st.bg || pick(SUIT_BGS), suit = st.suit || pick(SUITS), visor = st.visor || pick(VISORS);
+    R(0,0,72,72,bg);
+    c.fillStyle="rgba(0,0,0,0.16)"; /* halftone dot band, like the reference */
+    for(y=29;y<47;y+=3) for(x=((y/3)%2===0?1:3); x<72; x+=4) c.fillRect(x,y,2,2);
+    var helm="#46536b", tie=["#2e5d46","#7a2030","#20507a","#8a6d1f"][a.id%4];
+    /* arms behind torso */
+    R(12,34,9,25,"#0b0e14"); R(13,35,7,23,shade(suit,.82));
+    R(51,34,9,25,"#0b0e14"); R(52,35,7,23,shade(suit,.82));
+    /* legs */
+    R(22,53,13,15,"#0b0e14"); R(23,54,11,13,shade(suit,.78));
+    R(37,53,13,15,"#0b0e14"); R(38,54,11,13,shade(suit,.78));
+    R(22,67,13,3,"#0b0e14"); R(37,67,13,3,"#0b0e14");
+    /* torso */
+    blob(36,33,[34,38,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,39,38],"#0b0e14",3);
+    blob(36,33,[34,38,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,39,38],suit,0);
+    R(50,36,5,17,shade(suit,.7)); R(18,36,3,17,shade(suit,1.2));
+    /* shirt V + tie */
+    for(i=0;i<10;i++){ var w=12-i; R(36-w/2,34+i,w,1,"#5c6656"); }
+    R(34,34,4,3,tie); R(35,36,2,12,tie);
+    /* lapels */
+    for(i=0;i<9;i++){ R(29-Math.floor(i/2),34+i,3,1,shade(suit,.55)); R(40+Math.floor(i/2),34+i,3,1,shade(suit,.55)); }
+    R(41,46,2,2,"#d9a441"); R(41,51,2,2,"#d9a441"); /* buttons */
+    R(45,40,3,2,"#ffd21f"); R(46,40,1,2,"#37f24b"); /* chest pin */
+    /* hands */
+    R(12,57,9,7,"#0b0e14"); R(13,58,7,5,"#67768f"); R(15,59,1,3,"#39445e"); R(17,59,1,3,"#39445e");
+    R(51,57,9,7,"#0b0e14"); R(52,58,7,5,"#67768f"); R(54,59,1,3,"#39445e"); R(56,59,1,3,"#39445e");
+    /* briefcase, held in the left hand */
+    R(14,53,9,3,"#0b0e14"); R(16,54,5,2,"#6b7a90");
+    R(5,55,25,16,"#0b0e14"); R(6,56,23,14,"#3d4657"); R(6,56,23,3,"#2b3342");
+    R(10,56,3,14,"#2b3342"); R(22,56,3,14,"#2b3342");
+    R(10,61,3,3,"#aebbd0"); R(22,61,3,3,"#aebbd0"); R(15,62,5,2,visor);
+    R(7,57,2,2,visor); R(26,57,2,2,visor);
+    /* helmet */
+    blob(36,13,[10,18,24,28,30,30,30,30,30,30,29,29,28,28,26,24,22,20],"#0b0e14",3);
+    blob(36,13,[10,18,24,28,30,30,30,30,30,30,29,29,28,28,26,24,22,20],helm,0);
+    R(26,16,4,11,shade(helm,1.3)); R(44,16,5,12,shade(helm,.7)); R(33,12,6,2,shade(helm,.75));
+    /* ear pods */
+    R(20,22,4,8,"#232c3f"); R(48,22,4,8,"#232c3f"); R(21,25,2,2,visor); R(49,25,2,2,visor);
+    /* visor with glowing code rows */
+    R(28,20,16,1,"#08110c"); for(y=21;y<=26;y++) R(26,y,20,1,"#08110c"); R(28,27,16,1,"#08110c");
+    var rows=[21,23,25];
+    for(i=0;i<rows.length;i++){ x=27; while(x<44){ var seg=1+Math.floor(rand()*4); if(rand()>.22) R(x,rows[i],seg,1.4,visor); x+=seg+1+Math.floor(rand()*2); } }
+    R(29,28,14,4,"#39445e"); R(31,30,10,1,"#232c3f"); /* chin plate */
+  }
+  else if(a.arch===1){ /* ================= CHIBI BOT ================= */
+    var bg1 = st.bg || pick(BOT_BGS), eye = st.eye || pick(EYES), core = st.core || pick(CORES), body="#e8eef7";
+    R(0,0,72,72,bg1);
+    c.fillStyle="rgba(255,255,255,0.5)";
+    for(i=0;i<22;i++){ c.fillRect(Math.floor(rand()*70)+1, Math.floor(rand()*66)+2, rand()>.6?2:1, 1); }
+    R(24,64,24,2,"rgba(0,0,0,0.28)");
+    /* antenna */
+    R(46,8,2,9,"#7c8aa5"); R(44,4,6,6,"#0b0e14"); R(45,5,4,4,eye);
+    /* ears */
+    R(17,23,6,10,"#0b0e14"); R(18,24,4,8,"#8a9ab2"); R(49,23,6,10,"#0b0e14"); R(50,24,4,8,"#8a9ab2");
+    /* head */
+    blob(36,15,[16,24,29,31,32,32,32,32,32,32,32,32,31,31,30,29,27,24,20,16],"#0b0e14",3);
+    blob(36,15,[16,24,29,31,32,32,32,32,32,32,32,32,31,31,30,29,27,24,20,16],body,0);
+    R(47,19,4,13,"#b7c4d8"); R(27,17,8,2,"#ffffff");
+    /* face screen */
+    R(28,20,16,1,"#0a1622"); for(y=21;y<=30;y++) R(26,y,20,1,"#0a1622"); R(28,31,16,1,"#0a1622");
+    R(30,23,4,5,eye); R(38,23,4,5,eye); R(31,24,1,1,"#ffffff"); R(39,24,1,1,"#ffffff");
+    R(33,28,1,1,eye); R(34,29,4,1,eye); R(38,28,1,1,eye);
+    R(27,28,2,1,"#f2a0b5"); R(43,28,2,1,"#f2a0b5");
+    R(33,35,6,3,"#7c8aa5"); /* neck */
+    /* arms */
+    R(18,40,7,14,"#0b0e14"); R(19,41,5,12,"#c9d4e6");
+    R(47,40,7,14,"#0b0e14"); R(48,41,5,12,"#c9d4e6");
+    /* body */
+    blob(36,38,[20,26,29,30,30,30,30,30,30,30,29,29,28,27,26,24,22,20],"#0b0e14",3);
+    blob(36,38,[20,26,29,30,30,30,30,30,30,30,29,29,28,27,26,24,22,20],body,0);
+    R(29,42,14,11,"#d3dce9");
+    R(33,45,6,6,"#0b0e14"); R(34,46,4,4,core); R(35,47,1,1,"#ffffff");
+    R(24,44,2,2,core);
+    /* laptop */
+    R(41,49,20,13,"#0b0e14"); R(42,50,18,11,"#aebbd0"); R(42,50,18,2,"#67768f"); R(49,54,3,3,core);
+    /* feet */
+    R(26,57,8,4,"#0b0e14"); R(27,58,6,2,"#8a9ab2"); R(38,57,8,4,"#0b0e14"); R(39,58,6,2,"#8a9ab2");
+  }
+  else if(a.arch===2){ /* ================= GHOST ================= */
+    var bg2 = st.bg || pick(GHOST_BGS), ghost = st.ghost || pick(GHOSTS), hat = st.hat || pick(HATS);
+    R(0,0,72,72,bg2);
+    c.fillStyle="rgba(0,0,0,0.13)"; /* tile grid, like the reference */
+    for(x=0;x<=72;x+=12) c.fillRect(x,0,1,72);
+    for(y=0;y<=72;y+=12) c.fillRect(0,y,72,1);
+    R(24,64,24,2,"rgba(0,0,0,0.20)");
+    /* speech bubble */
+    R(53,9,15,14,"#0b0e14"); R(51,10,15,12,"#0b0e14"); R(52,11,13,10,"#ffffff");
+    R(53,21,6,5,"#0b0e14"); R(54,21,4,3,"#ffffff");
+    R(54,15,2,2,"#8a9ab2"); R(58,15,2,2,"#8a9ab2"); R(62,15,2,2,"#8a9ab2");
+    /* wrench */
+    R(11,35,9,8,"#0b0e14"); R(12,36,7,6,"#4a5568"); R(16,36,4,3,bg2);
+    R(13,42,5,14,"#0b0e14"); R(14,43,3,12,"#39445e");
+    /* body */
+    blob(36,29,[24,29,31,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32],"#0b0e14",3);
+    blob(36,29,[24,29,31,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32],ghost,0);
+    R(45,32,4,24,shade(ghost,.86)); R(24,32,2,22,shade(ghost,1.04));
+    R(27,57,4,5,bg2); R(36,57,4,5,bg2); R(45,57,4,5,bg2); /* wavy bottom edge */
+    /* eyes + cheeks */
+    R(30,38,3,5,"#232a3a"); R(40,38,3,5,"#232a3a");
+    R(27,44,3,2,"#f2a0b5"); R(43,44,3,2,"#f2a0b5");
+    /* hard hat */
+    blob(36,15,[12,20,25,27,28,28,28,28,27,26],"#0b0e14",3);
+    blob(36,15,[12,20,25,27,28,28,28,28,27,26],hat,0);
+    R(28,17,6,3,shade(hat,1.3));
+    R(19,25,34,5,"#0b0e14"); R(20,26,32,3,shade(hat,.8));
+  }
+  else { /* ================= HALO AGENT (bust portrait) ================= */
+    var hair = st.hair || pick(HAIRS), armor = st.armor || pick(ARMORS), halo = st.halo || pick(HALOS), eye2 = st.eye || pick(EYES);
+    var skin = "#eec39c", cubeCols=["#37d6f2","#7dff6a","#ffd21f","#ff8ad2"];
+    R(0,0,72,72,"#05060a");
+    for(i=0;i<30;i++){ c.fillStyle=["#ffffff","#ffe9a8","#bfe8ff"][Math.floor(rand()*3)]; c.globalAlpha=.35+rand()*.6; c.fillRect(Math.floor(rand()*70)+1, Math.floor(rand()*70)+1, rand()>.7?2:1, 1); }
+    c.globalAlpha=1;
+    function cube(cx0,cy0,s,col){ R(cx0-1,cy0-1,s+2,s+2,"#0b0e14"); R(cx0,cy0,s,s,col); R(cx0,cy0,s,Math.floor(s/2),shade(col,1.25)); R(cx0+s-2,cy0+2,2,2,shade(col,.65)); }
+    cube(7,30,6,cubeCols[a.id%4]); cube(59,24,6,cubeCols[(a.id+1)%4]); cube(9,50,5,cubeCols[(a.id+2)%4]); cube(60,46,5,cubeCols[(a.id+3)%4]);
+    /* long hair */
+    var hw=[14,22,27,29,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,29,29,28,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14];
+    blob(36,14,hw,"#0b0e14",3); blob(36,14,hw,hair,0);
+    /* face */
+    R(29,22,14,17,skin); R(31,39,10,2,skin); R(33,41,6,4,shade(skin,.85));
+    R(28,20,16,4,hair); R(28,24,5,2,hair); R(39,24,5,2,hair); /* fringe with center part */
+    R(35,25,2,3,eye2); /* forehead gem */
+    R(30,29,4,1,"#20202a"); R(38,29,4,1,"#20202a");
+    R(30,30,4,2,eye2); R(38,30,4,2,eye2);
+    R(35,33,1,2,shade(skin,.78)); R(34,36,4,2,"#b04a5e");
+    /* armor bust */
+    var aw=[22,30,36,40,43,45,46,46,46,46,46,46,46,46,46,45,44,43,42,40,38,36,34,32,30];
+    blob(36,45,aw,"#0b0e14",3); blob(36,45,aw,armor,0);
+    R(15,45,13,12,"#0b0e14"); R(16,46,11,10,shade(armor,1.14));
+    R(44,45,13,12,"#0b0e14"); R(45,46,11,10,shade(armor,1.14));
+    R(31,47,10,21,shade(armor,.76)); R(30,47,1,20,shade(armor,1.35)); R(41,47,1,20,shade(armor,1.35));
+    R(34,54,4,1,"#0b0e14"); R(33,55,6,3,"#0b0e14"); R(34,58,4,1,"#0b0e14");
+    R(35,54,2,1,"#3ee6f2"); R(34,55,4,3,"#3ee6f2"); /* chest gem */
+    /* hair strands over the armor */
+    R(23,45,3,13,shade(hair,.8)); R(46,45,3,13,shade(hair,.8));
+    /* halo ring */
+    c.strokeStyle=halo; c.lineWidth=2.4;
+    c.beginPath(); c.ellipse(36,10,11,3.6,0,0,Math.PI*2); c.stroke();
+    c.strokeStyle="rgba(255,255,255,0.55)"; c.lineWidth=1;
+    c.beginPath(); c.ellipse(36,9,11,3.6,0,Math.PI,Math.PI*2); c.stroke();
+  }
+  var ctx = cv.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0,0,cv.width,cv.height);
+  ctx.drawImage(off,0,0,cv.width,cv.height);
+}
+function makeCanvas(a, w, h){ var cv=document.createElement('canvas'); cv.width=w; cv.height=h; drawAgent(cv,a); return cv; }
+
+/* ================= BUILD UI ================= */
+function cardHTML(a){
+  return '<button class="gcard'+(a.rarity==="LEGENDARY"?" legendary":"")+'" onclick="openModal('+a.id+')" aria-label="Agentic Spoxy #'+a.id+'">'
+    + '<span class="art" data-art="'+a.id+'"></span>'
+    + '<span class="meta"><span class="name" style="display:block">AGENTIC SPOXY #'+a.id+'</span>'
+    + '<span class="row"><span class="badge t-'+a.rarity+'">'+a.rarity+'</span><span class="rank">Rank '+a.rank.toLocaleString('en-US')+'</span></span></span></button>';
+}
+function paintArts(scope){
+  var nodes = scope.querySelectorAll('[data-art]');
+  for(var i=0;i<nodes.length;i++){ var a=getAgent(parseInt(nodes[i].getAttribute('data-art'),10)); nodes[i].appendChild(makeCanvas(a,220,220)); nodes[i].removeAttribute('data-art'); }
+}
+
+/* marquee */
+(function(){
+  var ids=[21,19,20,3,14,15,8,1], html="";
+  var seq = ids.concat(ids);
+  for(var i=0;i<seq.length;i++) html += '<span class="mq" data-art="'+seq[i]+'"></span>';
+  var t=document.getElementById('mqTrack'); t.innerHTML=html; paintArts(t);
+})();
+/* logo */
+drawAgent(document.getElementById('logoCv'), getAgent(3));
+
+/* traits grid */
+(function(){
+  var html="";
+  LAYERS.forEach(function(l){
+    html += '<div class="tcard"><h3>'+l+'<span>'+TRAITS[l].length+'</span></h3><div class="tchips">'
+      + TRAITS[l].map(function(v){return '<span>'+v+'</span>';}).join('') + '</div></div>';
+  });
+  document.getElementById('traitGrid').innerHTML = html;
+})();
+
+/* rarest preview: 4 lowest ranks among pinned + #19 */
+(function(){
+  var ids=[19,21,3,12];
+  var el=document.getElementById('rarestCards'); el.innerHTML = ids.map(function(id){return cardHTML(getAgent(id));}).join(''); paintArts(el);
+})();
+
+/* ================= GALLERY (all 5,000 agents, browsable) ================= */
+var PAGE_SIZE = 60;
+var gFilter = 'ALL', gSearch = '', gLimit = PAGE_SIZE, gList = null;
+function isZh(){ return typeof lang !== "undefined" && lang === 'zh'; }
+function fmtNum(n){ return isZh() ? n.toLocaleString('zh-CN') : n.toLocaleString('en-US'); }
+function computeFiltered(){
+  var list = [], q = gSearch.replace(/\D/g, ''), i, a;
+  for(i = 1; i <= 5000; i++){
+    if(q && String(i).indexOf(q) === -1) continue;
+    a = getAgent(i);
+    if(gFilter !== 'ALL' && a.rarity !== gFilter) continue;
+    list.push(a);
+  }
+  return list;
+}
+function updateGalleryMeta(){
+  var total = gList ? gList.length : 0;
+  var shown = Math.min(gLimit, total);
+  var empty = document.getElementById('gEmpty');
+  var line = document.getElementById('shownLine');
+  var wrap = document.getElementById('loadWrap');
+  var btn = document.getElementById('loadMoreBtn');
+  if(total === 0){
+    empty.style.display = 'block';
+    empty.textContent = isZh() ? '没有匹配的智能体。试试其他编号或稀有度筛选。' : 'No agents match that search. Try another number or rarity filter.';
+    line.textContent = isZh() ? '找到 0 个智能体' : '0 agents found';
+    wrap.style.display = 'none';
+    return;
+  }
+  empty.style.display = 'none';
+  line.textContent = isZh()
+    ? '显示 ' + fmtNum(shown) + ' 个，共 ' + fmtNum(total) + ' 个智能体'
+    : 'Showing ' + fmtNum(shown) + ' of ' + fmtNum(total) + ' agents';
+  wrap.style.display = shown < total ? 'block' : 'none';
+  if(btn) btn.textContent = isZh() ? '加载更多' : 'LOAD MORE';
+}
+function renderGallery(reset){
+  var el = document.getElementById('galleryCards');
+  if(reset || !gList){ gList = computeFiltered(); }
+  var slice = gList.slice(0, gLimit), html = '', i;
+  for(i = 0; i < slice.length; i++) html += cardHTML(slice[i]);
+  el.innerHTML = html;
+  paintArts(el);
+  updateGalleryMeta();
+}
+function loadMore(){
+  if(!gList) return;
+  var prev = Math.min(gLimit, gList.length);
+  gLimit += PAGE_SIZE;
+  var next = Math.min(gLimit, gList.length);
+  if(next <= prev){ updateGalleryMeta(); return; }
+  var el = document.getElementById('galleryCards'), html = '', i;
+  for(i = prev; i < next; i++) html += cardHTML(gList[i]);
+  var tmp = document.createElement('div'); tmp.innerHTML = html;
+  while(tmp.firstChild) el.appendChild(tmp.firstChild);
+  paintArts(el);
+  updateGalleryMeta();
+}
+function setFilter(f, btn){
+  gFilter = f; gLimit = PAGE_SIZE;
+  var btns = document.querySelectorAll('#gFilters button');
+  for(var i = 0; i < btns.length; i++) btns[i].classList.toggle('on', btns[i].getAttribute('data-f') === f);
+  renderGallery(true);
+}
+(function(){
+  var inp = document.getElementById('gSearch');
+  if(inp) inp.addEventListener('input', function(){ gSearch = inp.value; gLimit = PAGE_SIZE; renderGallery(true); });
+})();
+renderGallery(true);
+
+/* ================= ERC-721 METADATA ================= */
+var currentAgentId = 21;
+function rarityArticle(rarity){
+  return /^[AEIOU]/.test(String(rarity||"").toUpperCase()) ? "an" : "a";
+}
+function agentDescription(a){
+  return "AGENTIC SPOXY #"+a.id+" is "+rarityArticle(a.rarity)+" "+a.rarity+" pixel AI agent, Rank "+a.rank+" of 5,000 on BNB Chain. Assembled from 8 trait layers: "
+    + LAYERS.map(function(l){ return l+": "+a.traits[l]; }).join(", ")+".";
+}
+function dnaOf(a){
+  var s = LAYERS.map(function(l){ return a.traits[l]; }).join("|")+"|"+a.rarity+"|"+a.rank;
+  var h1=0, h2=0, i, ch;
+  for(i=0;i<s.length;i++){ ch=s.charCodeAt(i); h1=((h1<<5)-h1+ch)>>>0; h2=((h2<<3)+h2+ch*7)>>>0; }
+  return ("00000000"+h1.toString(16)).slice(-8)+("00000000"+h2.toString(16)).slice(-8);
+}
+function buildMetadata(a){
+  var attrs = LAYERS.map(function(l){ return {trait_type:l, value:a.traits[l]}; });
+  attrs.push({trait_type:"Rarity", value:a.rarity});
+  attrs.push({display_type:"number", trait_type:"Rank", value:a.rank});
+  return {
+    name:"AGENTIC SPOXY #"+a.id,
+    description: agentDescription(a),
+    image:"ipfs://AGENTIC-SPOXY/images/"+a.id+".png",
+    external_url:"",
+    dna: dnaOf(a),
+    attributes: attrs
+  };
+}
+function buildCollectionMetadata(){
+  return {
+    name:"AGENTIC SPOXY",
+    description:"5,000 pixel AI agents on BNB Chain, each assembled from 8 trait layers: Background, Chassis, Outfit, Headgear, Eyes, Mouth, Tool and Status.",
+    image:"ipfs://AGENTIC-SPOXY/images/collection.png",
+    external_url:"",
+    seller_fee_basis_points:0,
+    fee_recipient:"",
+    properties:{
+      category:"image",
+      creators:[],
+      files:[{uri:"ipfs://AGENTIC-SPOXY/images/{id}.png", type:"image/png"}]
+    },
+    standard:"ERC-721",
+    chain:"BNB Chain",
+    supply:5000,
+    base_image_uri:"ipfs://AGENTIC-SPOXY/images/",
+    base_metadata_uri:"ipfs://AGENTIC-SPOXY/metadata/"
+  };
+}
+function metadataText(a){ return JSON.stringify(buildMetadata(a), null, 2); }
+function downloadTextFile(filename, text, mime){
+  var blob = new Blob([text], {type: mime || "application/json;charset=utf-8"});
+  var url = URL.createObjectURL(blob);
+  var link = document.createElement('a'); link.href=url; link.download=filename;
+  document.body.appendChild(link); link.click(); document.body.removeChild(link);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 800);
+}
+function setMetaStatus(msg){
+  var el=document.getElementById('mMetaStatus'); if(el) el.textContent=msg;
+  var el2=document.getElementById('metaDlStatus'); if(el2 && document.getElementById('overlay') && !document.getElementById('overlay').classList.contains('open')) el2.textContent=msg;
+}
+function downloadAgentJSONById(id){
+  var a=getAgent(id); downloadTextFile(id+".json", metadataText(a));
+  var st=document.getElementById('metaDlStatus'); if(st) st.textContent = isZh() ? ("#"+id+" 的元数据已下载为 "+id+".json") : ("Downloaded metadata for #"+id+" as "+id+".json");
+}
+function downloadAgentJSON(){ downloadAgentJSONById(currentAgentId); setMetaStatus(isZh() ? "JSON 已下载。" : "JSON downloaded."); }
+function copyAgentJSON(){
+  var txt = metadataText(getAgent(currentAgentId));
+  var statusEl = document.getElementById('mMetaStatus');
+  function showSuccess(){
+    setMetaStatus(isZh() ? "JSON 已复制到剪贴板。" : "JSON copied to clipboard.");
+    if(statusEl) statusEl.style.color = "";
+  }
+  function showManualFallback(){
+    setMetaStatus(isZh() ? "自动复制失败 — 下方 JSON 已选中，请按 Ctrl+C 或手动复制。" : "Copy failed — the JSON below is selected, press Ctrl+C or copy it manually.");
+    if(statusEl) statusEl.style.color = "#ff8a1e";
+    var mj = document.getElementById('mJson');
+    if(mj){
+      try{
+        var range = document.createRange(); range.selectNodeContents(mj);
+        var sel = window.getSelection(); if(sel){ sel.removeAllRanges(); sel.addRange(range); }
+      }catch(e){}
+    }
+  }
+  function tryLegacyCopy(){
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.setAttribute('readonly','');
+    ta.style.position = 'fixed'; ta.style.top = '-9999px'; ta.style.left = '0'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    var ok = false;
+    try{ ta.select(); ta.setSelectionRange(0, ta.value.length); ok = !!(document.execCommand && document.execCommand('copy')); }catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    if(ok){ showSuccess(); } else { showManualFallback(); }
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(showSuccess, tryLegacyCopy);
+  } else {
+    tryLegacyCopy();
+  }
+}
+function downloadAgentPNG(){
+  var a=getAgent(currentAgentId);
+  var cv=document.createElement('canvas'); cv.width=720; cv.height=720; drawAgent(cv, a);
+  var link=document.createElement('a'); link.download=currentAgentId+".png"; link.href=cv.toDataURL("image/png"); link.click();
+  setMetaStatus(isZh() ? "PNG 已下载 (720 × 720)。" : "PNG downloaded (720 × 720).");
+}
+function downloadCollectionJSON(){
+  downloadTextFile("collection.json", JSON.stringify(buildCollectionMetadata(), null, 2));
+  var st=document.getElementById('metaDlStatus'); if(st) st.textContent = isZh() ? "collection.json 已下载。" : "Downloaded collection.json";
+}
+function downloadAllMetadata(){
+  var st=document.getElementById('metaDlStatus'); if(st) st.textContent = isZh() ? "正在准备全部 5,000 条元数据…" : "Preparing all 5,000 metadata files…";
+  setTimeout(function(){
+    var all=[], i; for(i=1;i<=5000;i++) all.push(buildMetadata(getAgent(i)));
+    downloadTextFile("agentic-spoxy-metadata-all.json", JSON.stringify(all, null, 2));
+    if(st) st.textContent = isZh() ? "完成 — 全部 5,000 条元数据已下载到一个 JSON 文件中。" : "Done — all 5,000 metadata entries downloaded in one JSON file.";
+  }, 30);
+}
+/* fill collection example */
+(function(){ var ex=document.getElementById('collectionExample'); if(ex) ex.textContent = metadataText(getAgent(21)); })();
+
+/* ================= MODAL ================= */
+function openModal(id){
+  currentAgentId = id;
+  var a=getAgent(id);
+  document.getElementById('mTitle').textContent = "AGENTIC SPOXY #"+id;
+  var b=document.getElementById('mBadge'); b.textContent=a.rarity; b.className="badge t-"+a.rarity;
+  document.getElementById('mRank').textContent = "Rank "+a.rank.toLocaleString('en-US');
+  document.getElementById('mTraits').innerHTML = LAYERS.map(function(l){
+    return '<div class="tr"><b>'+l.toUpperCase()+'</b><span>'+a.traits[l]+'</span></div>';
+  }).join('');
+  var mj=document.getElementById('mJson'); if(mj) mj.textContent = metadataText(a);
+  var ms=document.getElementById('mMetaStatus'); if(ms) ms.textContent="";
+  var cv=document.getElementById('modalCv'); drawAgent(cv, a);
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); document.body.style.overflow=''; }
+document.addEventListener('keydown', function(e){ if(e.key==="Escape") closeModal(); });
+
+/* ================= MINT PANEL — BINANCE AGENT ID ONLY ================= */
+var qty={a:1,w:1}, pLang='en', pay='BNB', payAgent='BNB';
+/* Pricing model: minting is Binance Agent ID only. The first 100 of the
+   5,000 supply mint FREE; every mint after that costs 0.00025 BNB.
+   MINTED mirrors the progress bar on this static page (0 / 5,000), so the
+   free window is fully open: 100 of 100 free mints remain. */
+var SUPPLY_TOTAL = 5000, MINTED_COUNT = 44, FREE_SUPPLY = 100, PRICE_BNB = 0.00025, MAX_PER_WALLET = 2;
+function freeLeft(){ return Math.max(0, FREE_SUPPLY - MINTED_COUNT); }
+function mintCost(q){
+  var f = Math.min(q, freeLeft()), p = q - f;
+  return { free:f, paid:p, totalBNB: p * PRICE_BNB };
+}
+function fmtBNB(v){
+  if(!v) return "0";
+  return (Math.round(v*100000)/100000).toFixed(5).replace(/0+$/,"").replace(/\.$/,"");
+}
+function costText(q, currency){
+  var c = mintCost(q);
+  var payPart = c.paid === 0
+    ? (isZh() ? "总计：0 (免费)" : "Total: 0 (FREE)")
+    : (isZh()
+        ? ("总计：" + (currency === "USDT" ? "相当于 " : "") + fmtBNB(c.totalBNB) + " BNB" + (currency === "USDT" ? " 的 USDT" : ""))
+        : ("Total: " + (currency === "USDT" ? "the USDT equivalent of " : "") + fmtBNB(c.totalBNB) + " BNB"));
+  return isZh()
+    ? ("当前阶段：<b>免费</b> — 前 100 个供应免费，剩余 " + freeLeft() + " / 100。你的铸造：<b>" + c.free + " 个免费</b>，" + c.paid + " 个付费 × 0.00025 BNB。" + payPart + "（+ 网络 Gas）。前 100 个供应售完后，每次铸造 0.00025 BNB。")
+    : ("Current phase: <b>FREE</b> — the first 100 supply mint free, " + freeLeft() + " of 100 left. Your mint: <b>" + c.free + " free</b>, " + c.paid + " paid × 0.00025 BNB. " + payPart + " (+ network gas). Once the first 100 supply are gone, 0.00025 BNB per mint applies.");
+}
+function refreshCost(){
+  var a = document.getElementById('costLineA'); if(a) a.innerHTML = costText(qty.a, payAgent);
+  var w = document.getElementById('costLineW'); if(w) w.innerHTML = costText(qty.w, pay);
+}
+function step(k,d){ qty[k]=Math.max(1,Math.min(MAX_PER_WALLET,qty[k]+d)); document.getElementById(k==='a'?'qtyA':'qtyW').textContent=qty[k]; refreshCost(); if(k==='a') writePrompt(); }
+function setPay(p){ pay=p; document.getElementById('payBnb').classList.toggle('on',p==='BNB'); document.getElementById('payUsdt').classList.toggle('on',p==='USDT'); refreshCost(); }
+function setPayAgent(p){ payAgent=p; document.getElementById('payBoxBnb').classList.toggle('on',p==='BNB'); document.getElementById('payBoxUsdt').classList.toggle('on',p==='USDT'); refreshCost(); writePrompt(); }
+function setPLang(l){ pLang=l; document.getElementById('plEn').classList.toggle('on',l==='en'); document.getElementById('plZh').classList.toggle('on',l==='zh'); writePrompt(); }
+/* Binance Agent ID gate: minting is only possible with a Binance Agent ID.
+   Format accepted on this page: 6–42 characters, letters / numbers / "-" / "_" only. */
+function cleanBinanceId(v){ return String(v||"").trim(); }
+function isValidBinanceId(v){ return /^[A-Za-z0-9_-]{6,42}$/.test(cleanBinanceId(v)); }
+function getBinanceId(){
+  var a=document.getElementById('binanceIdA'), w=document.getElementById('binanceIdW');
+  var v = a && cleanBinanceId(a.value) ? a.value : (w ? w.value : "");
+  return cleanBinanceId(v);
+}
+function binanceErrMsg(){
+  return isZh()
+    ? "只能使用币安 Agent ID 铸造。请先输入有效的币安 Agent ID（6–42 个字符：字母、数字、- 或 _）。"
+    : "Minting is only possible with a Binance Agent ID. Enter a valid Binance Agent ID first (6–42 characters: letters, numbers, - or _).";
+}
+function binanceOkMsg(id){
+  return isZh()
+    ? ("币安 Agent ID 已接受："+id+" — 此 ID 将用于铸造。")
+    : ("Binance Agent ID accepted: "+id+" — this ID will be used to mint.");
+}
+function paintBinanceGate(){
+  var id=getBinanceId(), valid=isValidBinanceId(id), touched=!!id;
+  ['binanceIdA','binanceIdW'].forEach(function(elId){
+    var el=document.getElementById(elId); if(!el) return;
+    el.classList.toggle('valid', valid);
+    el.classList.toggle('invalid', touched && !valid);
+  });
+  ['binanceStatusA','binanceStatusW'].forEach(function(elId){
+    var el=document.getElementById(elId); if(!el) return;
+    if(valid){ el.textContent=binanceOkMsg(id); el.className='field-status ok'; }
+    else if(touched){ el.textContent=binanceErrMsg(); el.className='field-status err'; }
+    else { el.textContent=''; el.className='field-status'; }
+  });
+  return valid;
+}
+function onBinanceInput(source){
+  var other = source && source.id==='binanceIdA' ? document.getElementById('binanceIdW') : document.getElementById('binanceIdA');
+  if(other && source) other.value = source.value;
+  paintBinanceGate();
+  writePrompt();
+}
+function requireBinanceId(focusEl){
+  if(paintBinanceGate()) return true;
+  ['binanceStatusA','binanceStatusW'].forEach(function(elId){
+    var el=document.getElementById(elId); if(el){ el.textContent=binanceErrMsg(); el.className='field-status err'; }
+  });
+  ['binanceIdA','binanceIdW'].forEach(function(elId){
+    var el=document.getElementById(elId); if(el) el.classList.add('invalid');
+  });
+  if(focusEl && focusEl.focus) focusEl.focus();
+  return false;
+}
+(function(){
+  ['binanceIdA','binanceIdW'].forEach(function(elId){
+    var el=document.getElementById(elId);
+    if(el) el.addEventListener('input', function(){ onBinanceInput(el); });
+  });
+})();
+function writePrompt(){
+  var q=qty.a, id=getBinanceId(), valid=isValidBinanceId(id), c=mintCost(q), total=fmtBNB(c.totalBNB);
+  var idEn = valid ? id : "NOT PROVIDED — minting is blocked until a valid Binance Agent ID is supplied";
+  var idZh = valid ? id : "未填写 — 在输入有效的币安 Agent ID 之前，铸造将被阻止";
+  var payEn = payAgent==="USDT"
+    ? ("Pay in USDT: this mint is "+c.free+" free and "+c.paid+" paid — send the USDT equivalent of "+total+" BNB (0 if it is fully free).")
+    : ("Pay in BNB: this mint is "+c.free+" free and "+c.paid+" paid — send exactly "+total+" BNB as the transaction value (send value 0 if it is fully free).");
+  var payZh = payAgent==="USDT"
+    ? ("使用 USDT 支付：本次铸造 "+c.free+" 个免费、"+c.paid+" 个付费 — 发送相当于 "+total+" BNB 的 USDT（如果全部免费则为 0）。")
+    : ("使用 BNB 支付：本次铸造 "+c.free+" 个免费、"+c.paid+" 个付费 — 正好发送 "+total+" BNB 作为交易价值（如果全部免费则发送 0）。");
+  document.getElementById('promptBox').value = pLang==='zh'
+    ? [
+      "从你自己的钱包在 BNB Chain（链 ID 56）上铸造 "+q+" 个 AGENTIC SPOXY NFT。",
+      "",
+      "币安 Agent ID："+idZh+"。",
+      "只能使用币安 Agent ID 铸造 — 没有有效币安 Agent ID 的钱包无法铸造。如果此 ID 无效，请停止并报告；不要仅使用钱包铸造。",
+      "",
+      "价格：前 100 个供应免费，之后每次铸造 0.00025 BNB。每个钱包最多 2 个。",
+      "已铸造："+MINTED_COUNT+" / "+SUPPLY_TOTAL+" · 剩余免费名额："+freeLeft()+" / 100。",
+      payZh,
+      "",
+      "步骤：",
+      "1. 验证上面的币安 Agent ID 并确认铸造已开启；如果尚未开启，请停止并报告。",
+      "2. 使用该币安 Agent ID 在合约 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee 上调用 mint("+q+")，并发送上面价格行中的价值。",
+      "3. Gas：自行将铸造交易的 Gas 上限设置为 900000；不要依赖自动估算。未使用的 Gas 不收费。",
+      "4. 等待交易被打包。交易的 Minted 事件会给出第一个代币 ID 和数量。",
+      "5. 从下一个区块开始（约半秒后），tokenURI(id) 会返回每个代币的元数据、图片和链上特征。",
+      "",
+      "报告：交易哈希、代币 ID、支付金额，以及 tokenURI 中每个代币的名称和稀有度。",
+      "如果调用被回滚，请告诉我错误：NoAgentId, MintClosed, BadQuantity, OverLimit, SoldOut, Underpaid, PayFailed。"
+    ].join("\n")
+    : [
+      "Mint "+q+" AGENTIC SPOXY NFT(s) on BNB Chain (chain id 56) from your own wallet.",
+      "",
+      "Binance Agent ID: "+idEn+".",
+      "Minting is only possible with a Binance Agent ID — a wallet without a valid Binance Agent ID cannot mint. If this ID is invalid, stop and report back; do not mint with a wallet alone.",
+      "",
+      "Price: the first 100 of the supply are FREE, then 0.00025 BNB per mint. Max 2 per wallet.",
+      "Minted so far: "+MINTED_COUNT+" / "+SUPPLY_TOTAL+" · Free slots left: "+freeLeft()+" of 100.",
+      payEn,
+      "",
+      "Steps:",
+      "1. Verify the Binance Agent ID above and check that minting is open; if it is not open, stop and report back.",
+      "2. Call mint("+q+") on contract 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee using that Binance Agent ID, sending the value from the price line above.",
+      "3. Gas: set the mint transaction's gas limit yourself to 900000; do not rely on automatic estimation. Gas you do not use is not charged.",
+      "4. Wait for it to be mined. The transaction's Minted event gives the first token id and the quantity.",
+      "5. From the next block (about half a second later), tokenURI(id) returns each token's metadata, its picture and traits on chain.",
+      "",
+      "Report back: the transaction hash, the token ids, what was paid, and each token's name and rarity from tokenURI.",
+      "If a call reverts, tell me its error: NoAgentId, MintClosed, BadQuantity, OverLimit, SoldOut, Underpaid, PayFailed."
+    ].join("\n");
+}
+writePrompt();
+refreshCost();
+function copyPrompt(){
+  var box=document.getElementById('promptBox'), st=document.getElementById('copyStatus');
+  st.style.color="";
+  if(!requireBinanceId(document.getElementById('binanceIdA'))){
+    st.textContent = binanceErrMsg();
+    st.style.color = "#ff8a1e";
+    return;
+  }
+  function done(){ st.style.color=""; st.textContent = lang==='zh' ? "提示词已复制 — 你的币安 Agent ID 已包含在内。" : "Prompt copied — your Binance Agent ID is included in it."; }
+  function fail(){ st.textContent = lang==='zh' ? "自动复制失败 — 上方提示词已选中，请按 Ctrl+C 或手动复制。" : "Copy failed — the prompt above is selected, press Ctrl+C or copy it manually."; st.style.color="#ff8a1e"; try{ box.select(); }catch(e){} }
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(box.value).then(done, function(){ try{ box.select(); if(document.execCommand('copy')) done(); else fail(); }catch(e){ fail(); } }); }
+  else { try{ box.select(); if(document.execCommand('copy')) done(); else fail(); }catch(e){ fail(); } }
+}
+function connectWallet(){
+  var st=document.getElementById('walletStatus');
+  st.style.color="";
+  if(!requireBinanceId(document.getElementById('binanceIdW'))){
+    st.textContent = binanceErrMsg();
+    st.style.color = "#ff8a1e";
+    return;
+  }
+  var cw = mintCost(qty.w);
+  st.textContent = lang==='zh'
+    ? ("币安 Agent ID 已接受："+getBinanceId()+"。铸造尚未上线 — 铸造开启后才能连接钱包，且只能使用此币安 Agent ID。当前阶段免费：前 100 个供应免费铸造（剩余 "+freeLeft()+" 个），之后每次铸造 0.00025 BNB。你的数量 "+qty.w+" 个总计 "+fmtBNB(cw.totalBNB)+" BNB。")
+    : ("Binance Agent ID accepted: "+getBinanceId()+". Mint isn't live yet — the wallet can connect once mint opens, and only with this Binance Agent ID. Current phase is FREE: the first 100 supply mint free ("+freeLeft()+" left), then 0.00025 BNB per mint. Your quantity of "+qty.w+" totals "+fmtBNB(cw.totalBNB)+" BNB.");
+}
+
+/* ================= LANGUAGE EN / ZH ================= */
+var lang='en';
+var I18N = {
+  en:{navMint:"Mint",navPrompt:"Prompt",navTraits:"Traits",navGallery:"Gallery",minted:"minted",opensSoon:"Mint opens soon",chipFree:"FREE FIRST 100 SUPPLY",chipPaid:"THEN 0.00025 BNB PER MINT",chipBinance:"BINANCE AGENT ID REQUIRED",chipMax:"MAX 2 PER WALLET",chipReveal:"REVEALED BLOCK BY BLOCK AFTER MINT",freeLab:"FREE MINT WINDOW — FIRST 100 SUPPLY, BINANCE AGENT ID ONLY",freeLeft:"free mints left",thenPrice:"then 0.00025 BNB per mint",
+    heroSub:"5,000 pixel AI agents, each assembled from 8 trait layers and checked for duplicates. Art and metadata live fully on-chain on BNB Chain. Minting is only possible with a Binance Agent ID — no Binance Agent ID, no mint. The first 100 of the supply mint FREE with a Binance Agent ID; after those 100 are gone, minting costs 0.00025 BNB per mint.",
+    agentH:"Mint via your AI agent",agentSub:"No separate wallet step here, the way agent minting works on the reference flow: choose how many, choose how to pay, enter your Binance Agent ID, then send the prompt below to an AI agent whose wallet holds that Binance Agent ID — it mints from its own wallet. The first 100 of the supply are FREE; after that, each mint costs 0.00025 BNB.",
+    qty:"Quantity",payBnbSub:"FREE for the first 100 supply, then 0.00025 BNB each",payUsdtSub:"FREE for the first 100 supply, then the USDT equivalent of 0.00025 BNB each",binanceLab:"Binance Agent ID — required to mint",binanceHint:"Use the Binance Agent ID linked to your agent wallet. Wallet-only minting without a Binance Agent ID is not allowed.",binancePh:"Enter your Binance Agent ID",promptLang:"Prompt language",copy:"COPY PROMPT",agentNote:"Mint isn't live yet — and when it opens, only a valid Binance Agent ID can mint: free for the first 100 supply, then 0.00025 BNB per mint, max 2 per wallet. Copy Prompt stays blocked until a valid Binance Agent ID is entered.",
+    walletH:"Mint with wallet — Binance Agent ID required",walletGate:"Wallet alone is not enough. This path is also locked to Binance Agent ID only — without a valid Binance Agent ID, wallet connection and minting stay blocked. Same pricing as the agent path: the first 100 supply mint FREE, then 0.00025 BNB per mint.",contract:"Contract",placeholder:"(live on BNB Chain)",payIn:"Pay in",connect:"CONNECT WALLET",mintSoon:"MINT OPENS SOON",gasNote:"Even with a connected wallet, a mint is rejected unless it carries a valid Binance Agent ID. Free mints (the first 100 supply) send 0 value; paid mints send exactly 0.00025 BNB per mint. Your wallet will request a 900,000 gas limit; you only pay for gas actually used.",
+    traitsH:"Stacked from 8 layers",traitsSub:"Every agent is stacked from 8 layers into 5,000 unique combos. Rarity tiers by rank:",rarest:"Rarest preview",
+    galleryH:"Browse all 5,000 agents",
+    gallerySub:"Search by agent number, filter by rarity, and load more to explore the full collection of 5,000.",
+    searchPh:"Search by number — e.g. 21",
+    loadMore:"LOAD MORE",nfa:"Not financial advice.",
+    metaH:"ERC-721 metadata, complete per token",
+    metaSub:"Every agent now has standard ERC-721 JSON: name, description, image URI, and 10 attributes — the 8 traits plus Rarity and Rank. Open any agent to preview and download its file, or download the full set below.",
+    metaStandard:"STANDARD",metaImageUri:"IMAGE URI PATTERN",metaUri:"METADATA URI PATTERN",metaExample:"EXAMPLE — AGENTIC SPOXY #21",
+    metaDl21:"DOWNLOAD #21 JSON",metaDlAll:"DOWNLOAD ALL 5,000 JSON",metaDlColl:"DOWNLOAD COLLECTION JSON",
+    metaNote:"The ipfs:// URIs are patterns to replace with the real CID after you upload the images and JSON to IPFS. The PNG for each token can be downloaded from its detail view. Contract is live on BNB Chain at 0x4e5c350c04d6e3fa9ec85acf4b630cfd8d7823ee."},
+  zh:{navMint:"铸造",navPrompt:"提示词",navTraits:"特征",navGallery:"画廊",minted:"已铸造",opensSoon:"铸造即将开启",chipFree:"前100个供应免费",chipPaid:"之后每次铸造 0.00025 BNB",chipBinance:"必须使用币安 Agent ID",chipMax:"每个钱包最多2个",chipReveal:"铸造后逐区块揭示",freeLab:"免费铸造窗口 — 前100个供应，仅限币安 Agent ID",freeLeft:"剩余免费名额",thenPrice:"之后每次铸造 0.00025 BNB",
+    heroSub:"5,000个像素AI智能体，每个由8层特征组装并经过去重检查。艺术品和元数据完全上链于BNB Chain。只能使用币安 Agent ID 铸造——没有币安 Agent ID，就无法铸造。前100个供应使用币安 Agent ID 免费铸造；这100个用完后，每次铸造费用为 0.00025 BNB。",
+    agentH:"通过你的AI智能体铸造",agentSub:"这里没有单独的钱包步骤，与参考流程中的智能体铸造方式相同：选择数量，选择支付方式，输入你的币安 Agent ID，然后将下面的提示词发送给钱包持有该币安 Agent ID 的AI智能体——它会从自己的钱包铸造。前100个供应免费；之后每次铸造费用为 0.00025 BNB。",
+    qty:"数量",payBnbSub:"前100个供应免费，之后每个 0.00025 BNB",payUsdtSub:"前100个供应免费，之后每个相当于 0.00025 BNB 的 USDT",binanceLab:"币安 Agent ID — 铸造必填",binanceHint:"使用与你的智能体钱包关联的币安 Agent ID。不允许仅使用钱包而没有币安 Agent ID 进行铸造。",binancePh:"输入你的币安 Agent ID",promptLang:"提示词语言",copy:"复制提示词",agentNote:"铸造尚未上线——上线后，只有有效的币安 Agent ID 才能铸造：前100个供应免费，之后每次铸造 0.00025 BNB，每个钱包最多2个。在输入有效的币安 Agent ID 之前，复制提示词按钮将保持锁定。",
+    walletH:"使用钱包铸造 — 必须使用币安 Agent ID",walletGate:"仅有钱包是不够的。此路径同样仅限币安 Agent ID——没有有效的币安 Agent ID，钱包连接和铸造将保持锁定。价格与智能体路径相同：前100个供应免费铸造，之后每次铸造 0.00025 BNB。",contract:"合约",placeholder:"(已在 BNB Chain 上线)",payIn:"支付方式",connect:"连接钱包",mintSoon:"铸造即将开启",gasNote:"即使钱包已连接，如果没有携带有效的币安 Agent ID，铸造也会被拒绝。免费铸造（前100个供应）发送0价值；付费铸造每次正好发送 0.00025 BNB。你的钱包将请求 900,000 的 Gas 上限；你只需支付实际使用的 Gas。",
+    traitsH:"由8层堆叠而成",traitsSub:"每个智能体由8层堆叠成5,000种独特组合。按排名划分的稀有度等级：",rarest:"最稀有预览",
+    galleryH:"浏览全部 5,000 个智能体",
+    gallerySub:"按智能体编号搜索，按稀有度筛选，并加载更多以探索完整的 5,000 个收藏。",
+    searchPh:"按编号搜索 — 例如 21",
+    loadMore:"加载更多",nfa:"不构成财务建议。",
+    metaH:"ERC-721 元数据，每个代币完整",
+    metaSub:"每个智能体现在都有标准的 ERC-721 JSON：名称、描述、图片 URI 和10个属性——8个特征加上稀有度和排名。打开任意智能体可预览并下载其文件，或在下方下载完整套装。",
+    metaStandard:"标准",metaImageUri:"图片 URI 模式",metaUri:"元数据 URI 模式",metaExample:"示例 — AGENTIC SPOXY #21",
+    metaDl21:"下载 #21 JSON",metaDlAll:"下载全部 5,000 个 JSON",metaDlColl:"下载收藏 JSON",
+    metaNote:"ipfs:// URI 是模式，在将图片和 JSON 上传到 IPFS 后需替换为真实的 CID。每个代币的 PNG 可从其详情视图下载。合约地址在上线前仍为占位符，因此请在部署时在合约中设置 tokenURI / baseURI。"}
+};
+function setLang(l){
+  lang=l;
+  document.getElementById('langEn').classList.toggle('on',l==='en');
+  document.getElementById('langZh').classList.toggle('on',l==='zh');
+  var dict=I18N[l], els=document.querySelectorAll('[data-i]');
+  for(var i=0;i<els.length;i++){ var k=els[i].getAttribute('data-i'); if(dict[k]) els[i].textContent=dict[k]; }
+  var gs=document.getElementById('gSearch'); if(gs && dict.searchPh) gs.placeholder=dict.searchPh;
+  ['binanceIdA','binanceIdW'].forEach(function(id){ var el=document.getElementById(id); if(el && dict.binancePh) el.placeholder=dict.binancePh; });
+  if(typeof paintBinanceGate==='function') paintBinanceGate();
+  if(typeof refreshCost==='function') refreshCost();
+  if(typeof writePrompt==='function') writePrompt();
+  var dj=document.getElementById('mDlJsonBtn'); if(dj) dj.textContent = l==='zh' ? '下载 JSON' : 'DOWNLOAD JSON';
+  var cj=document.getElementById('mCopyJsonBtn'); if(cj) cj.textContent = l==='zh' ? '复制 JSON' : 'COPY JSON';
+  var dp=document.getElementById('mDlPngBtn'); if(dp) dp.textContent = l==='zh' ? '下载 PNG' : 'DOWNLOAD PNG';
+  renderGallery(false);
+}
+</script>
 </body>
 </html>
